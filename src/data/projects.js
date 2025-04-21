@@ -7,7 +7,7 @@ const projects = [
         description: "",
         style: {
             shadow: "shadow-[#011F3F]",
-            cover: "from-[#011F3F]",
+            cover: "from-[#011F3F80]",
             display: " hidden group-hover:flex"
         }
     },
