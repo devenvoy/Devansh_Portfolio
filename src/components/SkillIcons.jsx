@@ -559,8 +559,8 @@ const ComposeMultiplatform = ({ width = 35, height = 45 }) => {
             <svg width={width} height={height} viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#00c4b3;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                        <stop offset="0%" style={{ stopColor: "#00c4b3", stopOpacity: 1 }} />
+                        <stop offset="100%" style={{ stopColor: "#3b82f6", stopOpacity: 1 }} />
                     </linearGradient>
                 </defs>
                 <g fill="url(#grad1)">
@@ -579,13 +579,13 @@ const Ktor = ({ width = 45, height = 60 }) => {
 
                 <defs>
                     <linearGradient id="a" x1="34.379" x2="64.784" y1="21.379" y2="51.784" gradientTransform="translate(0 40) scale(.45714)" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stop-color="#07c3f2"></stop>
-                        <stop offset="1" stop-color="#6b57ff"></stop>
+                        <stop offset="0" stopColor="#07c3f2"></stop>
+                        <stop offset="1" stopColor="#6b57ff"></stop>
                     </linearGradient>
                     <linearGradient id="b" x1="65.723" x2="94.471" y1="52.723" y2="81.471" gradientTransform="translate(0 40) scale(.45714)" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stop-color="#b74af7"></stop>
-                        <stop offset=".492" stop-color="#fc801d"></stop>
-                        <stop offset="1" stop-color="#fc801d"></stop>
+                        <stop offset="0" stopColor="#b74af7"></stop>
+                        <stop offset=".492" stopColor="#fc801d"></stop>
+                        <stop offset="1" stopColor="#fc801d"></stop>
                     </linearGradient>
                 </defs>
                 <path fill="url(#a)" d="M36.57 56.914 22.855 43.2l-7.238 7.242-6.472 6.473 13.71 13.715Zm0 0"></path>
@@ -601,7 +601,7 @@ const Flutter = ({ width = 35, height = 45 }) => {
     return (
         <>
             <svg viewBox="0 0 128 128" width={width} height={height}>
-                <g fill="#3FB6D3"><path d="M12.3 64.2L76.3 0h39.4L32.1 83.6zM76.3 128h39.4L81.6 93.9l34.1-34.8H76.3L42.2 93.5z"></path></g><path fill="#27AACD" d="M81.6 93.9l-20-20-19.4 19.6 19.4 19.6z"></path><path fill="#19599A" d="M115.7 128L81.6 93.9l-20 19.2L76.3 128z"></path><linearGradient id="flutter-original-a" gradientUnits="userSpaceOnUse" x1="59.365" y1="116.36" x2="86.825" y2="99.399"><stop offset="0" stop-color="#1b4e94"></stop><stop offset=".63" stop-color="#1a5497"></stop><stop offset="1" stop-color="#195a9b"></stop></linearGradient><path fill="url(#flutter-original-a)" d="M61.6 113.1l30.8-8.4-10.8-10.8z"></path>
+                <g fill="#3FB6D3"><path d="M12.3 64.2L76.3 0h39.4L32.1 83.6zM76.3 128h39.4L81.6 93.9l34.1-34.8H76.3L42.2 93.5z"></path></g><path fill="#27AACD" d="M81.6 93.9l-20-20-19.4 19.6 19.4 19.6z"></path><path fill="#19599A" d="M115.7 128L81.6 93.9l-20 19.2L76.3 128z"></path><linearGradient id="flutter-original-a" gradientUnits="userSpaceOnUse" x1="59.365" y1="116.36" x2="86.825" y2="99.399"><stop offset="0" stopColor="#1b4e94"></stop><stop offset=".63" stopColor="#1a5497"></stop><stop offset="1" stopColor="#195a9b"></stop></linearGradient><path fill="url(#flutter-original-a)" d="M61.6 113.1l30.8-8.4-10.8-10.8z"></path>
             </svg>
         </>
     )
