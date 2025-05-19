@@ -1,4 +1,4 @@
-import { Card, Typography, Chip } from '@mui/material';
+import { Card, Typography, Chip ,Link } from '@mui/material';
 import { ExternalLink } from 'lucide-react';
 import { mergeClasses } from './utils';
 
@@ -17,7 +17,7 @@ const ProjectDetails = ({
                         : 'md:order-last md:rounded-r-xl md:border-l'
                 )}
             >
-                <a
+                <Link 
                     href={demo}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -28,7 +28,7 @@ const ProjectDetails = ({
                         className="rounded-xl shadow-lg transition-transform duration-500 md:hover:scale-105"
                         style={{ objectFit: 'cover' }}
                     />
-                </a>
+                </Link>
 
             </div>
 
@@ -48,14 +48,14 @@ const ProjectDetails = ({
                         <Chip key={index} label={technology} />
                     ))}
                 </div>
-                <a
+                <Link 
                     href={demo}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="self-start rounded-lg p-1.5 hover:bg-gray-50 [&_svg]:stroke-gray-500"
                 >
                     <ExternalLink />
-                </a>
+                </Link>
             </div>
         </Card>
     );
