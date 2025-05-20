@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as ScrollLink, scroller } from 'react-scroll';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import navLinks from '../data/navlinks';
+import ThemeButton from './ThemeButton';
 
 const Navigation = ({ ulClass, liClass, handleClick }) => {
     const location = useLocation();
@@ -68,6 +69,10 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
                     </li>
                 );
             })}
+
+            <li className={`mx-4 cursor-pointer hover:scale-[1.15] border-b-2 border-transparent hover:border-b-gray-300 duration-500 hover:text-gray-300 ${liClass}`}>
+                <ThemeButton />
+            </li>
         </ul>
     );
 };

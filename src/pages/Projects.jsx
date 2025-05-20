@@ -1,5 +1,5 @@
 import React from 'react'
-import ProjectDetails from './Project-detail'
+import ProjectDetails from '../components/Project-detail'
 import personalProjects from '../data/projects'
 
 const Projects = () => {

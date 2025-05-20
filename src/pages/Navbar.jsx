@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import HamBurgerMenu from './HamBurgerMenu';
-import Navigation from './Navigation';
-import ThemeButton from './ThemeIcon'; // <- your ThemeButton component
+import HamBurgerMenu from '../components/HamBurgerMenu';
+import Navigation from '../components/Navigation';
 
 const Navbar = () => {
     const [navOpen, setNavOpen] = useState(false);
@@ -27,15 +26,15 @@ const Navbar = () => {
                     {/* Desktop Navigation */}
                     <Navigation ulClass="hidden md:flex" liClass="" />
 
-                    {/* Theme Button (visible on all screens) */}
+                    {/* Theme Button (visible on all screens)
                     <div className="ml-4 border border-red-500">
                         <ThemeButton />
-                    </div>
+                    </div> */}
 
                     {/* Hamburger Icon (visible on small screens only) */}
                     <HamBurgerMenu handleClick={handleClick} navOpen={navOpen} />
 
-                    {/* Mobile Navigation (Slide menu) */}
+                    {/* Mobile Navigation (Slide menu) */}   
                     <Navigation
                         handleClick={handleClick}
                         ulClass={`${navOpen ? "-translate-x-0" : "translate-x-full"} duration-500 flex flex-col h-screen bg-gradient-to-b from-black to-gray-800 w-screen xs:w-80 top-0 right-0 absolute items-center justify-center md:scale-0`}

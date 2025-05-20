@@ -41,7 +41,7 @@ import ReactJs, {
 	TailwindCSS,
 	TS,
 	VSCode,
-} from "../components/SkillIcons";
+} from "../components/icons/SkillIcons";
 
 const skills = [
 	{

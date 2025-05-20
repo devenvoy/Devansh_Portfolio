@@ -1,7 +1,7 @@
 import React from 'react';
 import blogs from '../data/blogs';
-import GridLayout from './GridLayout';
-import Blog from './Blog';
+import GridLayout from '../components/layouts/GridLayout';
+import Blog from '../components/Blog';
 
 const Blogs = () => {
     return (

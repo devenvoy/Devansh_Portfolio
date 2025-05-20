@@ -1,8 +1,6 @@
-import React from "react";
-import GridLayout from "./GridLayout";
-import SectionHeading from "./SectionHeading";
+import GridLayout from "../components/layouts/GridLayout";
 import skills from "../data/skills";
-import Skill from "./Skill";
+import Skill from "../components/Skill";
 
 const Skills = () => {
   return (

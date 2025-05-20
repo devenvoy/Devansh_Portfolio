@@ -1,5 +1,5 @@
 import React from 'react'
-import { GMail, Map, CopyRight, ArrowRightLong } from './Icons'
+import { GMail, Map, CopyRight, ArrowRightLong } from '../components/icons/Icons'
 import { Link } from 'react-scroll'
 import navLinks from '../data/navlinks'
 import contactInfo from '../data/contactInfo'

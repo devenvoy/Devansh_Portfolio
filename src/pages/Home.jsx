@@ -1,10 +1,10 @@
 import React from 'react'
 import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-scroll';
-import { ArrowDown } from "./Icons";
+import { ArrowDown } from "../components/icons/Icons.jsx";
 import Avatar from "../assets/Avatar.jpg"
 import work from "../data/work.js"
-import contactInfo from '../data/contactInfo';
+import contactInfo from '../data/contactInfo.jsx';
 const Home = () => {
     
     return (  

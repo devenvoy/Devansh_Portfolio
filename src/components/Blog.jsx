@@ -1,7 +1,7 @@
 import React from 'react';
-import Card from './Card';
-import { Link } from './Icons';
-import CardCover from './CardCover';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import { Link } from './icons/Icons';
 
 const Blog = ({ blog }) => {
     if (!blog) return null;
@@ -9,10 +9,10 @@ const Blog = ({ blog }) => {
     const { img, check_now, description, style = { shadow: "shadow-gray-500", cover: "from-gray-500" } } = blog;
 
     return (
-        <Card style={style}>
+        <Card className={`p-1 ${style.shadow}`}>
             <div className="group relative rounded-md cursor-pointer">
                 <img src={img} alt="Blog-Image" width="auto" height="auto" loading='lazy' title="Blog" className='rounded-t-md ' />
-                <CardCover text={description} style={style} />
+                <CardHeader text={description} />
             </div>
             <div className='flex justify-center items-center rounded-b-md'>
                 <BlogsLink name="Check Here" style={"rounded-br-md " + style.cover} link={check_now} />

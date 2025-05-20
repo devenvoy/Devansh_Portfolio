@@ -1,6 +1,6 @@
 import { Card, Typography, Chip ,Link } from '@mui/material';
 import { ExternalLink } from 'lucide-react';
-import { mergeClasses } from './utils';
+import { mergeClasses } from '../utils/utils';
 
 const ProjectDetails = ({
     project: { img, name, demo, description, technologies },

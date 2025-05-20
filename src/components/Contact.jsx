@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import SectionHeading from './SectionHeading'
-import { Person, GMail, Chat, Submit } from './Icons'
+import { Person, GMail, Chat, Submit } from './icons/Icons'
 import { validateForm } from '../utils/formValidation'
 
 const Contact = () => {

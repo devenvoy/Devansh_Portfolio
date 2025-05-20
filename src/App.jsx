@@ -1,13 +1,13 @@
 import React from 'react'
-import About from './components/About';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
-import Projects from './components/Projects';
+import About from './pages/About';
+import Home from './pages/Home';
+import Navbar from './pages/Navbar';
+import Projects from './pages/Projects';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Footer from './pages/Footer';
 import BackToTopButton from './components/BackToTopButton';
-import Blogs from './components/Blogs';
-import ExperienceSection from './components/Experience';
+import Blogs from './pages/Blogs';
+import ExperienceSection from './pages/Experience';
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => {

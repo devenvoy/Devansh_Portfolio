@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ArrowUp } from "./Icons"
+import { ArrowUp } from "./icons/Icons"
 import { Link } from 'react-scroll'
 
 const BackToTopButton = () => {

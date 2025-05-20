@@ -1,5 +1,5 @@
 import React from 'react'
-import { MUIWrapperContext } from './MUIWrapper';
+import { MUIWrapperContext } from './layouts/MUIWrapper';
 import {
     IconButton,
     useTheme,

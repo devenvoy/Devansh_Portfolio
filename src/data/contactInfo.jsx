@@ -1,5 +1,5 @@
-import LinkedIn, { GitHub, GMail, Telegram, Resume } from "../components/Icons";
-import {  Discord, Twitter } from "../components/Icons";
+import LinkedIn, { GitHub, GMail, Telegram, Resume } from "../components/icons/Icons";
+import {  Discord, Twitter } from "../components/icons/Icons";
 import ResumeLink from "../assets/resume.pdf"
 const contactInfo = [
     {

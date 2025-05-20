@@ -1,7 +1,7 @@
 import React from 'react'
-import { Download } from './Icons';
+import { Download } from '../components/icons/Icons';
 import resume from "../assets/resume.pdf";
-import SectionHeading from './SectionHeading';
+import SectionHeading from '../components/SectionHeading';
 import Skills from './Skills';
 
 const About = () => {
