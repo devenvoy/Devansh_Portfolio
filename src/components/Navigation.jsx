@@ -3,10 +3,14 @@ import { Link as ScrollLink, scroller } from 'react-scroll';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import navLinks from '../data/navlinks';
 import ThemeButton from './ThemeButton';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+
 
 const Navigation = ({ ulClass, liClass, handleClick }) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const handleNavClick = async (link) => {
         if (link === 'achievements') {
@@ -62,19 +66,46 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
                 }
 
                 return (
-                    <li
-                        key={id}
-                        className={`mx-4 py-2 capitalize font-medium cursor-pointer text-gray-500 hover:scale-[1.15] border-b-2 border-transparent hover:border-b-gray-300 duration-500 hover:text-gray-300 ${liClass}`}>
-                        {content}
-                    </li>
+                    <NavItem key={id} content={content} theme={theme} liClass={liClass} />
                 );
             })}
 
-            <li className={`mx-4 cursor-pointer hover:scale-[1.15] border-b-2 border-transparent hover:border-b-gray-300 duration-500 hover:text-gray-300 ${liClass}`}>
-                <ThemeButton />
-            </li>
+
+            <NavItem id={99} content={<ThemeButton />} theme={theme} liClass={liClass} />
         </ul>
     );
 };
 
 export default Navigation;
+const NavItem = ({ content, liClass, theme }) => {
+    const isIcon = typeof content?.type === 'function' && content.type.name === 'ThemeButton';
+
+    return (
+        <Box
+            onClick={typeof content === 'function' ? content : undefined}
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mx: 2,
+                px: 1,
+                py: isIcon ? 0 : 0.5,
+                height: '40px',
+                textTransform: 'capitalize',
+                fontWeight: 500,
+                cursor: 'pointer',
+                transition: 'all 0.5s ease',
+                color: theme.palette.mode === 'dark' ? 'grey.400' : 'grey.700',
+                borderBottom: isIcon ? 'none' : '2px solid transparent',
+                '&:hover': !isIcon && {
+                    transform: 'scale(1.15)',
+                    borderBottomColor: theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                    color: theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                },
+            }}
+            className={liClass}
+        >
+            {content}
+        </Box>
+    );
+};

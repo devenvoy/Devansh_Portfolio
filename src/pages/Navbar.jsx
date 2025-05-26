@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Container from '@mui/material/Container';
 import HamBurgerMenu from '../components/HamBurgerMenu';
 import Navigation from '../components/Navigation';
 
@@ -11,40 +14,55 @@ const Navbar = () => {
 
     return (
         <>
-            {/* Top Navbar */}
-            <div className='fixed w-full max-w-[100vw] h-20 bg-gradient-to-b from-black via-black to-transparent z-50 bg-opacity-[0.9]'>
-                <div className='flex justify-between items-center px-5 max-w-screen-2xl mx-auto'>
-
+            {/* Top Navbar using MUI Box + Container */}
+            <Box
+                sx={{
+                    position: 'fixed',
+                    width: '100%',
+                    height: '80px',
+                    zIndex: 50,
+                    background: 'linear-gradient(to bottom, black, black, transparent)',
+                    backdropFilter: 'blur(3px)',
+                    maxWidth: '100vw',
+                }}
+            >
+                <Container
+                    maxWidth="xl"
+                    sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 3 }}
+                >
                     {/* Logo */}
-                    <div onClick={() => window.location.href = '/'} className='text-[2.5rem] duration-500 font-semibold group cursor-pointer'>
-                        <p className='animatedHeading font-signature'>
-                            <span className='text-transparent'>Port</span>
-                            <span className='text-transparent'>Folio</span>
-                        </p>
-                    </div>
+                    <Box
+                        onClick={() => (window.location.href = '/')}
+                        sx={{
+                            fontSize: '2.5rem',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            fontFamily: 'cursive',
+                            transition: '0.5s',
+                        }}
+                        className="animatedHeading font-signature"
+                    >
+                        <span style={{ color: 'transparent' }}>Port</span>
+                        <span style={{ color: 'transparent' }}>Folio</span>
+                    </Box>
 
                     {/* Desktop Navigation */}
                     <Navigation ulClass="hidden md:flex" liClass="" />
 
-                    {/* Theme Button (visible on all screens)
-                    <div className="ml-4 border border-red-500">
-                        <ThemeButton />
-                    </div> */}
-
-                    {/* Hamburger Icon (visible on small screens only) */}
+                    {/* Hamburger Icon */}
                     <HamBurgerMenu handleClick={handleClick} navOpen={navOpen} />
 
-                    {/* Mobile Navigation (Slide menu) */}   
+                    {/* Mobile Navigation Slide Menu */}
                     <Navigation
                         handleClick={handleClick}
                         ulClass={`${navOpen ? "-translate-x-0" : "translate-x-full"} duration-500 flex flex-col h-screen bg-gradient-to-b from-black to-gray-800 w-screen xs:w-80 top-0 right-0 absolute items-center justify-center md:scale-0`}
                         liClass="my-4 py-2 text-lg"
                     />
-                </div>
-            </div>
+                </Container>
+            </Box>
 
-            {/* Spacer below navbar for mobile */}
-            <div className="md:hidden h-32 w-full bg-black"></div>
+            {/* Spacer for mobile */}
+            <Box className="md:hidden" sx={{ height: '128px', backgroundColor: 'black' }} />
         </>
     );
 };
