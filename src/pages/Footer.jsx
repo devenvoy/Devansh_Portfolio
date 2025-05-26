@@ -1,69 +1,146 @@
-import React from 'react'
-import { GMail, Map, CopyRight, ArrowRightLong } from '../components/icons/Icons'
-import { Link } from 'react-scroll'
-import navLinks from '../data/navlinks'
-import contactInfo from '../data/contactInfo'
+import React from 'react';
+import { GMail, Map, CopyRight, ArrowRightLong } from '../components/icons/Icons';
+import { Link } from 'react-scroll';
+import navLinks from '../data/navlinks';
+import contactInfo from '../data/contactInfo';
+import {
+  Box,
+  Typography,
+  useTheme,
+  Grid,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
+
 const Footer = () => {
-    return (
-        <div className='bg-gradient-to-t from-black via-black to-gray-900 w-full  text-gray-300'>
-            <div className="section pb-5">
-                <div className="flex flex-wrap justify-between ">
-                    <div className="w-full sm:w-3/5 lg:w-2/5 pr-2">
-                        <h3 className='text-white text-[1.75rem] font-bold pb-2'>Devansh Amdavadwala</h3>
-                        <p className='text-lg text-cyan-400 pb-5'>Software Developer</p>
-                        <p>Thank you for visiting my Personal Portfolio.</p>
-                        <p>Lets connect over socials.</p>
-                    </div>
-                    <div className="w-full xs:w-2/5 mt-8 sm:w-2/5 sm:mt-0 lg:w-[30%] sm:pl-20 lg:pl-12 justify-start">
-                        <h3 className='text-white text-[1.35rem] xs:text-2xl font-bold pb-4'>Quick Links</h3>
-                        {navLinks.map(({ link, id }) => {
-                            return (
-                                <div key={id} className="group w-fit px-3">
-                                    <Link to={link} smooth duration={500}>
-                                        <div className="flex items-center justify-between w-fit gap-2 font-semibold text-white cursor-pointer">
-                                            <ArrowRightLong />
-                                            <span className='bg-clip-text bg-gradient-to-r from-cyan-500 via-cyan-500 to-blue-500 group-hover:text-transparent duration-500 group-hover:animate-pulse '>
-                                                {link.toUpperCase()}
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="w-full mt-8 xs:w-3/5 sm:w-full lg:mt-0 lg:w-[30%] lg:pl-0">
-                        <h3 className='text-white text-2xl font-bold pb-4'>Contact info</h3>
-                        <div className="flex flex-col sm:flex-row lg:flex-col  gap-5 xs:gap-10 sm:gap-5 md:gap-10 justify-between">
-                            <div className='text-[0.9rem] font-advanced'>
-                                <p className='flex items-center gap-3 mb-1'>
-                                    <GMail /> devanshamdavadwala@gmail.com</p>
-                                <p className='flex items-center gap-3 '> <Map /><span className="pt-1">Surat, Gujarat, India</span></p>
-                            </div>
-                            <ul className="flex items-center  gap-5 md:gap-8 lg:gap-4 justify-start ">
-                                {contactInfo.map(({ id, link, name, icon, download }) => {
-                                    return (
-                                        <li key={id} className={`group relative w-8 h-8 flex justify-center items-center rounded-full p-1 sm:grayscale  cursor-pointer duration-[450ms] transition ease-in hover:grayscale-0 hover:scale-105 focus:grayscale-0 focus:scale-105 active:grayscale-0 active:scale-105`}>
-                                            <a href={link} download={download} target="_blank" rel='noferrer'>{icon}</a>
-                                            <div className="flex scale-0 sm:group-hover:scale-100 group-focus:scale-100 transition ease-out duration-300 delay-100 origin-center justify-center items-center absolute -bottom-10 w-auto h-6 py-2 px-3 bg-gray-900 text-sm text-gray-300">
-                                                {name}
-                                            </div>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+  const theme = useTheme();
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="section py-2 text-black font-advanced">
-                <div className="">
-                    <p className=' text-sm text-gray-300 flex justify-center items-center  '>
-                        <span className="px-1 pb-[0.2rem]">  <CopyRight /></span>  All Rights Reserved</p>
-                </div>
-            </div>
-        </div >
-    )
-}
+  return (
+    <Box
+      sx={{
+        background: `linear-gradient(to top, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
+        color: theme.palette.text.secondary,
+        width: '100%',
+        pt: 5,
+      }}
+    >
+      {/* Main Content Section */}
+      <Box className="section" sx={{ pb: 5 }}>
+        <Grid container spacing={4} justifyContent="space-between">
+          {/* Intro Section */}
+          <Grid item xs={12} sm={7} lg={4}>
+            <Typography variant="h5" fontWeight="bold" color={theme.palette.text.primary} gutterBottom>
+              Devansh Amdavadwala
+            </Typography>
+            <Typography variant="subtitle1" sx={{ color: theme.palette.primary.main, pb: 2 }}>
+              Software Developer
+            </Typography>
+            <Typography>Thank you for visiting my Personal Portfolio.</Typography>
+            <Typography>Let’s connect over socials.</Typography>
+          </Grid>
 
-export default Footer
+          {/* Quick Links */}
+          <Grid item xs={12} sm={5} lg={3}>
+            <Typography variant="h6" color={theme.palette.text.primary} fontWeight="bold" gutterBottom>
+              Quick Links
+            </Typography>
+            {navLinks.map(({ link, id }) => (
+              <Box key={id} sx={{ px: 1, py: 0.5 }}>
+                <Link to={link} smooth duration={500}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                      fontWeight: 600,
+                      color: theme.palette.text.primary,
+                      cursor: 'pointer',
+                      '& span': {
+                        background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        transition: '0.4s ease',
+                      },
+                    }}
+                  >
+                    <ArrowRightLong />
+                    <span>{link.toUpperCase()}</span>
+                  </Box>
+                </Link>
+              </Box>
+            ))}
+          </Grid>
+
+          {/* Contact Info */}
+          <Grid item xs={12} lg={4}>
+            <Typography variant="h6" color={theme.palette.text.primary} fontWeight="bold" gutterBottom>
+              Contact Info
+            </Typography>
+
+            <Box
+              display="flex"
+              flexDirection={{ xs: 'column', sm: 'row', lg: 'column' }}
+              gap={3}
+              justifyContent="space-between"
+            >
+              <Box fontSize="0.9rem">
+                <Box display="flex" alignItems="center" gap={1} mb={1}>
+                  <GMail /> devanshamdavadwala@gmail.com
+                </Box>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <Map /> Surat, Gujarat, India
+                </Box>
+              </Box>
+
+              {/* Contact Icons */}
+              <Box display="flex" gap={2}>
+                {contactInfo.map(({ id, link, name, icon, download }) => (
+                  <Tooltip key={id} title={name} arrow>
+                    <IconButton
+                      component="a"
+                      href={link}
+                      download={download}
+                      target="_blank"
+                      rel="noreferrer"
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: '50%',
+                        transition: '0.4s ease',
+                        filter: 'grayscale(100%)',
+                        '&:hover': {
+                          filter: 'grayscale(0%)',
+                          transform: 'scale(1.05)',
+                          backgroundColor: theme.palette.action.hover,
+                        },
+                      }}
+                    >
+                      {icon}
+                    </IconButton>
+                  </Tooltip>
+                ))}
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
+      {/* Bottom Copyright */}
+      <Box className="section" sx={{ py: 2 }}>
+        <Typography
+          textAlign="center"
+          variant="body2"
+          color={theme.palette.text.secondary}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          gap={1}
+        >
+          <CopyRight /> All Rights Reserved
+        </Typography>
+      </Box>
+    </Box>
+  );
+};
+
+export default Footer;
