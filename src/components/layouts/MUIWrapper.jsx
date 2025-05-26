@@ -39,7 +39,7 @@ export default function MUIWrapper({ children }) {
           : {
               // ☀️ Light Mode (optional customization)
               background: {
-                default: '#ffffff',
+                default: '#dfdfdf',
                 paper: '#f9fafb', // Tailwind's gray-50
               },
               primary: {
