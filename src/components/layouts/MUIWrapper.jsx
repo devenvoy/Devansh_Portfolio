@@ -15,16 +15,49 @@ export default function MUIWrapper({ children }) {
     },
   }), []);
 
-  const theme = useMemo(() => createTheme({
-    palette: {
-      mode,
-    },
-  }), [mode]);
+  const theme = useMemo(() => {
+    return createTheme({
+      palette: {
+        mode,
+        ...(mode === "dark"
+          ? {
+              // 🌙 Custom Dark Mode Colors
+              background: {
+                default: '#000000',
+                paper: '#111827',
+              },
+              primary: {
+                light: '#22d3ee',
+                main: '#06b6d4',
+                dark: '#2563eb',
+              },
+              text: {
+                primary: '#e0e0e0',
+                secondary: '#9ca3af',
+              },
+            }
+          : {
+              // ☀️ Light Mode (optional customization)
+              background: {
+                default: '#ffffff',
+                paper: '#f9fafb', // Tailwind's gray-50
+              },
+              primary: {
+                main: '#2563eb', // blue-600
+              },
+              text: {
+                primary: '#1f2937', // gray-800
+                secondary: '#6b7280', // gray-500
+              },
+            }),
+      },
+    });
+  }, [mode]);
 
   return (
     <MUIWrapperContext.Provider value={muiWrapperUtils}>
       <ThemeProvider theme={theme}>
-          <CssBaseline />
+        <CssBaseline />
         {children}
       </ThemeProvider>
     </MUIWrapperContext.Provider>

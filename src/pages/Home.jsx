@@ -1,61 +1,310 @@
-import React from 'react'
+import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-scroll';
-import { ArrowDown } from "../components/icons/Icons.jsx";
-import Avatar from "../assets/Avatar.jpg"
-import work from "../data/work.js"
+import { ArrowDown } from '../components/icons/Icons.jsx';
+import Avatar from '../assets/Avatar.jpg';
+import work from '../data/work.js';
 import contactInfo from '../data/contactInfo.jsx';
-const Home = () => {
-    
-    return (  
-        <div id='Home' className='pt-8 h-full min-h-screen w-full flex items-center bg-gradient-to-b from-black via-black to-gray-900 '>
-            <div className='section gap-16 md:gap-1 md:justify-between items-center md:flex-row-reverse'>
-                <div className='flex flex-col justify-center md:w-2/5 max-w-[320px]'>
-                    <img src={Avatar} alt="" width="auto" height="auto" loading='eager' title='Avatar' className='rounded-[14px] mx-auto w-full ' />
-                </div>
-                <div className='pl-2 xs:pl-8 flex flex-col gap-3 justify-center text-gray-200 w-max md:w-3/5'>
-                    <h1 className='text-5xl xs:text-6xl lg:text-7xl font-bold '>
-                        <span className='block'>Hi There, </span>
-                        <span>I'm </span>
-                        <span className='text-transparent bg-gradient-to-br from-cyan-300 to-blue-600 bg-clip-text'> Devansh </span>
-                    </h1>
-                    <p className='text-gray-400 text-xl xs:text-2xl font-semibold py-4 min-w-[16rem] xs:min-w-[25rem] max-w-[26rem]'>
-                        <span className='block xs:inline'> I am a</span>
-                        <span className='text-cyan-400 xs:pl-2'>
-                            <TypeAnimation
-                                sequence={work}
-                                speed={1}
-                                wrapper="span"
-                                cursor={true}
-                                repeat={Infinity}
-                            />
-                        </span>
-                    </p>
-                    <ul className="flex items-center z-40 gap-3 md:gap-8 lg:gap-4 justify-start ">
-                        {contactInfo.map(({ id, link, name, icon, download }) => {
-                            return (
-                                <li key={id} link={link} className={`group relative w-8 h-8 flex justify-center items-center rounded-full p-1 sm:grayscale  cursor-pointer duration-[450ms] transition ease-in hover:grayscale-0 hover:scale-105 focus:grayscale-0 focus:scale-105 active:grayscale-0 active:scale-105`}>
-                                    <a href={link} download={download} target="_blank" rel='noferrer'>{icon}</a>
-                                    <div className="flex scale-0 sm:group-hover:scale-100 group-focus:scale-100 transition ease-out duration-300 delay-100 origin-center justify-center items-center absolute z-50 -bottom-10 w-auto h-6 py-2 px-3 bg-gray-900 text-sm text-gray-300">
-                                        {name}
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <div className='py-5'>
-                        <Link to="About" smooth duration={500} className='z-30 group bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center gap-3 px-6 py-3  rounded-lg ease-linear duration-300 delay-75 transition-all cursor-pointer w-40 relative '>
-                            <span className='pr-6 sm:pr-0 sm:group-hover:-translate-x-5 sm:transition-transform delay-[400ms] ease-out'>About Me</span>
-                            <span className="absolute z-30 right-5 sm:-translate-y-7 sm:group-hover:translate-y-0 sm:scale-0 transition-all group-hover:scale-125 ease-in delay-200 animate-pulse duration-500 ">
-                                <ArrowDown />
-                            </span>
-                        </Link>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    )
-}
+import {
+    Box,
+    Typography,
+    useTheme,
+    ThemeProvider,
+} from '@mui/material';
+
+
+const Home = () => {
+    const theme = useTheme();
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Box
+                id="Home"
+                sx={{
+                    pt: 8,
+                    minHeight: '100vh',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    background: `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
+                }}
+            >
+                {/* Container similar to your 'section' class */}
+                <Box
+                    sx={{
+                        width: '100%',
+                        maxWidth: 1200,
+                        marginX: 'auto',
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row-reverse' },
+                        justifyContent: { md: 'space-between' },
+                        alignItems: 'center',
+                        gap: { xs: 8, md: 2 },
+                        px: { xs: 2, md: 4 },
+                    }}
+                >
+                    {/* Avatar container */}
+                    <Box
+                        sx={{
+                            flex: { md: '0 0 40%' },
+                            maxWidth: { xs: 320, md: 'auto' },
+                            width: { xs: '100%', md: 'auto' },
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Box
+                            component="img"
+                            src={Avatar}
+                            alt="Avatar"
+                            loading="eager"
+                            title="Avatar"
+                            sx={{
+                                width: '100%',
+                                borderRadius: '14px',
+                                maxWidth: 320,
+                            }}
+                        />
+                    </Box>
+
+                    {/* Text + animation + socials */}
+                    <Box
+                        sx={{
+                            flex: { md: '0 0 55%' },
+                            width: { xs: '100%', md: 'auto' },
+                            color: theme.palette.text.primary,
+                            pl: { xs: 0, sm: 4 },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 1.5,
+                            maxWidth: 420,
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Typography
+                            component="h1"
+                            sx={{
+                                fontWeight: 'bold',
+                                fontSize: { xs: '2.8rem', sm: '3.8rem', lg: '4.0rem' },
+                                lineHeight: 1.1,
+                            }}
+                        >
+                            <Box component="span" display="block">
+                                Hi There,
+                            </Box>
+                            <Box component="span" display="block">
+                                I'm{' '}
+                                <Box
+                                    component="span"
+                                    sx={{
+                                        background: `linear-gradient(to right, ${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
+                                        WebkitBackgroundClip: 'text',
+                                        WebkitTextFillColor: 'transparent',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    Devansh
+                                </Box>
+                            </Box>
+                        </Typography>
+
+                        <Typography
+                            component="p"
+                            sx={{
+                                color: theme.palette.text.secondary,
+                                fontWeight: 600,
+                                fontSize: { xs: '1.2rem', sm: '1.5rem' },
+                                py: 2,
+                                minWidth: { xs: '16rem', sm: '25rem' },
+                                maxWidth: '26rem',
+                            }}
+                        >
+                            <Box component="span" display={{ xs: 'block', sm: 'inline' }}>
+                                I am a
+                            </Box>
+                            <Box
+                                component="span"
+                                sx={{
+                                    color: theme.palette.primary.main,
+                                    paddingLeft: { xs: 0, sm: 1 },
+                                }}
+                            >
+                                <TypeAnimation
+                                    sequence={work}
+                                    speed={1}
+                                    wrapper="span"
+                                    cursor={true}
+                                    repeat={Infinity}
+                                />
+                            </Box>
+                        </Typography>
+
+                        {/* Social icons */}
+                        <Box
+                            component="ul"
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: { xs: 2, md: 3, lg: 4 },
+                                listStyle: 'none',
+                                p: 0,
+                                m: 0,
+                                zIndex: 40,
+                                justifyContent: 'flex-start',
+                            }}
+                        >
+                            {contactInfo.map(({ id, link, name, icon, download }) => (
+                                <Box
+                                    component="li"
+                                    key={id}
+                                    sx={{
+                                        position: 'relative',
+                                        width: 32,
+                                        height: 32,
+                                        borderRadius: '50%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        p: 0.5,
+                                        filter: 'grayscale(100%)',
+                                        cursor: 'pointer',
+                                        transition: 'filter 0.45s ease, transform 0.3s ease',
+                                        '&:hover, &:focus, &:active': {
+                                            filter: 'grayscale(0%)',
+                                            transform: 'scale(1.1)',
+                                        },
+                                    }}
+                                >
+                                    <a
+                                        href={link}
+                                        download={download}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        style={{ color: 'inherit', display: 'flex' }}
+                                    >
+                                        {icon}
+                                    </a>
+                                    {/* Tooltip on hover */}
+                                    <Box
+                                        sx={{
+                                            position: 'absolute',
+                                            bottom: -32,
+                                            left: '50%',
+                                            transform: 'translateX(-50%) scale(0)',
+                                            backgroundColor: theme.palette.background.paper,
+                                            color: theme.palette.text.secondary,
+                                            fontSize: '0.75rem',
+                                            px: 1,
+                                            py: 0.5,
+                                            borderRadius: 1,
+                                            whiteSpace: 'nowrap',
+                                            transition: 'transform 0.3s ease',
+                                            pointerEvents: 'none',
+                                            zIndex: 50,
+                                            '&:hover, &:focus-within': {
+                                                transform: 'translateX(-50%) scale(1)',
+                                            },
+                                            '.group:hover &': {
+                                                transform: 'translateX(-50%) scale(1)',
+                                            },
+                                        }}
+                                    >
+                                        {name}
+                                    </Box>
+                                </Box>
+                            ))}
+                        </Box>
+
+                        {/* About Me Button */}
+                        <AboutButton />
+                    </Box>
+                </Box>
+            </Box>
+        </ThemeProvider>
+    );
+};
 
 export default Home;
+
+
+const AboutButton = () => {
+    return (
+        <Link to="About" smooth={true} duration={500} style={{ textDecoration: 'none' }}>
+            <Box
+                className="group"
+                sx={{
+                    position: 'relative',
+                    zIndex: 30,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 1,
+                    px: 3,
+                    py: 1,
+                    borderRadius: 2,
+                    cursor: 'pointer',
+                    width: '10rem',
+                    background: 'linear-gradient(to bottom right, #22d3ee, #2563eb)',
+                    transition: 'all 0.3s linear 75ms',
+                    overflow: 'hidden',
+                    '&:hover .label': {
+                        transform: 'translateX(-1.25rem)',
+                        transition: 'transform 0.4s ease-out 0.4s',
+                    },
+                    '&:hover .arrow': {
+                        transform: 'translateY(0)',
+                        opacity: 1,
+                        transition: 'transform 0.3s ease-in 0.2s, opacity 0.3s ease-in 0.2s',
+                    },
+                }}
+            >
+                <Typography
+                    variant="button"
+                    className="label"
+                    sx={{
+                        pr: { xs: 3, sm: 0 },
+                        color: 'white',
+                        fontWeight: 500,
+                        transition: 'transform 0.3s ease',
+                    }}
+                >
+                    About Me
+                </Typography>
+
+                <Box
+                    className="arrow"
+                    sx={{
+                        position: 'absolute',
+                        right: 20,
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        opacity: 0,
+                        animation: 'arrowPulse 2s infinite',
+                        color: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        pointerEvents: 'none',
+                    }}
+                >
+                    <ArrowDown />
+                </Box>
+
+                {/* CSS keyframes injected into the DOM once */}
+                <style>
+                    {`
+                    @keyframes arrowPulse {
+                        0%, 100% {
+                            transform: translateY(-50%) scale(1);
+                        }
+                        50% {
+                            transform: translateY(-50%) scale(1.15);
+                        }
+                    }
+                `}
+                </style>
+            </Box>
+        </Link>
+    );
+};
