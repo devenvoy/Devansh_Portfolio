@@ -3,12 +3,14 @@ import About from './pages/About';
 import Home from './pages/Home';
 import Navbar from './pages/Navbar';
 import Projects from './pages/Projects';
-import Contact from './components/Contact';
+import Contact from './pages/Contact';
 import Footer from './pages/Footer';
 import BackToTopButton from './components/BackToTopButton';
 import Blogs from './pages/Blogs';
 import ExperienceSection from './pages/Experience';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -29,6 +31,7 @@ const App = () => {
       </Routes>
       <Footer />
       <BackToTopButton />
+      <ToastContainer />
     </div>
   )
 }

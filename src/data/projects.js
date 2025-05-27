@@ -1,5 +1,3 @@
-const BASE_URL= import.meta.env.BASE_URL
-
 const projects = [
     {
         img: "./gradnet.png",
