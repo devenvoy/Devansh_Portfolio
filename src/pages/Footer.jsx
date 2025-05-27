@@ -28,7 +28,7 @@ const Footer = () => {
       <Box className="section" sx={{ pb: 5 }}>
         <Grid container spacing={4} justifyContent="space-between">
           {/* Intro Section */}
-          <Grid item xs={12} sm={7} lg={4}>
+          <Grid sx={{ xs: 12, sm: 7, lg: 4 }}>
             <Typography variant="h5" fontWeight="bold" color={theme.palette.text.primary} gutterBottom>
               Devansh Amdavadwala
             </Typography>
@@ -40,7 +40,7 @@ const Footer = () => {
           </Grid>
 
           {/* Quick Links */}
-          <Grid item xs={12} sm={5} lg={3}>
+          <Grid sx={{ xs: 12, sm: 5, lg: 3 }}>
             <Typography variant="h6" color={theme.palette.text.primary} fontWeight="bold" gutterBottom>
               Quick Links
             </Typography>
@@ -72,7 +72,7 @@ const Footer = () => {
           </Grid>
 
           {/* Contact Info */}
-          <Grid item xs={12} lg={4}>
+          <Grid sx={{ xs: 12, lg: 4 }}>
             <Typography variant="h6" color={theme.palette.text.primary} fontWeight="bold" gutterBottom>
               Contact Info
             </Typography>

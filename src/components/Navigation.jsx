@@ -5,6 +5,7 @@ import navLinks from '../data/navlinks';
 import ThemeButton from './ThemeButton';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 
 
 const Navigation = ({ ulClass, liClass, handleClick }) => {
@@ -21,18 +22,10 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
         if (location.pathname !== '/') {
             navigate('/');
             setTimeout(() => {
-                scroller.scrollTo(link, {
-                    smooth: true,
-                    duration: 500,
-                    offset: -50,
-                });
+                scroller.scrollTo(link, { smooth: true, duration: 500, offset: -50, });
             }, 100);
         } else {
-            scroller.scrollTo(link, {
-                smooth: true,
-                duration: 500,
-                offset: -50,
-            });
+            scroller.scrollTo(link, { smooth: true, duration: 500, offset: -50, });
         }
 
         if (handleClick) handleClick();
@@ -51,16 +44,21 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
                     content = (
                         <RouterLink to="/achievements"
                             onClick={() => {
+                                handleClick()
                                 handleNavClick(link)
                             }}>
-                            {link}
+                            <Typography fontFamily='Nunito'>
+                                {link}
+                            </Typography>
                         </RouterLink>
                     );
                 }
                 else {
                     content = (
                         <span onClick={() => handleNavClick(link)}>
-                            {link}
+                            <Typography fontFamily='Nunito'>
+                                {link}
+                            </Typography>
                         </span>
                     );
                 }

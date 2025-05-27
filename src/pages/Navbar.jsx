@@ -1,34 +1,40 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import HamBurgerMenu from '../components/HamBurgerMenu';
 import Navigation from '../components/Navigation';
+import { useTheme } from '@mui/material';
 
 const Navbar = () => {
+    const theme = useTheme();
     const [navOpen, setNavOpen] = useState(false);
 
     const handleClick = () => {
-        setNavOpen(prev => !prev);
+        setNavOpen((prev) => !prev);
     };
 
     return (
         <>
-            {/* Top Navbar using MUI Box + Container */}
             <Box
                 sx={{
                     position: 'fixed',
                     width: '100%',
                     height: '80px',
                     zIndex: 50,
-                    background: 'linear-gradient(to bottom, black, black, transparent)',
+                    background: `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.default}, 'transparent')`,
                     backdropFilter: 'blur(3px)',
                     maxWidth: '100vw',
                 }}
             >
                 <Container
                     maxWidth="xl"
-                    sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 3 }}
+                    sx={{
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        px: 3,
+                    }}
                 >
                     {/* Logo */}
                     <Box
@@ -37,7 +43,7 @@ const Navbar = () => {
                             fontSize: '2.5rem',
                             fontWeight: 600,
                             cursor: 'pointer',
-                            fontFamily: 'cursive',
+                            fontFamily: 'Nunito',
                             transition: '0.5s',
                         }}
                         className="animatedHeading font-signature"
@@ -50,19 +56,47 @@ const Navbar = () => {
                     <Navigation ulClass="hidden md:flex" liClass="" />
 
                     {/* Hamburger Icon */}
-                    <HamBurgerMenu handleClick={handleClick} navOpen={navOpen} />
+                    <Box
+                        sx={{
+                            position: 'fixed',
+                            top: 20,
+                            right: 20,
+                            zIndex: 70,
+                        }}
+                    >
+                        <HamBurgerMenu handleClick={handleClick} navOpen={navOpen} />
+                    </Box>
 
                     {/* Mobile Navigation Slide Menu */}
-                    <Navigation
-                        handleClick={handleClick}
-                        ulClass={`${navOpen ? "-translate-x-0" : "translate-x-full"} duration-500 flex flex-col h-screen bg-gradient-to-b from-black to-gray-800 w-screen xs:w-80 top-0 right-0 absolute items-center justify-center md:scale-0`}
-                        liClass="my-4 py-2 text-lg"
-                    />
+                    <Box
+                        sx={{
+                            transform: navOpen ? 'translateX(0)' : 'translateX(100%)',
+                            transition: 'transform 0.5s ease',
+                            display: { xs: 'flex', md: 'none' },
+                            flexDirection: 'column',
+                            height: '100vh',
+                            width: { xs: '100vw', sm: '20rem' },
+                            position: 'fixed',
+                            top: 0,
+                            right: 0,
+                            background: `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 60,
+                            boxShadow: theme.shadows[5],
+                        }}
+                    >
+                        <Navigation
+                            handleClick={handleClick}
+                            ulClass="flex flex-col h-full w-full items-center justify-center"
+                            liClass="my-4 py-2 text-lg"
+                        />
+                    </Box>
                 </Container>
             </Box>
 
             {/* Spacer for mobile */}
-            <Box className="md:hidden" sx={{ height: '128px', backgroundColor: 'black' }} />
+            <Box className="md:hidden" sx={{ height: '128px', backgroundColor: 'transparent' }} />
         </>
     );
 };

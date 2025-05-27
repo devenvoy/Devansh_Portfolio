@@ -3,7 +3,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
 export const MUIWrapperContext = createContext({
-  toggleColorMode: () => {},
+  toggleColorMode: () => { },
 });
 
 export default function MUIWrapper({ children }) {
@@ -21,37 +21,38 @@ export default function MUIWrapper({ children }) {
         mode,
         ...(mode === "dark"
           ? {
-              // 🌙 Custom Dark Mode Colors
-              background: {
-                default: '#000000',
-                paper: '#111827',
-              },
-              primary: {
-                light: '#22d3ee',
-                main: '#06b6d4',
-                dark: '#2563eb',
-              },
-              text: {
-                primary: '#e0e0e0',
-                secondary: '#9ca3af',
-              },
-            }
+            background: {
+              default: '#000000',
+              paper: '#111827',
+            },
+            primary: {
+              light: '#22d3ee',
+              main: '#06b6d4',
+              dark: '#2563eb',
+            },
+            text: {
+              primary: '#e0e0e0',
+              secondary: '#9ca3af',
+            },
+          }
           : {
-              // ☀️ Light Mode (optional customization)
-              background: {
-                default: '#dfdfdf',
-                paper: '#f9fafb', // Tailwind's gray-50
-              },
-              primary: {
-                main: '#2563eb', // blue-600
-              },
-              text: {
-                primary: '#1f2937', // gray-800
-                secondary: '#6b7280', // gray-500
-              },
-            }),
+            background: {
+              default: '#ffffff',
+              paper: '#f9fafb',
+            },
+            primary: {
+              main: '#2563eb',
+            },
+            text: {
+              primary: '#1f2937',
+              secondary: '#6b7280',
+            },
+          }),
       },
-    });
+      typography: {
+        fontFamily: `'Raleway', 'Nunito', sans-serif`,
+      },
+    })
   }, [mode]);
 
   return (
