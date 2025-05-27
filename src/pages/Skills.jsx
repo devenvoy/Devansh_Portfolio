@@ -1,26 +1,73 @@
-import GridLayout from "../components/layouts/GridLayout";
+import React from "react";
+import { Box, Typography, useTheme, Grid, Paper } from "@mui/material";
 import skills from "../data/skills";
 import Skill from "../components/Skill";
 
 const Skills = () => {
+  const theme = useTheme();
+
   return (
-    <div
+    <Box
       id="Skills"
-      className="h-full min-h-screen w-full flex items-center bg-gradient-to-b from-gray-800 to-slate-900 rounded-xl"
+      sx={{
+        width: '100%',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        background: `linear-gradient(to bottom, ${theme.palette.grey[600]}, ${theme.palette.background.paper})`,
+        borderRadius: 3,
+        px: { xs: 2, sm: 4 },
+        py: { xs: 4, sm: 6 },
+      }}
     >
-      <div className="section pt-0">
-        <div className="pb-5 pt-5 md:pt-0 text-white font-semibold">
-        <div className='mb-3'>  My Tech Stack ~</div>
-        </div>
-        <div className="p-5 xs:p-4 rounded-lg bg-gray-900">
-          <GridLayout style="grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
-            {skills.map((skill, index) => {
-              return <Skill key={index} skill={skill} />;
-            })}
-          </GridLayout>
-        </div>
-      </div>
-    </div>
+      <Box sx={{ width: '100%' }}>
+        {/* Section Heading */}
+        <Box sx={{ pb: 2, pt: { xs: 4, md: 0 } }}>
+          <Typography
+            variant="h6"
+            sx={{
+              color: theme.palette.common.white,
+              fontWeight: 600,
+              mb: 1,
+            }}
+          >
+            My Tech Stack ~
+          </Typography>
+        </Box>
+
+        {/* Skills Container */}
+        <Paper
+          elevation={3}
+          sx={{
+            // backgroundColor: theme.palette.grey[900],
+            p: { xs: 2, sm: 3 },
+            borderRadius: 2,
+          }}
+        >
+          <Grid
+            container
+            spacing={2}
+            columns={{ xs: 6, sm: 12, md: 17 }}
+          >
+            {skills.map((skill, index) => (
+              <Grid
+              size={{
+                xs:3,
+                sm:4,
+                md:4,
+                lg:3.33,
+                xl:3.33
+              }}
+                
+                key={index}
+              >
+                <Skill skill={skill} />
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
+      </Box>
+    </Box>
   );
 };
 

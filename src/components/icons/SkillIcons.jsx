@@ -1,5 +1,5 @@
 
-const ReactJs = ({ width = 40, height = 45 }) => {
+const ReactJs = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="175.7 78 490.6 436.9" width={width} height={height}>
@@ -9,7 +9,7 @@ const ReactJs = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const JS = ({ width = 35, height = 45 }) => {
+const JS = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53199999999998" width={width} height={height} >
@@ -20,7 +20,7 @@ const JS = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const NextJs = ({ width = 35, height1 = 35, height2 = 20 }) => {
+const NextJs = ({ width = 65, height1 = 65, height2 = 20 }) => {
     return (
         <div >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox=".5 -.2 1023 1024.1" width={width} height={height1}>
@@ -33,7 +33,7 @@ const NextJs = ({ width = 35, height1 = 35, height2 = 20 }) => {
         </div>
     )
 }
-const HTML = ({ width = 35, height = 45 }) => {
+const HTML = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.35 122.88" width={width} height={height}>
@@ -45,7 +45,7 @@ const HTML = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const CSS = ({ width = 35, height = 45 }) => {
+const CSS = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 141.53" width={width} height={height}>
@@ -56,7 +56,7 @@ const CSS = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const TS = ({ width = 35, height = 45 }) => {
+const TS = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 122.88" width={width} height={height}>
@@ -66,7 +66,7 @@ const TS = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const TailwindCSS = ({ width = 40, height = 45 }) => {
+const TailwindCSS = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 73.29" width={width} height={height}>
@@ -75,7 +75,7 @@ const TailwindCSS = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const ExpressJS = ({ width = 40, height = 45 }) => {
+const ExpressJS = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1333.33 773.55" width={width} height={height}>
@@ -84,7 +84,7 @@ const ExpressJS = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const MongoDB = ({ width = 35, height = 45 }) => {
+const MongoDB = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 598.88 1333.33" width={width} height={height}>
@@ -95,7 +95,7 @@ const MongoDB = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const NodeJS = ({ width = 35, height = 45 }) => {
+const NodeJS = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 122.88" width={width} height={height} >
@@ -104,7 +104,7 @@ const NodeJS = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const C = ({ width = 35, height = 45 }) => {
+const C = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.19 122.88" width={width} height={height}>
@@ -116,7 +116,7 @@ const C = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const CPlusPlus = ({ width = 35, height = 45 }) => {
+const CPlusPlus = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.19 122.88" width={width} height={height}>
@@ -133,7 +133,7 @@ const CPlusPlus = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const Python = ({ width = 40, height = 45 }) => {
+const Python = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={width} height={height}>
@@ -147,7 +147,7 @@ const Python = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const Java = ({ width = 40, height = 45 }) => {
+const Java = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.63 122.88" width={width} height={height} >
@@ -164,7 +164,7 @@ const Java = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const PHP = ({ width = 45, height = 45 }) => {
+const PHP = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 62.27" width={width} height={height}>
@@ -174,7 +174,7 @@ const PHP = ({ width = 45, height = 45 }) => {
         </>
     )
 }
-const Kotlin = ({ width = 30, height = 45 }) => {
+const Kotlin = ({ width = 60, height = 65 }) => {
     return (
         <>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -236,7 +236,7 @@ const Kotlin = ({ width = 30, height = 45 }) => {
     )
 }
 
-const Compose = ({ width = 30, height = 45 }) => {
+const Compose = ({ width = 60, height = 65 }) => {
     return (
         <>
             <svg viewBox="0 0 128 128" width={width} height={height}>
@@ -246,7 +246,7 @@ const Compose = ({ width = 30, height = 45 }) => {
     )
 }
 
-const Bootstrap = ({ width = 45, height = 45 }) => {
+const Bootstrap = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 408" width={width} height={height} fillRule="evenodd">
@@ -256,7 +256,7 @@ const Bootstrap = ({ width = 45, height = 45 }) => {
         </>
     )
 }
-const VSCode = ({ width = 30, height = 45 }) => {
+const VSCode = ({ width = 60, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.9 -2 1003.9 995.6" width={width} height={height}>
@@ -268,7 +268,7 @@ const VSCode = ({ width = 30, height = 45 }) => {
         </>
     )
 }
-const Git = ({ width = 40, height = 45 }) => {
+const Git = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 122.87" width={width} height={height}>
@@ -277,7 +277,7 @@ const Git = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const GitHub = ({ width = 35, height = 45 }) => {
+const GitHub = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={width} height={height} >
@@ -286,7 +286,7 @@ const GitHub = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const MySQL = ({ width = 45, height = 45 }) => {
+const MySQL = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 83.67" width={width} height={height}>
@@ -303,7 +303,7 @@ const MySQL = ({ width = 45, height = 45 }) => {
     )
 }
 
-const GraphQL = ({ width = 45, height = 45 }) => {
+const GraphQL = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width={width} height={height}>
@@ -315,7 +315,7 @@ const GraphQL = ({ width = 45, height = 45 }) => {
         </>
     )
 }
-const CSharp = ({ width = 35, height = 45 }) => {
+const CSharp = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1.428 255.582 290.108" width={width} height={height}>
@@ -328,7 +328,7 @@ const CSharp = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const DotNet = ({ width = 60, height = 45 }) => {
+const DotNet = ({ width = 60, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.23294661979148623 0 125.23294661979149 79.04777140278348" width={width} height={height}>
@@ -337,7 +337,7 @@ const DotNet = ({ width = 60, height = 45 }) => {
         </>
     )
 }
-const MaterialUI = ({ width = 35, height = 45 }) => {
+const MaterialUI = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 476.30000000000007" width={width} height={height}>
@@ -349,7 +349,7 @@ const MaterialUI = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const FireBase = ({ width = 35, height = 45 }) => {
+const FireBase = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg
@@ -362,7 +362,7 @@ const FireBase = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const Redis = ({ width = 40, height = 45 }) => {
+const Redis = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 220" width={width} height={height}>
@@ -380,7 +380,7 @@ const Redis = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const Redux = ({ width = 35, height = 45 }) => {
+const Redux = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 244" width={width} height={height} >
@@ -389,7 +389,7 @@ const Redux = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const SASS = ({ width = 45, height = 45 }) => {
+const SASS = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 384" width={width} height={height}>
@@ -398,7 +398,7 @@ const SASS = ({ width = 45, height = 45 }) => {
         </>
     )
 }
-const Bash = ({ width = 60, height = 45 }) => {
+const Bash = ({ width = 100, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375.72 158.2" width={width} height={height}>
@@ -411,7 +411,7 @@ const Bash = ({ width = 60, height = 45 }) => {
         </>
     )
 }
-const JQuery = ({ width = 35, height = 45 }) => {
+const JQuery = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.19275382 .5 25.19275382 24.582" width={width} height={height}>
@@ -424,7 +424,7 @@ const JQuery = ({ width = 35, height = 45 }) => {
         </>
     )
 }
-const PostMan = ({ width = 40, height = 45 }) => {
+const PostMan = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-13.58674873666481 -3.5096047119942106 81.71274873666479 72.05384966725056" width={width} height={height}>
@@ -453,7 +453,7 @@ const PostMan = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const Doker = ({ width = 60, height = 45 }) => {
+const Doker = ({ width = 60, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="20.7 244.9 600.3 154.7" width={width} height={height}>
@@ -464,7 +464,7 @@ const Doker = ({ width = 60, height = 45 }) => {
         </>
     )
 }
-const Kubernets = ({ width = 40, height = 45 }) => {
+const Kubernets = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 249" width={width} height={height}>
@@ -475,7 +475,7 @@ const Kubernets = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const PostGreSql = ({ width = 40, height = 45 }) => {
+const PostGreSql = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 264" width={width} height={height}>
@@ -487,7 +487,7 @@ const PostGreSql = ({ width = 40, height = 45 }) => {
         </>
     )
 }
-const Heroku = ({ width = 35, height = 45 }) => {
+const Heroku = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="60 329.689 149.444 166.512" width={width} height={height}>
@@ -497,7 +497,7 @@ const Heroku = ({ width = 35, height = 45 }) => {
     )
 }
 
-const AndroidStudio = ({ width = 35, height = 45 }) => {
+const AndroidStudio = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg viewBox="0 0 128 128" width={width} height={height}>
@@ -507,7 +507,7 @@ const AndroidStudio = ({ width = 35, height = 45 }) => {
     )
 }
 
-const SQLite = ({ width = 70, height = 50 }) => {
+const SQLite = ({ width = 100, height = 50 }) => {
     return (
         <>
             <svg
@@ -553,7 +553,7 @@ const SQLite = ({ width = 70, height = 50 }) => {
 }
 
 
-const ComposeMultiplatform = ({ width = 35, height = 45 }) => {
+const ComposeMultiplatform = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg width={width} height={height} viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
@@ -572,7 +572,7 @@ const ComposeMultiplatform = ({ width = 35, height = 45 }) => {
     )
 }
 
-const Ktor = ({ width = 45, height = 60 }) => {
+const Ktor = ({ width = 65, height = 60 }) => {
     return (
         <>
             <svg viewBox="0 0 128 128" width={width} height={height}>
@@ -597,7 +597,7 @@ const Ktor = ({ width = 45, height = 60 }) => {
     )
 }
 
-const Flutter = ({ width = 35, height = 45 }) => {
+const Flutter = ({ width = 65, height = 65 }) => {
     return (
         <>
             <svg viewBox="0 0 128 128" width={width} height={height}>
@@ -607,7 +607,7 @@ const Flutter = ({ width = 35, height = 45 }) => {
     )
 }
 
-const Rust = ({ width = 40, height = 55 }) => {
+const Rust = ({ width = 65, height = 55 }) => {
     return (
         <>
             <svg viewBox="0 0 128 128" width={width} height={height}>
