@@ -1,51 +1,186 @@
-import React from 'react'
+import React from 'react';
+import { Box, Typography, Button, useTheme } from '@mui/material';
 import { Download } from '../components/icons/Icons';
-import resume from "../assets/resume.pdf";
+import resume from '../assets/resume.pdf';
 import SectionHeading from '../components/SectionHeading';
 import Skills from './Skills';
 
 const About = () => {
-    return (
-        <>
-            <div id='About' className=' pt-8 h-full min-h-screen w-full flex items-center  bg-gradient-to-b  from-gray-900 via-black to-black '>
-                <div className='section justify-between'>
-                    <SectionHeading heading="About Me" />
-                    <div className='mb-10  flex flex-col justify-center '>
-                    </div>
-                    <div className='flex flex-col justify-center w-full px-2 xs: sm:px-12 md:px-4 lg:px-14 text-white '>
-                        <h3 className='text-2xl xs:text-3xl  sm:text-4xl md:text-5xl lg:text-6xl font-semibold '>Hi, I'm <span className='text-cyan-500 block xs:inline'>Devansh Amdavadwala</span></h3>
-                        <div className='text-gray-400 py-4 space-y-2 md:space-y-4 md:pt-8 lg:pt-12 font-semibold text-justify'>
-                            <p className='leading-tight'>
-                                I am an Android Developer with a passion for creating robust, efficient, and user-friendly mobile applications that deliver real-world impact.
-                            </p>
-                            <p className='leading-tight'>
-                                With hands-on experience in Java and Kotlin, I specialize in building modern Android apps using Jetpack Compose, MVVM architecture, and Clean Architecture principles. I’ve worked extensively with SharedPreferences, Room Database, and Retrofit,ktor for seamless local and network data handling.
-                            </p>
-                            <p className='leading-tight'>
-                                I have integrated Firebase services for real-time updates and authentication, and utilized Coroutines for smooth, asynchronous operations. My development process is enhanced by Dependency Injection using Hilt, koin and the adoption of external libraries to accelerate and enrich app features.
-                            </p>
-                            <p className='leading-tight'>
-                                I enjoy solving complex challenges, exploring the latest tools in Android development, and delivering apps that are optimized, scalable, and easy to maintain.
-                            </p>
-                            <p className='leading-tight'>
-                                My focus is on building apps with clean code, modern UI using Compose, and delivering high-quality software on time and within scope.
-                            </p>
-                        </div>
-                        <div className='py-5'>
-                            <a href={resume} target="_blank" rel="noreferrer" download={true} className='z-30  group bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center gap-3 px-6 py-3  rounded-lg ease-linear duration-300 delay-75 transition-all cursor-pointer w-36 relative'>
-                                <span className='pr-6 sm:pr-0 sm:group-hover:-translate-x-5 sm:transition-transform delay-[400ms] ease-out'>Resume</span>
-                                <span className="absolute right-5 sm:scale-0 transition-all group-hover:scale-100 ease-in delay-200 animate-pulse duration-500 ">
-                                    <Download />
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    <Skills />
-                </div>
-            </div>
-        </>
-    )
-}
+    const theme = useTheme();
 
+    return (
+        <Box
+            id="About"
+            sx={{
+                pt: 8,
+                minHeight: '100vh',
+                width: '100%',
+                background: `linear-gradient(to bottom,${theme.palette.background.paper}, ${theme.palette.background.default}, ${theme.palette.background.default})`,
+
+                display: 'flex',
+                alignItems: 'center',
+            }}
+        >
+            <Box
+                sx={{
+                    width: '100%',
+                    maxWidth: 1200,
+                    mx: 'auto',
+                    px: { xs: 2, sm: 4, md: 6 },
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 4,
+                }}
+            >
+                <SectionHeading heading="About Me" />
+
+                <Typography
+                    variant="h3"
+                    component="h3"
+                    sx={{
+                        fontWeight: 600,
+                        fontSize: {
+                            xs: '2rem',
+                            sm: '2.5rem',
+                            md: '3.5rem',
+                            lg: '4.5rem',
+                        }
+                    }}
+                >
+                    Hi, I'm{' '}
+                    <Box component="span" sx={{ color: '#06b6d4', display: { xs: 'block', sm: 'inline' } }}>
+                        Devansh Amdavadwala
+                    </Box>
+                </Typography>
+
+                <Box
+                    sx={{
+                        color: 'gray.400',
+                        fontWeight: 600,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: { xs: 2, md: 3 },
+                        textAlign: 'justify',
+                        fontSize: { xs: '1rem', sm: '1.1rem' },
+                    }}
+                >
+                    <Typography>
+                        I am an Android Developer with a passion for creating robust, efficient, and user-friendly
+                        mobile applications that deliver real-world impact.
+                    </Typography>
+                    <Typography>
+                        With hands-on experience in Java and Kotlin, I specialize in building modern Android apps using
+                        Jetpack Compose, MVVM architecture, and Clean Architecture principles. I’ve worked extensively
+                        with SharedPreferences, Room Database, and Retrofit, ktor for seamless local and network data
+                        handling.
+                    </Typography>
+                    <Typography>
+                        I have integrated Firebase services for real-time updates and authentication, and utilized
+                        Coroutines for smooth, asynchronous operations. My development process is enhanced by
+                        Dependency Injection using Hilt, Koin and the adoption of external libraries to accelerate and
+                        enrich app features.
+                    </Typography>
+                    <Typography>
+                        I enjoy solving complex challenges, exploring the latest tools in Android development, and
+                        delivering apps that are optimized, scalable, and easy to maintain.
+                    </Typography>
+                    <Typography>
+                        My focus is on building apps with clean code, modern UI using Compose, and delivering
+                        high-quality software on time and within scope.
+                    </Typography>
+                </Box>
+
+                <ResumeButton/>
+
+                <Skills />
+            </Box>
+        </Box>
+    );
+};
 
 export default About;
+
+const ResumeButton = () => {
+    return (
+        <Box
+            component="a"
+            href={resume}
+            download
+            target="_blank"
+            rel="noreferrer"
+            className="group"
+            sx={{
+                position: 'relative',
+                zIndex: 30,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 1,
+                px: 3,
+                py: 1.5,
+                borderRadius: 2,
+                cursor: 'pointer',
+                width: '10rem',
+                textDecoration: 'none',
+                background: 'linear-gradient(to bottom right, #22d3ee, #2563eb)',
+                transition: 'all 0.3s linear 75ms',
+                overflow: 'hidden',
+                '&:hover .label': {
+                    transform: 'translateX(-1.25rem)',
+                    transition: 'transform 0.4s ease-out 0.4s',
+                },
+                '&:hover .arrow': {
+                    transform: 'translateY(0)',
+                    opacity: 1,
+                    transition: 'transform 0.3s ease-in 0.2s, opacity 0.3s ease-in 0.2s',
+                },
+            }}
+        >
+            <Typography
+                variant="button"
+                className="label"
+                sx={{
+                    pr: { xs: 3, sm: 0 },
+                    color: 'white',
+                    fontWeight: 500,
+                    fontFamily: 'Nunito',
+                    transition: 'transform 0.3s ease',
+                }}
+            >
+                Resume
+            </Typography>
+
+            <Box
+                className="arrow"
+                sx={{
+                    position: 'absolute',
+                    right: 20,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    opacity: 0,
+                    animation: 'arrowPulse 2s infinite',
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                }}
+            >
+                <Download />
+            </Box>
+
+            <style>
+                {`
+                @keyframes arrowPulse {
+                    0%, 100% {
+                        transform: translateY(-50%) scale(1);
+                    }
+                    50% {
+                        transform: translateY(-50%) scale(1.15);
+                    }
+                }
+                `}
+            </style>
+        </Box>
+    );
+};

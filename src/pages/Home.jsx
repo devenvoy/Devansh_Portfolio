@@ -15,7 +15,7 @@ import {
 const Home = () => {
     const theme = useTheme();
 
-    return ( 
+    return (
         <Box
             id="Home"
             sx={{
@@ -83,6 +83,7 @@ const Home = () => {
                         component="h1"
                         sx={{
                             fontWeight: 'bold',
+                            fontFamily: 'Nunito',
                             fontSize: { xs: '2.8rem', sm: '3.8rem', lg: '4.0rem' },
                             lineHeight: 1.1,
                         }}
@@ -111,6 +112,7 @@ const Home = () => {
                         sx={{
                             color: theme.palette.text.secondary,
                             fontWeight: 600,
+                            fontFamily: 'Nunito',
                             fontSize: { xs: '1.2rem', sm: '1.5rem' },
                             py: 2,
                             minWidth: { xs: '16rem', sm: '25rem' },
@@ -195,6 +197,7 @@ const Home = () => {
                                         px: 1,
                                         py: 0.5,
                                         borderRadius: 1,
+                                        fontFamily: 'Nunito',
                                         whiteSpace: 'nowrap',
                                         transition: 'transform 0.3s ease',
                                         pointerEvents: 'none',
@@ -262,6 +265,7 @@ const AboutButton = () => {
                         pr: { xs: 3, sm: 0 },
                         color: 'white',
                         fontWeight: 500,
+                        fontFamily: 'Nunito',
                         transition: 'transform 0.3s ease',
                     }}
                 >
