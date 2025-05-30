@@ -10,10 +10,16 @@ import {
     Typography,
     useTheme,
 } from '@mui/material';
+import AOS from 'aos';
+import { useEffect } from 'react';
 
 
 const Home = () => {
     const theme = useTheme();
+
+    useEffect(() => {
+        AOS.init({ duration: 500, once: true });
+    }, []);
 
     return (
         <Box
@@ -50,6 +56,8 @@ const Home = () => {
                         display: 'flex',
                         justifyContent: 'center',
                     }}
+
+                    data-aos="slide-left"
                 >
                     <Box
                         component="img"
@@ -78,6 +86,7 @@ const Home = () => {
                         maxWidth: 420,
                         justifyContent: 'center',
                     }}
+                    data-aos="slide-right"
                 >
                     <Typography
                         component="h1"

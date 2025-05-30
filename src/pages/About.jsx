@@ -4,9 +4,16 @@ import { Download } from '../components/icons/Icons';
 import resume from '../assets/resume.pdf';
 import SectionHeading from '../components/SectionHeading';
 import Skills from './Skills';
+import AOS from 'aos';
+import { useEffect } from 'react';
 
 const About = () => {
     const theme = useTheme();
+
+
+    useEffect(() => {
+        AOS.init({ duration: 1000, easing: 'ease-in-out', once: true });
+    }, []);
 
     return (
         <Box
@@ -32,9 +39,10 @@ const About = () => {
                     gap: 4,
                 }}
             >
-                <SectionHeading heading="About Me" />
+                <SectionHeading heading="About Me" data-aos="fade-down" />
 
                 <Typography
+                    data-aos="zoom-in"
                     variant="h3"
                     component="h3"
                     sx={{
@@ -48,7 +56,15 @@ const About = () => {
                     }}
                 >
                     Hi, I'm{' '}
-                    <Box component="span" sx={{ color: '#06b6d4', display: { xs: 'block', sm: 'inline' } }}>
+                    <Box
+                        component="span"
+                        sx={{
+                            background: `linear-gradient(to right, ${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            fontWeight: 'bold',
+                        }}
+                    >
                         Devansh Amdavadwala
                     </Box>
                 </Typography>
@@ -64,35 +80,39 @@ const About = () => {
                         fontSize: { xs: '1rem', sm: '1.1rem' },
                     }}
                 >
-                    <Typography>
+                    <Typography data-aos="fade-up" data-aos-delay="100">
                         I am an Android Developer with a passion for creating robust, efficient, and user-friendly
                         mobile applications that deliver real-world impact.
                     </Typography>
-                    <Typography>
+                    <Typography data-aos="fade-up" data-aos-delay="100">
                         With hands-on experience in Java and Kotlin, I specialize in building modern Android apps using
                         Jetpack Compose, MVVM architecture, and Clean Architecture principles. I’ve worked extensively
                         with SharedPreferences, Room Database, and Retrofit, ktor for seamless local and network data
                         handling.
                     </Typography>
-                    <Typography>
+                    <Typography data-aos="fade-up" data-aos-delay="100">
                         I have integrated Firebase services for real-time updates and authentication, and utilized
                         Coroutines for smooth, asynchronous operations. My development process is enhanced by
                         Dependency Injection using Hilt, Koin and the adoption of external libraries to accelerate and
                         enrich app features.
                     </Typography>
-                    <Typography>
+                    <Typography data-aos="fade-up" data-aos-delay="100">
                         I enjoy solving complex challenges, exploring the latest tools in Android development, and
                         delivering apps that are optimized, scalable, and easy to maintain.
                     </Typography>
-                    <Typography>
+                    <Typography data-aos="fade-up" data-aos-delay="100">
                         My focus is on building apps with clean code, modern UI using Compose, and delivering
                         high-quality software on time and within scope.
                     </Typography>
                 </Box>
 
-                <ResumeButton/>
+                <Box data-aos="flip-up">
+                    <ResumeButton />
+                </Box>
 
-                <Skills />
+                <Box data-aos="slide-up">
+                    <Skills />
+                </Box>
             </Box>
         </Box>
     );
