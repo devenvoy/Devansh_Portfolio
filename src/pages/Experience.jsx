@@ -25,7 +25,7 @@ const experiences = [
 
 function ExperienceSection() {
   const theme = useTheme();
-  
+
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
   }, []);
@@ -50,7 +50,8 @@ function ExperienceSection() {
           maxWidth: { xs: 1200, md: 'auto' },
         }}
       >
-        <Typography variant="h4" fontWeight="bold" color="text.secondary" mb={4}>
+        <Typography variant="h4" fontWeight="bold"
+          textAlign='center' color="text.secondary" mb={4}>
           Professional Experience
         </Typography>
 

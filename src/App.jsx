@@ -11,6 +11,7 @@ import ExperienceSection from './pages/Experience';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import Skills from './pages/Skills';
 
 const App = () => {
   return (
@@ -21,8 +22,10 @@ const App = () => {
           <>
             <section id="home"><Home /></section>
             <section id="about"><About /></section>
+            <section id="skills">   <Skills /></section>
             <section id="experience"><ExperienceSection /></section>
             <section id="projects"><Projects /></section>
+
             {/* <section id="blogs"><Blogs /></section> */}
             <section id="contact"><Contact /></section>
           </>

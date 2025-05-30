@@ -23,7 +23,6 @@ const About = () => {
                 minHeight: '100vh',
                 width: '100%',
                 background: `linear-gradient(to bottom,${theme.palette.background.paper}, ${theme.palette.background.default}, ${theme.palette.background.default})`,
-
                 display: 'flex',
                 alignItems: 'center',
             }}
@@ -47,6 +46,7 @@ const About = () => {
                     component="h3"
                     sx={{
                         fontWeight: 600,
+                        textAlign: 'center',
                         fontSize: {
                             xs: '2rem',
                             sm: '2.5rem',
@@ -107,11 +107,9 @@ const About = () => {
                 </Box>
 
                 <Box data-aos="flip-up">
-                    <ResumeButton />
-                </Box>
-
-                <Box data-aos="slide-up">
-                    <Skills />
+                    <center>
+                        <ResumeButton />
+                    </center>
                 </Box>
             </Box>
         </Box>

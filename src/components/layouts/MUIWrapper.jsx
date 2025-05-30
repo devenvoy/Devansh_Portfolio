@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import "../../index.css";
 import 'aos/dist/aos.css';
+import '../../App.css'
 
 export const MUIWrapperContext = createContext({
   toggleColorMode: () => { },
