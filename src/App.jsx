@@ -12,6 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Skills from './pages/Skills';
+import Achievements from './pages/Achievements';
 
 const App = () => {
   return (
@@ -30,7 +31,7 @@ const App = () => {
             <section id="contact"><Contact /></section>
           </>
         } />
-        <Route path='/achievements' element={<Projects />} />
+        <Route path='/achievements' element={<Achievements/>} />
       </Routes>
       <Footer />
       <BackToTopButton />
