@@ -2,8 +2,6 @@ import React from 'react';
 import { Box, Typography, Button, useTheme } from '@mui/material';
 import { Download } from '../components/icons/Icons';
 import resume from '../assets/resume.pdf';
-import SectionHeading from '../components/SectionHeading';
-import Skills from './Skills';
 import AOS from 'aos';
 import { useEffect } from 'react';
 
@@ -38,7 +36,6 @@ const About = () => {
                     gap: 4,
                 }}
             >
-                <SectionHeading heading="About Me" data-aos="fade-down" />
 
                 <Typography
                     data-aos="zoom-in"

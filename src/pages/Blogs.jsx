@@ -1,6 +1,5 @@
 import React from 'react';
 import blogs from '../data/blogs';
-import GridLayout from '../components/layouts/GridLayout';
 import Blog from '../components/Blog';
 
 const Blogs = () => {

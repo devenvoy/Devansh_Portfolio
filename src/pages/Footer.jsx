@@ -94,8 +94,9 @@ const Footer = () => {
 
               {/* Contact Icons */}
               <Box display="flex" gap={2}>
-                {contactInfo.map(({ id, link, name, icon, download }) => (
-                  <Tooltip key={id} title={name} arrow>
+                {contactInfo.map(({ id, link, name, icon, download }) => {
+                  const Icon = icon;
+                  return <Tooltip key={id} title={name} arrow>
                     <IconButton
                       component="a"
                       href={link}
@@ -115,10 +116,10 @@ const Footer = () => {
                         },
                       }}
                     >
-                      {icon}
+                      <Icon color={theme.palette.text.primary} />
                     </IconButton>
                   </Tooltip>
-                ))}
+                })}
               </Box>
             </Box>
           </Grid>

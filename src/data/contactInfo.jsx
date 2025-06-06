@@ -1,42 +1,36 @@
-import LinkedIn, { GitHub, GMail, Telegram, Resume } from "../components/icons/Icons";
-import {  Discord, Twitter } from "../components/icons/Icons";
+import LinkedIn, { GitHub, GMail, Twitter, Resume } from "../components/icons/Icons";
 import ResumeLink from "../assets/resume.pdf"
+
 const contactInfo = [
     {
         id: 1,
         name: "LinkedIn",
         link: "https://www.linkedin.com/in/devansh-a-bb104524a/",
-        icon: <LinkedIn />,
+        icon: LinkedIn
     },
     {
         id: 2,
         name: "GitHub",
         link: "https://github.com/devenvoy",
-        icon: <GitHub />,
+        icon: GitHub
     },
     {
         id: 3,
         name: "Mail",
         link: "mailto:devanshamdavadwala@gmail.com",
-        icon: <GMail />,
+        icon: GMail
     },
     {
         id: 6,
         name: "Twitter",
         link: "https://x.com/AjDevansh",
-        icon: <Twitter />,
-      },
-    // {
-    //     id: 4,
-    //     name: "Telegram",
-    //     link: "https://t.me/DevEnvoy",
-    //     icon: <Telegram />,
-    // },
+        icon: Twitter
+    },
     {
         id: 5,
         name: "Resume",
         link: ResumeLink,
-        icon: <Resume />,
+        icon: Resume,
         download: true
     },
     // {
@@ -44,6 +38,12 @@ const contactInfo = [
     //   name: "Discord",
     //   link: "https://discord.com/users/arcenvoy",
     //   icon: <Discord />,
+    // },
+    // {
+    //     id: 4,
+    //     name: "Telegram",
+    //     link: "https://t.me/DevEnvoy",
+    //     icon: <Telegram />,
     // },
 ];
 

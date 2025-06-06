@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SectionHeading from '../components/SectionHeading';
 import { Person, GMail, Chat, Submit } from '../components/icons/Icons';
 import { validateForm } from '../utils/formValidation';
 import {

@@ -21,6 +21,11 @@ const Home = () => {
         AOS.init({ duration: 500, once: true });
     }, []);
 
+    useEffect(() => {
+        AOS.refresh();
+    }, [theme]);
+
+
     return (
         <Box
             id="Home"
@@ -76,8 +81,8 @@ const Home = () => {
                 {/* Text + animation + socials */}
                 <Box
                     sx={{
-                        flex: { md: '0 0 55%' },
-                        width: { xs: '100%', md: 'auto' },
+                        flex: { md: '0 0 55%', xs: '1 1 100%' },
+                        width: '100%',
                         color: theme.palette.text.primary,
                         pl: { xs: 0, sm: 4 },
                         display: 'flex',
@@ -162,8 +167,9 @@ const Home = () => {
                             justifyContent: 'flex-start',
                         }}
                     >
-                        {contactInfo.map(({ id, link, name, icon, download }) => (
-                            <Box
+                        {contactInfo.map(({ id, link, name, icon, download }) => {
+                            const Icon = icon;
+                            return <Box
                                 component="li"
                                 key={id}
                                 sx={{
@@ -191,9 +197,8 @@ const Home = () => {
                                     rel="noreferrer"
                                     style={{ color: 'inherit', display: 'flex' }}
                                 >
-                                    {icon}
+                                    <Icon color={theme.palette.text.primary} />
                                 </a>
-                                {/* Tooltip on hover */}
                                 <Box
                                     sx={{
                                         position: 'absolute',
@@ -222,7 +227,7 @@ const Home = () => {
                                     {name}
                                 </Box>
                             </Box>
-                        ))}
+                        })}
                     </Box>
 
                     {/* About Me Button */}
