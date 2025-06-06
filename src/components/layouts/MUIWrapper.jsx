@@ -28,6 +28,7 @@ export default function MUIWrapper({ children }) {
               default: '#000000',
               paper: '#111827',
             },
+            divider: '#404040',
             primary: {
               light: '#22d3ee',
               main: '#06b6d4',
@@ -43,6 +44,7 @@ export default function MUIWrapper({ children }) {
               default: '#ffffff',
               paper: '#f9fafb',
             },
+            divider: '#e0e0e0',
             primary: {
               main: '#2563eb',
             },

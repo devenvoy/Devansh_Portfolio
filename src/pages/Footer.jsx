@@ -10,6 +10,7 @@ import {
   Grid,
   IconButton,
   Tooltip,
+  Divider,
 } from '@mui/material';
 
 const Footer = () => {
@@ -24,10 +25,11 @@ const Footer = () => {
         pt: 5,
       }}
     >
-      {/* Main Content Section */}
+
+      <Divider/>
       <Box className="section" sx={{ pb: 5 }}>
         <Grid container spacing={4} justifyContent="space-between">
-          {/* Intro Section */}
+
           <Grid sx={{ xs: 12, sm: 7, lg: 4 }}>
             <Typography variant="h5" fontWeight="bold" color={theme.palette.text.primary} gutterBottom>
               Devansh Amdavadwala

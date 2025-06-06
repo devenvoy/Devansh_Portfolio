@@ -1,62 +1,105 @@
-import { Card, Typography, Chip ,Link } from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, Chip, Link, Box, IconButton } from '@mui/material';
 import { ExternalLink } from 'lucide-react';
-import { mergeClasses } from '../utils/utils';
 
 const ProjectDetails = ({
     project: { img, name, demo, description, technologies },
     layoutType = 'default',
+    theme,
 }) => {
+    const isDefault = layoutType === 'default';
     return (
-        <Card className="mx-auto flex w-full max-w-6xl flex-col md:flex-row">
-            {/* Image */}
-            <div
-                className={mergeClasses(
-                    'flex items-center justify-center border-gray-100 bg-gray-50 p-8 dark:bg-gray-200 max-md:rounded-t-xl md:w-1/2 lg:p-12',
-                    layoutType === 'default'
-                        ? 'md:rounded-l-xl md:border-r'
-                        : 'md:order-last md:rounded-r-xl md:border-l'
-                )}
+        <Card
+            data-aos="fade-up"
+            sx={{
+                mx: 'auto',
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                maxWidth: '1200px',
+                borderRadius: 3,
+                boxShadow: 3,
+                my: 2,
+                overflow: 'hidden',
+            }}
+        >
+            {/* Image Section */}
+            <Box
+                sx={{
+                    width: { xs: '100%', md: '50%' },
+                    order: isDefault ? 0 : 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    p: { xs: 3, lg: 6 },
+                    borderRight: {
+                        md: isDefault ? `1px solid ${theme.palette.divider}` : 'none',
+                    },
+                    borderLeft: {
+                        md: !isDefault ? `1px solid ${theme.palette.divider}` : 'none',
+                    },
+                }}
             >
-                <Link 
-                    href={demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <img
-                        src={img}
+                <Link href={demo} target="_blank" rel="noopener noreferrer">
+                    <CardMedia
+                        component="img"
+                        image={img}
                         alt={`${name} preview`}
-                        className="rounded-xl shadow-lg transition-transform duration-500 md:hover:scale-105"
-                        style={{ objectFit: 'cover' }}
+                        sx={{
+                            borderRadius: 2,
+                            boxShadow: 3,
+                            objectFit: 'cover',
+                            transition: 'transform 0.5s',
+                            '&:hover': {
+                                transform: 'scale(1.05)',
+                            },
+                            width: '100%',
+                            height: '100%',
+                        }}
                     />
                 </Link>
+            </Box>
 
-            </div>
-
-            {/* Content */}
-            <div
-                className={mergeClasses(
-                    'flex flex-col gap-6 p-8 md:w-1/2 lg:p-12',
-                    layoutType === 'default' ? '' : 'md:order-first'
-                )}
+            {/* Content Section */}
+            <CardContent
+                sx={{
+                    width: { xs: '100%', md: '50%' },
+                    order: isDefault ? 1 : 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                    p: { xs: 3, lg: 6 },
+                }}
             >
-                <Typography className="text-xl font-semibold text-gray-900">
+                <Typography variant="h6" sx={{ color: 'text.primary', fontWeight: 600 }}>
                     {name}
                 </Typography>
-                <Typography className="text-base text-gray-700">{description}</Typography>
-                <div className="flex flex-wrap gap-2">
-                    {technologies?.map((technology, index) => (
-                        <Chip key={index} label={technology} />
+
+                <Typography variant="body1" sx={{ color: 'text.secondary' }}>
+                    {description}
+                </Typography>
+
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                    {technologies?.map((tech, idx) => (
+                        <Chip key={idx} label={tech} variant="outlined" />
                     ))}
-                </div>
-                <Link 
-                    href={demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="self-start rounded-lg p-1.5 hover:bg-gray-50 [&_svg]:stroke-gray-500"
-                >
-                    <ExternalLink />
-                </Link>
-            </div>
+                </Box>
+
+                <Box sx={{ mt: 2 }}>
+                    <IconButton
+                        component={Link}
+                        href={demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                            p: 1,
+                            borderRadius: 2,
+                            color: 'grey.600',
+                            '&:hover': { bgcolor: 'grey.100' },
+                        }}
+                    >
+                        <ExternalLink />
+                    </IconButton>
+                </Box>
+            </CardContent>
         </Card>
     );
 };

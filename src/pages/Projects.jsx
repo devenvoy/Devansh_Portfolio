@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProjectDetails from '../components/Project-detail'
 import personalProjects from '../data/projects'
-import { Box, useTheme,Typography } from '@mui/material'
+import { Box, useTheme, Typography } from '@mui/material'
+import Aos from 'aos'
 
 const Projects = () => {
+    
     const theme = useTheme();
+
+    useEffect(() => {
+        Aos.init({ duration: 800, once: true });
+    }, []);
+
     return (
         <Box id="experience"
             sx={{
@@ -27,6 +34,7 @@ const Projects = () => {
                             key={index}
                             project={project}
                             layoutType={index % 2 === 0 ? 'default' : 'reverse'}
+                            theme={theme}
                         />
                     )
                 })}
