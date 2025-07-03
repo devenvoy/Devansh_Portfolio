@@ -134,7 +134,7 @@ const Home = () => {
                         }}
                     >
                         <Box component="span" display={{ xs: 'block', sm: 'inline' }}>
-                            I am a
+                            I'm an
                         </Box>
                         <Box
                             component="span"
@@ -255,6 +255,7 @@ const AboutButton = () => {
                     gap: 1,
                     px: 3,
                     py: 1,
+                    my:3,
                     borderRadius: 2,
                     cursor: 'pointer',
                     width: '10rem',

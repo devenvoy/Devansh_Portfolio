@@ -1,7 +1,7 @@
 const work = [
-  "Android Developer",
+  " Software Developer",
   2000,
-  "Compose Developer",
+  "Android Developer",
   2000,
   "KMP Developer",
   2000,

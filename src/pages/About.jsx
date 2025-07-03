@@ -78,17 +78,17 @@ const About = () => {
                     }}
                 >
                     <Typography data-aos="fade-up" data-aos-delay="100">
-                        I am an Android Developer with a passion for creating robust, efficient, and user-friendly
+                        I'm an Android Developer with a passion for creating robust, efficient, and user-friendly
                         mobile applications that deliver real-world impact.
                     </Typography>
                     <Typography data-aos="fade-up" data-aos-delay="100">
                         With hands-on experience in Java and Kotlin, I specialize in building modern Android apps using
-                        Jetpack Compose, MVVM architecture, and Clean Architecture principles. I’ve worked extensively
-                        with SharedPreferences, Room Database, and Retrofit, ktor for seamless local and network data
-                        handling.
+                        Jetpack Compose, MVVM with Clean Architecture principles. I’ve worked extensively
+                        with Room Database,  SharedPreferences,  Retrofit,  ktor for seamless local data
+                        handling and server-client connectivity for mobile application.
                     </Typography>
                     <Typography data-aos="fade-up" data-aos-delay="100">
-                        I have integrated Firebase services for real-time updates and authentication, and utilized
+                        I have integrated Firebase services for authentication, messaging ,real-time database , firestore, remote-config also utilized
                         Coroutines for smooth, asynchronous operations. My development process is enhanced by
                         Dependency Injection using Hilt, Koin and the adoption of external libraries to accelerate and
                         enrich app features.

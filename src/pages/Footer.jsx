@@ -1,5 +1,6 @@
 import React from 'react';
 import { GMail, Map, CopyRight, ArrowRightLong } from '../components/icons/Icons';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import navLinks from '../data/navlinks';
 import contactInfo from '../data/contactInfo';
@@ -15,6 +16,16 @@ import {
 
 const Footer = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const onClick = (link) => {
+    if (link === 'achievements') {
+      navigate('/achievements');
+      return;
+    }
+    else
+      null
+  }
 
   return (
     <Box
@@ -26,7 +37,7 @@ const Footer = () => {
       }}
     >
 
-      <Divider/>
+      <Divider />
       <Box className="section" sx={{ pb: 5 }}>
         <Grid container spacing={4} justifyContent="space-between">
 
@@ -48,7 +59,7 @@ const Footer = () => {
             </Typography>
             {navLinks.map(({ link, id }) => (
               <Box key={id} sx={{ px: 1, py: 0.5 }}>
-                <Link to={link} smooth duration={500}>
+                <Link to={link} smooth duration={500} onClick={()=>{onClick(link)}}>
                   <Box
                     sx={{
                       display: 'flex',
