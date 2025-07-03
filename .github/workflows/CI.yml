@@ -3,26 +3,13 @@ name: CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 env:
   CI: false
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    permissions:
-      contents: read
-      id-token: write
-      pages: write
-      actions: write
-      checks: write
-      deployments: write
 
     strategy:
       matrix:
@@ -43,19 +30,12 @@ jobs:
     - name: Build the app
       run: npm run build
 
+    # OPTIONAL: Run tests
     # - name: Run component tests
     #   run: npm run test
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v3
-
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: 'dist/'
-
     - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist  # change to ./build if using CRA
