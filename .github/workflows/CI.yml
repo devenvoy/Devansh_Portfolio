@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write  # IMPORTANT: allow pushing to gh-pages
+  contents: write  # allow pushing to gh-pages
 
 env:
   CI: false
@@ -31,10 +31,12 @@ jobs:
       run: npm ci
 
     - name: Build the app
-      run: npm run build
+      run: |
+        npm run build
+        npx next export
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        publish_dir: ./out
