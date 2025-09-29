@@ -1,8 +1,7 @@
+"use client";
 import { createContext, useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import 'aos/dist/aos.css';
-import '@/styles/App.css'
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export const MUIWrapperContext = createContext({
@@ -10,16 +9,17 @@ export const MUIWrapperContext = createContext({
 });
 
 export default function MUIWrapper({ children }) {
+  
   const [mode, setMode] = useLocalStorage("mui-theme-mode", "light");
 
   const muiWrapperUtils = useMemo(() => ({
     toggleColorMode: () => {
-      setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      setMode(prevMode => (prevMode === "light" ? "dark" : "light"));
     },
-  }), []);
+  }), [setMode]);
 
   const theme = useMemo(() => {
-    return createTheme({  
+    return createTheme({
       palette: {
         mode,
         ...(mode === "dark"

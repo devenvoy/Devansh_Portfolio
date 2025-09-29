@@ -1,7 +1,9 @@
 // pages/_app.jsx
-import '@/styles/globals.css';
+
 import { ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+import '@/styles/globals.css';
+import 'aos/dist/aos.css';
+import 'react-toastify/dist/ReactToastify.css';
 import MUIWrapper from '@/components/layouts/MUIWrapper';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
