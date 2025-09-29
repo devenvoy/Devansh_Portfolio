@@ -1,5 +1,4 @@
 import LinkedIn, { GitHub, GMail, Twitter, Resume } from "../components/icons/Icons";
-import ResumeLink from "../assets/resume.pdf"
 
 const contactInfo = [
     {
@@ -29,7 +28,7 @@ const contactInfo = [
     {
         id: 5,
         name: "Resume",
-        link: ResumeLink,
+        link: "/public/resume.pdf",
         icon: Resume,
         download: true
     },

@@ -1,10 +1,9 @@
-import React, { createContext, useMemo } from "react";
+import { createContext, useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import "../../index.css";
 import 'aos/dist/aos.css';
-import '../../App.css'
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import '@/styles/App.css'
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export const MUIWrapperContext = createContext({
   toggleColorMode: () => { },

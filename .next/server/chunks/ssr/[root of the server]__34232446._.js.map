@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 65, "column": 0}, "map": {"version":3,"sources":["file://D%3A/Test/react/Devansh_Portfolio/src/pages/_app.jsx"],"sourcesContent":["// pages/_app.jsx\r\nimport '@/styles/globals.css';\r\nimport { ToastContainer } from 'react-toastify';\r\nimport \"react-toastify/dist/ReactToastify.css\";\r\nimport MUIWrapper from '@components/layouts/MUIWrapper';\r\nimport Navbar from '@components/Navbar';\r\nimport Footer from '@components/Footer';\r\nimport BackToTopButton from '@components/BackToTopButton';\r\n\r\nfunction MyApp({ Component, pageProps }) {\r\n  return (\r\n    <MUIWrapper>\r\n      <Navbar />\r\n      <Component {...pageProps} />\r\n      <Footer />\r\n      <BackToTopButton />\r\n      <ToastContainer />\r\n    </MUIWrapper>\r\n  );\r\n}\r\n\r\nexport default MyApp;\r\n"],"names":[],"mappings":"AAAA,iBAAiB;;;;;AAEjB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAOA,SAAS,MAAM,EAAE,SAAS,EAAE,SAAS,EAAE;IACrC,qBACE,qKAAC;;0BACC,qKAAC;;;;;0BACD,qKAAC;gBAAW,GAAG,SAAS;;;;;;0BACxB,qKAAC;;;;;0BACD,qKAAC;;;;;0BACD,qKAAC,kIAAA,CAAA,iBAAc;;;;;;;;;;;AAGrB;uCAEe","debugId":null}}]
+}

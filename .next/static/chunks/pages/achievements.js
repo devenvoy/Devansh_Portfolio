@@ -1,0 +1,12 @@
+__turbopack_load_page_chunks__("/achievements", [
+  "static/chunks/node_modules_next_dist_18b58331._.js",
+  "static/chunks/node_modules_react_1cad9b0b._.js",
+  "static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js",
+  "static/chunks/node_modules_react-dom_f14d0471._.js",
+  "static/chunks/node_modules_@mui_system_esm_bcead5ea._.js",
+  "static/chunks/node_modules_@mui_material_esm_f7cb92f2._.js",
+  "static/chunks/node_modules_b5675076._.js",
+  "static/chunks/[root of the server]__45aec77e._.js",
+  "static/chunks/src_pages_achievements_5771e187._.js",
+  "static/chunks/src_pages_achievements_d5e635a7._.js"
+])
