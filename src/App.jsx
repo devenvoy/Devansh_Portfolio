@@ -1,18 +1,17 @@
 import React from 'react'
-import About from './pages/About';
-import Home from './pages/Home';
-import Navbar from './pages/Navbar';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-import Footer from './pages/Footer';
+import About from './sections/About';
+import Home from './sections/Home';
+import Navbar from './sections/Navbar';
+import Projects from './sections/Projects';
+import Contact from './sections/Contact';
+import Footer from './components/Footer';
 import BackToTopButton from './components/BackToTopButton';
-import Blogs from './pages/Blogs';
-import ExperienceSection from './pages/Experience';
+import Blogs from './sections/Blogs';
+import ExperienceSection from './sections/Experience';
 import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import Skills from './pages/Skills';
-import Achievements from './pages/Achievements';
+import Skills from './sections/Skills';
+import Achievements from './sections/Achievements';
 
 const App = () => {
   return (
@@ -35,7 +34,6 @@ const App = () => {
       </Routes>
       <Footer />
       <BackToTopButton />
-      <ToastContainer />
     </div>
   )
 }

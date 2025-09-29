@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+"use client";
+import  { useEffect, useState } from 'react'
 import { ArrowUp } from "./icons/Icons"
 import { Link } from 'react-scroll'
 
