@@ -12,6 +12,8 @@ const nextConfig = {
   },
   basePath: repoName,
   assetPrefix: repoName,
+
+  output: "export",
 };
 
 export default nextConfig;
