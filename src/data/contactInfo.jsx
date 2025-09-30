@@ -28,7 +28,7 @@ const contactInfo = [
     {
         id: 5,
         name: "Resume",
-        link: "/public/resume.pdf",
+        link: "https://drive.google.com/file/d/194hASLGWkzKPrlWP9baIgheV60aBLqQs/view",
         icon: Resume,
         download: true
     },

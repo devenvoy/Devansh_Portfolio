@@ -8,10 +8,12 @@ import MUIWrapper from '@/components/layouts/MUIWrapper';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTopButton from '@/components/BackToTopButton';
+import { CssBaseline } from '@mui/material';
 
 function MyApp({ Component, pageProps }) {
   return (
     <MUIWrapper>
+      <CssBaseline />
       <Navbar />
       <Component {...pageProps} />
       <Footer />

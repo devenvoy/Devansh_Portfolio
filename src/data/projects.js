@@ -1,8 +1,8 @@
 const projects = [
   {
-    img: "./gradnet.png",
+    img: "https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215455/gradnet_b93ahn.png",
     name: "GradNet Graduate's Network",
-    demo: "./gradnet.png",
+    demo: "https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215455/gradnet_b93ahn.png",
     description:
       "GradNet is a platform that connects recent graduates with employers. It allows employers to post jobs and search for candidates. It also allows candidates to search for jobs and apply to them.",
     technologies: [
@@ -14,7 +14,7 @@ const projects = [
     ],
   },
    {
-    img: "./dialer.png",
+    img: "https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215455/dialer_wybfla.png",
     name: "IPhone's Dialer",
     demo: "https://play.google.com/store/apps/details?id=com.contact.idialer.phonecaller",
 description:
@@ -34,7 +34,7 @@ Transform your phone calling with Phone Dialer, look like iPhone style dialer, t
     ],
   },
    {
-    img: "./testers.png",
+    img: "https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215457/testers_loytfa.png",
     name: "20 Testers Community",
     demo: "https://play.google.com/store/apps/details?id=com.testingcommunity.twentytesters",
 description:
