@@ -5,7 +5,14 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="theme-color" content="#2563eb" /> {/* fallback */}
+          {/* Favicon and theme color */}
+          <meta name="theme-color" content="#2563eb" />
+          <link rel="icon" href="/favicon.ico" />
+          
+          {/* Author */}
+          <meta name="author" content="Devansh Amdavadwala" />
+          
+          {/* Theme color script */}
           <script
             dangerouslySetInnerHTML={{
               __html: `

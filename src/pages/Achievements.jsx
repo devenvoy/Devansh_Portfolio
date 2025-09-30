@@ -1,4 +1,4 @@
-// pages/achievements/page.jsx
+// pages/achievements.jsx
 'use client';
 import React, { useState , useMemo } from "react";
 import {

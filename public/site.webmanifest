@@ -1,0 +1,38 @@
+{
+  "name": "Devansh Developer Portfolio",
+  "short_name": "Devansh Portfolio",
+  "description": "Android developer crafting beautiful, functional mobile experiences with modern technologies.",
+  "start_url": "/Devansh_Portfolio/",
+  "scope": "/Devansh_Portfolio/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Devansh_Portfolio/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Devansh_Portfolio/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Devansh_Portfolio/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["portfolio", "developer", "technology"],
+  "screenshots": [
+    {
+      "src": "/Devansh_Portfolio/screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ]
+}

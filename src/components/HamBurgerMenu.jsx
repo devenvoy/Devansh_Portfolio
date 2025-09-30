@@ -1,5 +1,6 @@
 import React from 'react'
 import { Hamburger, Menu, Cancel } from './icons/Icons';
+
 const HamBurgerMenu = ({ handleClick, navOpen }) => {
     return (
 

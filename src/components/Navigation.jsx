@@ -46,10 +46,11 @@ const NavItem = ({ content, liClass, isThemeButton = false }) => {
 const Navigation = ({ ulClass, liClass, handleClick }) => {
   const location = usePathname();
   const navigate = useRouter();
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   const handleNavClick = (link) => {
     if (link === 'achievements') {
-      navigate.push('/achievements');
+      navigate.push(`${basePath}/achievements`);
       return;
     }
 
@@ -77,7 +78,7 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
           );
         } else if (link === 'achievements') {
           content = (
-            <Link href="/achievements" passHref>
+            <Link href={`${basePath}/achievements`} passHref>
               <Typography
                 component="span"
                 fontFamily="Nunito"
@@ -105,17 +106,17 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
         }
 
         return (
-          <NavItem 
-            key={id} 
-            content={content} 
-            liClass={liClass} 
+          <NavItem
+            key={id}
+            content={content}
+            liClass={liClass}
           />
         );
       })}
 
-      <NavItem 
-        content={<ThemeButton />} 
-        liClass={liClass} 
+      <NavItem
+        content={<ThemeButton />}
+        liClass={liClass}
         isThemeButton={true}
       />
     </ul>
