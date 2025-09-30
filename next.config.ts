@@ -1,5 +1,5 @@
-const isGithubPages = process.env.VERCEL_ENV !== "production"; 
-const repoName = isGithubPages ? "" : "/Devansh_Portfolio";
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+const repoName = isGithubPages ? "/Devansh_Portfolio" : "";
 
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },

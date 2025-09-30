@@ -9,6 +9,7 @@ permissions:
 
 env:
   CI: false
+  GITHUB_PAGES: true
 
 jobs:
   build-deploy:
