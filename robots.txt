@@ -1,14 +1,9 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# *
 User-agent: *
 Allow: /
+
+# Host
+Host: https://devenvoy.github.io/Devansh_Portfolio
+
+# Sitemaps
+Sitemap: https://devenvoy.github.io/Devansh_Portfolio/sitemap.xml
