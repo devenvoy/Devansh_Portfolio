@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 import AOS from 'aos';
 import { useEffect } from 'react';
-import Image from 'next/image';
 
 
 const Home = () => {
@@ -63,11 +62,12 @@ const Home = () => {
 
                     data-aos="slide-left"
                 >
-                    <Image
+                    <Box
+                        component="img"
                         src="https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215454/Avatar_lt6zhz.jpg"
                         alt="Avatar"
-                        width={320}
-                        height={320}
+                        // width={320}
+                        // height={320}
                         style={{
                             width: '100%',
                             height: 'auto',
