@@ -50,7 +50,7 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
 
   const handleNavClick = (link) => {
     if (link === 'achievements') {
-      navigate.push(`${basePath}/achievements`);
+      +      navigate.push('/achievements');
       return;
     }
 
@@ -78,7 +78,7 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
           );
         } else if (link === 'achievements') {
           content = (
-            <Link href={`${basePath}/achievements`} passHref>
+            <Link href="/achievements" passHref>
               <Typography
                 component="span"
                 fontFamily="Nunito"
