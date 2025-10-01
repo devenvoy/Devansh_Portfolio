@@ -22,8 +22,9 @@ function ThemeButton() {
             onClick={muiUtils.toggleColorMode}
             color="inherit"
             disableTouchRipple
-            disableRipple
+            disableRipple   
             suppressHydrationWarning
+            aria-label="Toggle light/dark theme"
         >
             {/* Only render the icon after mounting */}
             {mounted ? (
