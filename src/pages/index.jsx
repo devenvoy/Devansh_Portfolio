@@ -19,7 +19,3 @@ export default function HomePage() {
     </>
   );
 }
-
-
-  // "background_color": "#ffffff",
-  // "theme_color": "#2563eb",

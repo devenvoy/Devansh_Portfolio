@@ -97,6 +97,15 @@ const Navbar = () => {
 
             {/* Spacer for mobile */}
             <Box className="md:hidden" sx={{ height: '128px', backgroundColor: 'transparent' }} />
+
+            <nav style={{ height: "1px", overflow: "hidden" }}>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </>
     );
 };
