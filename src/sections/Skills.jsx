@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Box, Typography, useTheme } from '@mui/material';
@@ -59,6 +58,23 @@ const SkillsRow = ({ skills, direction = 'left' }) => {
           gap: 4,
           animation: `${animationName} 40s linear infinite`,
           width: 'fit-content',
+          // Add keyframes directly in sx
+          '@keyframes marquee-left': {
+            '0%': {
+              transform: 'translateX(0)',
+            },
+            '100%': {
+              transform: 'translateX(-50%)',
+            },
+          },
+          '@keyframes marquee-right': {
+            '0%': {
+              transform: 'translateX(-50%)',
+            },
+            '100%': {
+              transform: 'translateX(0)',
+            },
+          },
         }}
       >
         {[...skills, ...skills].map((skill, index) => (

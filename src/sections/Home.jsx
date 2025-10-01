@@ -66,8 +66,8 @@ const Home = () => {
                         component="img"
                         src="https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215454/Avatar_lt6zhz.jpg"
                         alt="Avatar"
-                        // width={320}
-                        // height={320}
+                        loading="eager"
+                        fetchpriority="high"
                         style={{
                             width: '100%',
                             height: 'auto',
@@ -194,6 +194,7 @@ const Home = () => {
                                     download={download}
                                     target="_blank"
                                     rel="noreferrer"
+                                    aria-label={name}
                                     style={{ color: 'inherit', display: 'flex' }}
                                 >
                                     <Icon color={theme.palette.text.primary} />
@@ -245,6 +246,7 @@ const AboutButton = () => {
         <Link to="About" smooth={true} duration={500} style={{ textDecoration: 'none' }}>
             <Box
                 className="group"
+                aria-label="Scroll to About section"
                 sx={{
                     position: 'relative',
                     zIndex: 30,
