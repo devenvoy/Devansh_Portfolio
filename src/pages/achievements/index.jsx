@@ -1,5 +1,4 @@
-// pages/Achievements.jsx
-'use client';
+// pages/achievements/page.jsx
 import React, { useState , useMemo } from "react";
 import {
   Box,
@@ -11,8 +10,8 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { Cancel } from "../components/icons/Icons"; 
-import { achievementsData } from "../data/achievements_data";
+import { Cancel } from "../../components/icons/Icons"; 
+import { achievementsData } from "../../data/achievements_data";
 
 const Achievements = () => {
   const [open, setOpen] = useState(false);

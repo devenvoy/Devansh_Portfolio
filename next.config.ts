@@ -9,15 +9,6 @@ const nextConfig = {
       { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/achievements',
-        destination: '/Achievements',
-        permanent: true,
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;
