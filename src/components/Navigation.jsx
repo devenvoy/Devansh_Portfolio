@@ -1,56 +1,18 @@
-import React from 'react';
 import { scroller } from 'react-scroll';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import navLinks from '@/data/navlinks';
 import ThemeButton from './ThemeButton';
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-
-const NavItem = ({ content, liClass, isThemeButton = false }) => {
-  const theme = useTheme();
-
-  return (
-    <Box
-      component="li"
-      suppressHydrationWarning
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        mx: 2,
-        px: 1,
-        py: isThemeButton ? 0 : 0.5,
-        height: '40px',
-        textTransform: 'capitalize',
-        fontWeight: 500,
-        cursor: 'pointer',
-        transition: 'all 0.5s ease',
-        // Use theme tokens instead of conditional logic
-        color: 'text.secondary',
-        borderBottom: isThemeButton ? 'none' : '2px solid transparent',
-        '&:hover': !isThemeButton && {
-          transform: 'scale(1.15)',
-          borderBottomColor: 'text.primary',
-          color: 'text.primary',
-        },
-      }}
-      className={liClass}
-    >
-      {content}
-    </Box>
-  );
-};
 
 const Navigation = ({ ulClass, liClass, handleClick }) => {
   const location = usePathname();
   const navigate = useRouter();
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   const handleNavClick = (link) => {
     if (link === 'achievements') {
-      +      navigate.push('/Achievements');
+        navigate.push('/achievements');
       return;
     }
 
@@ -78,7 +40,7 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
           );
         } else if (link === 'achievements') {
           content = (
-            <Link href="/Achievements" passHref>
+            <Link href="/achievements" passHref>
               <Typography
                 component="span"
                 fontFamily="Nunito"
@@ -120,6 +82,40 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
         isThemeButton={true}
       />
     </ul>
+  );
+};
+
+
+const NavItem = ({ content, liClass, isThemeButton = false }) => {
+
+  return (
+    <Box
+      component="li"
+      suppressHydrationWarning
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        mx: 2,
+        px: 1,
+        py: isThemeButton ? 0 : 0.5,
+        height: '40px',
+        textTransform: 'capitalize',
+        fontWeight: 500,
+        cursor: 'pointer',
+        transition: 'all 0.5s ease',
+        color: 'text.secondary',
+        borderBottom: isThemeButton ? 'none' : '2px solid transparent',
+        '&:hover': !isThemeButton && {
+          transform: 'scale(1.15)',
+          borderBottomColor: 'text.primary',
+          color: 'text.primary',
+        },
+      }}
+      className={liClass}
+    >
+      {content}
+    </Box>
   );
 };
 

@@ -14,7 +14,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://devenvoy.github.io/Devansh_Portfolio/sitemap.xml
+Sitemap: https://devansh.amdavadwala.com/sitemap.xml
 
 # Disallow admin or private paths (if any)
 Disallow: /api/

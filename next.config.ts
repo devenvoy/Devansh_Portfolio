@@ -1,5 +1,4 @@
-const isGithubPages = process.env.GITHUB_PAGES === "true";
-const repoName = isGithubPages ? "/Devansh_Portfolio" : "";
+const repoName = "";
 
 const nextConfig = {
   unoptimized: true,

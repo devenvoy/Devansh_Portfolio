@@ -117,7 +117,7 @@ const ResumeButton = () => {
     return (
         <Box
             component="a"
-            href="/resume.pdf"
+            href="https://drive.google.com/file/d/194hASLGWkzKPrlWP9baIgheV60aBLqQs/view"
             download
             target="_blank"
             rel="noreferrer"

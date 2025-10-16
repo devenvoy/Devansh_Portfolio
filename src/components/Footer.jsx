@@ -1,7 +1,5 @@
-
 import { GMail, Map, CopyRight, ArrowRightLong } from './icons/Icons';
 import { useRouter } from 'next/navigation';
-import { Link } from 'react-scroll';
 import navLinks from '@/data/navlinks';
 import contactInfo from '@/data/contactInfo';
 import {
@@ -13,19 +11,27 @@ import {
   Tooltip,
   Divider,
 } from '@mui/material';
+import { scroller } from 'react-scroll';
 
 const Footer = () => {
   const theme = useTheme();
   const navigate = useRouter();
 
-  const onClick = (link) => {
+  const handleNavClick = (link) => {
     if (link === 'achievements') {
       navigate.push('/achievements');
       return;
     }
-    else
-      null
-  }
+
+    if (location !== '/') {
+      navigate.push('/');
+      setTimeout(() => {
+        scroller.scrollTo(link, { smooth: true, duration: 500, offset: -50, });
+      }, 200);
+    } else {
+      scroller.scrollTo(link, { smooth: true, duration: 500, offset: -50, });
+    }
+  };
 
   return (
     <Box
@@ -59,27 +65,26 @@ const Footer = () => {
             </Typography>
             {navLinks.map(({ link, id }) => (
               <Box key={id} sx={{ px: 1, py: 0.5 }}>
-                <Link to={link} smooth duration={500} onClick={()=>{onClick(link)}}>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      fontWeight: 600,
-                      color: theme.palette.text.primary,
-                      cursor: 'pointer',
-                      '& span': {
-                        background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        transition: '0.4s ease',
-                      },
-                    }}
-                  >
-                    <ArrowRightLong />
-                    <span>{link.toUpperCase()}</span>
-                  </Box>
-                </Link>
+                <Box
+                  onClick={() => { handleNavClick(link); }}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    fontWeight: 600,
+                    color: theme.palette.text.primary,
+                    cursor: 'pointer',
+                    '& span': {
+                      background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      transition: '0.4s ease',
+                    },
+                  }}
+                >
+                  <ArrowRightLong />
+                  <span>{link.toUpperCase()}</span>
+                </Box>
               </Box>
             ))}
           </Grid>
@@ -139,18 +144,21 @@ const Footer = () => {
         </Grid>
       </Box>
 
-      {/* Bottom Copyright */}
-      <Box className="section" sx={{ py: 2 }}>
+      {/* Footer Copyright */}
+      <Box className="section" sx={{ py: 3, borderTop: 1, borderColor: 'divider' }}>
         <Typography
-          textAlign="center"
           variant="body2"
-          color={theme.palette.text.secondary}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          gap={1}
+          color="text.secondary"
+          textAlign="center"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 0.5,
+            flexWrap: 'wrap'
+          }}
         >
-          <CopyRight /> All Rights Reserved
+          © {new Date().getFullYear()} Devansh Amdavadwala. All rights reserved.
         </Typography>
       </Box>
     </Box>

@@ -11,10 +11,10 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { Cancel } from "../components/icons/Icons"; // your custom icon
+import { Cancel } from "../components/icons/Icons"; 
 import { achievementsData } from "../data/achievements_data";
 
-const Achievements = () => {
+const achievements = () => {
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const theme = useTheme();
@@ -222,5 +222,5 @@ const Achievements = () => {
   );
 };
 
-export default Achievements;
+export default achievements;
 

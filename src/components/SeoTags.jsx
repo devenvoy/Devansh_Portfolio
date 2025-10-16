@@ -7,7 +7,7 @@ export default function SeoTags({
     title = 'Devansh Developer - Portfolio',
     description = 'Android developer crafting beautiful, functional mobile experiences with modern technologies.',
     image = 'https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759226789/Devansh_1_v41itb.png',
-    url = `https://devenvoy.github.io${basePath}`,
+    url = `https://devansh.amdavadwala.com`,
     type = 'website',
     author = 'Devansh Amdavadwala',
     twitterHandle = '@devansh_dev',
