@@ -1,4 +1,4 @@
-// pages/achievements.jsx
+// pages/Achievements.jsx
 'use client';
 import React, { useState , useMemo } from "react";
 import {
@@ -14,7 +14,7 @@ import {
 import { Cancel } from "../components/icons/Icons"; 
 import { achievementsData } from "../data/achievements_data";
 
-const achievements = () => {
+const Achievements = () => {
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const theme = useTheme();
@@ -222,5 +222,5 @@ const achievements = () => {
   );
 };
 
-export default achievements;
+export default Achievements;
 
