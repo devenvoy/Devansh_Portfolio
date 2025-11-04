@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Font variables from next/font */
+  --font-raleway: var(--font-raleway);
+  --font-great-vibes: var(--font-great-vibes);
+  --font-nunito: var(--font-nunito);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-raleway), Arial, Helvetica, sans-serif;
+}
+
+/* Font utility classes */
+.font-raleway {
+  font-family: var(--font-raleway);
+}
+
+.font-great-vibes {
+  font-family: var(--font-great-vibes);
+}
+
+.font-nunito {
+  font-family: var(--font-nunito);
+}
