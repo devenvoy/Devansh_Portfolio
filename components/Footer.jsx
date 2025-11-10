@@ -11,6 +11,7 @@ import {
   IconButton,
   Tooltip,
   Divider,
+  Link,
 } from '@mui/material';
 
 const Footer = () => {
@@ -28,7 +29,7 @@ const Footer = () => {
     whiteSpace: 'nowrap',
     border: 0,
   };
-  
+
 
   const onClick = (link) => {
     if (link === 'achievements') {
@@ -111,10 +112,37 @@ const Footer = () => {
               justifyContent="space-between"
             >
               <Box fontSize="0.9rem">
+                {/* Email */}
                 <Box display="flex" alignItems="center" gap={1} mb={1}>
-                  <GMail /> devanshamdavadwala@gmail.com
+                  <GMail />
+                  <Link
+                    href="mailto:devanshamdavadwala@gmail.com"
+                    underline="none"
+                    color="inherit"
+                    sx={{
+                      cursor: "pointer",
+                      "&:hover": {
+                        color: "primary.main",
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    devanshamdavadwala@gmail.com
+                  </Link>
                 </Box>
-                <Box display="flex" alignItems="center" gap={1}>
+
+                {/* Location */}
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      color: "primary.main",
+                    },
+                  }}
+                >
                   <Map /> Surat, Gujarat, India
                 </Box>
               </Box>
@@ -152,10 +180,7 @@ const Footer = () => {
                       >
                         {/* Hide the icon from screen readers so it doesn't get read as "svg" */}
                         <Icon
-                          aria-hidden="true"
-                          focusable="false"
-                          sx={{ color: theme.palette.text.primary }}  // use sx for custom colors
-                        />
+                          color={theme.palette.text.primary} aria-hidden="true" focusable="false" />
                         {/* Optional: redundant visible name for absolute robustness */}
                         <Box component="span" sx={visuallyHiddenStyles}>
                           {name}

@@ -1,11 +1,11 @@
-import 'aos/dist/aos.css';
-import 'react-toastify/dist/ReactToastify.css';
 import { Raleway, Great_Vibes, Nunito } from 'next/font/google';
 import MUIWrapper from '@/components/layouts/MUIWrapper';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTopButton from '@/components/BackToTopButton';
 import { ToastContainer } from 'react-toastify';
+import 'aos/dist/aos.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Optimize font loading with next/font
 const raleway = Raleway({

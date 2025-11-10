@@ -18,8 +18,16 @@ const experiences = [
     position: "Mobile Software Developer",
     link: "https://www.argonitservices.com/",
     duration: "May 2024 - Present",
-    description: "Worked as an Android Developer using Kotlin and Java to build scalable and high-performing mobile applications from scratch. Contributed to designing and implementing responsive user interfaces while ensuring seamless user experience and smooth performance. Gained expertise in modern mobile application development practices, collaborating with the team to deliver robust digital solutions.",
-    skills: ["Kotlin", "Android", "Compose", "Kotlin/Compose Multiplatform", "Firebase", "Retrofit/ktor", "Room", "Dagger Hilt/Koin"]
+    description: [
+      "Developed and deployed 6+ Android apps using Kotlin and Jetpack Compose, achieving average ratings of 4.6+ stars and 50K+ downloads on Google Play Store.",
+      "Reduced app crash rate from 5.8% to 0.7% by implementing comprehensive error handling and automated testing (JUnit,Espresso)",
+      "Integrated Firebase Cloud Messaging and Analytics, boosting user engagement by 20% via personalized notifications.",
+      "Built RESTful API connections with Retrofit and OkHttp, reducing API response time by 35% using caching strategies.",
+      "Collaborated with UI/UX designers to apply Material Design 3 principles, improving user satisfaction scores by 18%.",
+      "Automated the CI/CD pipeline using GitHub Actions, reducing deployment time from 1 week to 2 days.",
+      "Participated in code reviews and pair programming, identifying and resolving 80+ potential bugs before release."
+    ],
+    skills: ["Kotlin", "Android", "JetpackCompose", "Kotlin/Compose Multiplatform", "Firebase", "Retrofit/ktor", "Room", "Dagger Hilt/Koin", " Coroutines", "MVVM", "Github", "Postman", "Design Patterns", "Team Collaboration"],
   },
 ];
 
@@ -75,9 +83,15 @@ function ExperienceSection() {
                   <Typography variant="body2" color="text.secondary" gutterBottom>
                     {exp.duration}
                   </Typography>
-                  <Typography variant="body2" color="text.primary" mb={2}>
-                    {exp.description}
-                  </Typography>
+                  <ul>
+                    {exp.description.map((point, i) => (
+                      <li key={i} style={{ marginBottom: '8px' }}>
+                        <Typography variant="body2" color="text.primary">
+                         {point}
+                        </Typography>
+                      </li>
+                    ))}
+                  </ul>
 
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                     {exp.skills.map((skill, i) => (

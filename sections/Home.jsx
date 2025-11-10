@@ -260,7 +260,8 @@ const Home = () => {
                                         }}
                                     >
                                         {/* Decorative icon shouldn't be read by SR */}
-                                        <Icon aria-hidden="true" focusable="false" style={{ color: theme.palette.text.primary }} />
+                                        <Icon 
+                                        color={theme.palette.text.primary}aria-hidden="true" focusable="false" />
                                         {/* Redundant hidden text, helpful for some AT and for robustness */}
                                         <span style={visuallyHiddenStyles}>{name}</span>
                                     </a>
