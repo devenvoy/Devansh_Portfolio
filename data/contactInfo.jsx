@@ -28,7 +28,7 @@ const contactInfo = [
     {
         id: 5,
         name: "Resume",
-        link: "https://drive.google.com/file/d/1XdpN4xgISBgYgBGIf1NknYv1Xx3ruuKP",
+        link: "/devansh_amdavadwala_resume.pdf",
         icon: Resume,
         download: true
     },

@@ -27,7 +27,7 @@ const socials = [
     {
         id: 4,
         name: "Resume",
-        link: "https://drive.google.com/file/d/194hASLGWkzKPrlWP9baIgheV60aBLqQs/view",
+        link: "/devansh_amdavadwala_resume.pdf",
         icon: <BsPersonLinesFill size={22} />,
         style: "hover:bg-black rounded-br-md hover:text-[#5EEAC5]",
         download: true

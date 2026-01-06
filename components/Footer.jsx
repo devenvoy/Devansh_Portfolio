@@ -34,10 +34,9 @@ const Footer = () => {
   const onClick = (link) => {
     if (link === 'achievements') {
       navigate.push('/achievements');
-      return;
     }
-    else
-      null
+    else { navigate.push(`/#${link}`); }
+    return;
   }
 
   return (
@@ -72,7 +71,7 @@ const Footer = () => {
             </Typography>
             {navLinks.map(({ link, id }) => (
               <Box key={id} sx={{ px: 1, py: 0.5 }}>
-                <a href={link} smooth="true" duration={500}
+                <a href={"#${link}"} smooth="true" duration={500}
                   style={{ textDecoration: 'none' }}
                   onClick={() => { onClick(link) }}>
                   <Box

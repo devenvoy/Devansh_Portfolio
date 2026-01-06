@@ -33,7 +33,7 @@ export default function sitemap(){
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}/#contact`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.5,

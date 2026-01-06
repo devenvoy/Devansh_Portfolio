@@ -50,7 +50,7 @@ const About = () => {
                         }
                     }}
                 >
-                    Hi, I'm{' '}
+                    Hi, I&apos;m{' '}
                     <Box
                         component="span"
                         sx={{
@@ -76,7 +76,7 @@ const About = () => {
                     }}
                 >
                     <Typography data-aos="fade-up" data-aos-delay="100">
-                        I'm an Android Developer with a passion for creating robust, efficient, and user-friendly
+                        I&apos;m an Android Developer with a passion for creating robust, efficient, and user-friendly
                         mobile applications that deliver real-world impact.
                     </Typography>
                     <Typography data-aos="fade-up" data-aos-delay="100">
@@ -117,7 +117,7 @@ const ResumeButton = () => {
     return (
         <Box
             component="a"
-              href="https://drive.google.com/file/d/194hASLGWkzKPrlWP9baIgheV60aBLqQs/view"
+              href="/devansh_amdavadwala_resume.pdf"
             download
             target="_blank"
             rel="noreferrer"

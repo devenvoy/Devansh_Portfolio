@@ -6,8 +6,11 @@ import Projects from '@/sections/Projects';
 import Contact from '@/sections/Contact';
 
 export const metadata = {
-  title: 'Home - Devansh Amdavadwala',
+  title: 'Devansh Amdavadwala - Portfolio',
   description: 'Welcome to my portfolio',
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function HomePage() {

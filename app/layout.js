@@ -41,6 +41,9 @@ export const metadata = {
   description:
     'Mobile Android Software developer crafting beautiful, dynamic mobile experiences with modern technologies. View my projects and achievements.',
   authors: [{ name: 'Devansh Amdavadwala' }],
+  icons: {
+    icon: "/favicon.ico",
+  },
   keywords: [
     'developer',
     'portfolio',
@@ -138,7 +141,7 @@ export default function RootLayout({ children }) {
 					href="https://res.cloudinary.com"
 				/>
 
-				<meta charset="UTF-8" />
+				<meta charSet="UTF-8" />
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1.0"
