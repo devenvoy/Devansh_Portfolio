@@ -1,27 +1,12 @@
 'use client'
 import React from 'react';
-import { Box, Typography, IconButton } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material';
 import Link from 'next/link';
-import { Sun, Moon } from 'lucide-react';
+import OrbitalThemeButton from './OrbitalThemeButton';
 
 const Navigation = ({ handleClick, ulClass, liClass }) => {
     const theme = useTheme();
-    const [mode, setMode] = React.useState('light');
-
-    React.useEffect(() => {
-        const savedMode = localStorage.getItem('mui-theme-mode');
-        if (savedMode) {
-            setMode(savedMode);
-        }
-    }, []);
-
-    const toggleTheme = () => {
-        const newMode = mode === 'light' ? 'dark' : 'light';
-        setMode(newMode);
-        localStorage.setItem('mui-theme-mode', newMode);
-        window.location.reload(); // Reload to apply theme
-    };
 
     const navLinks = [
         { name: 'Home', href: '/#home' },
@@ -100,20 +85,7 @@ const Navigation = ({ handleClick, ulClass, liClass }) => {
 
             {/* Theme Toggle Button */}
             <Box component="li" sx={{ margin: 0, padding: 0 }}>
-                <IconButton
-                    onClick={toggleTheme}
-                    sx={{
-                        color: theme.palette.text.primary,
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                            color: theme.palette.primary.main,
-                            transform: 'rotate(180deg)',
-                        },
-                    }}
-                    aria-label="toggle theme"
-                >
-                    {mode === 'dark' ? <Sun /> : <Moon />}
-                </IconButton>
+                <OrbitalThemeButton />
             </Box>
         </Box>
     );

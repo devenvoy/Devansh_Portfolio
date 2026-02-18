@@ -1,167 +1,170 @@
 'use client'
-import { createContext, useMemo, useEffect, useState } from "react";
+import * as React from 'react';
+import { createContext, useMemo, useCallback } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import { CacheProvider } from '@emotion/react';
-import createCache from '@emotion/cache';
 
 export const MUIWrapperContext = createContext({
   toggleColorMode: () => { },
   mode: 'light',
 });
 
-// Create emotion cache
-const createEmotionCache = () => {
-  return createCache({ key: 'css', prepend: true });
-};
+const THEME_STORAGE_KEY = 'mui-theme-mode';
+
+// Theme configuration without emotion cache issues
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    background: {
+      default: '#ffffff',
+      paper: '#f9fafb',
+    },
+    divider: '#e0e0e0',
+    primary: {
+      main: '#2563eb',
+      light: '#3b82f6',
+      dark: '#1d4ed8',
+    },
+    secondary: {
+      main: '#10b981',
+      light: '#34d399',
+      dark: '#059669',
+    },
+    text: {
+      primary: '#1f2937',
+      secondary: '#6b7280',
+    },
+  },
+  typography: {
+    fontFamily: `'Raleway', 'Nunito', sans-serif`,
+    h1: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 700,
+    },
+    h2: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 700,
+    },
+    h3: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 600,
+    },
+    h4: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 600,
+    },
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: {
+      default: '#000000',
+      paper: '#111827',
+    },
+    divider: '#404040',
+    primary: {
+      light: '#22d3ee',
+      main: '#06b6d4',
+      dark: '#2563eb',
+    },
+    secondary: {
+      main: '#10b981',
+      light: '#34d399',
+      dark: '#059669',
+    },
+    text: {
+      primary: '#e0e0e0',
+      secondary: '#9ca3af',
+    },
+  },
+  typography: {
+    fontFamily: `'Raleway', 'Nunito', sans-serif`,
+    h1: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 700,
+    },
+    h2: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 700,
+    },
+    h3: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 600,
+    },
+    h4: {
+      fontFamily: `'Nunito', sans-serif`,
+      fontWeight: 600,
+    },
+  },
+});
 
 export default function MUIWrapper({ children }) {
-  const [mode, setMode] = useState('light');
-  const [mounted, setMounted] = useState(false);
-  const [cache] = useState(createEmotionCache());
+  const [mode, setMode] = React.useState('light');
+  const [mounted, setMounted] = React.useState(false);
 
-  // Initialize theme from localStorage on mount
-  useEffect(() => {
-    const savedMode = localStorage.getItem('mui-theme-mode');
-    if (savedMode === 'dark' || savedMode === 'light') {
-      setMode(savedMode);
+  // Initialize theme from localStorage on mount only
+  React.useEffect(() => {
+    try {
+      const savedMode = localStorage.getItem(THEME_STORAGE_KEY);
+      if (savedMode === 'dark' || savedMode === 'light') {
+        setMode(savedMode);
+        if (savedMode === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      }
+    } catch (e) {
+      // localStorage not available
     }
     setMounted(true);
-
-    // Update meta theme-color
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) {
-      metaTheme.setAttribute('content', savedMode === 'dark' ? '#000000' : '#2563eb');
-    }
   }, []);
 
-  // Save to localStorage whenever mode changes
-  useEffect(() => {
-    if (mounted) {
-      localStorage.setItem('mui-theme-mode', mode);
+  // Toggle color mode
+  const toggleColorMode = useCallback(() => {
+    setMode((prevMode) => {
+      const newMode = prevMode === "light" ? "dark" : "light";
       
-      // Update meta theme-color
-      const metaTheme = document.querySelector('meta[name="theme-color"]');
-      if (metaTheme) {
-        metaTheme.setAttribute('content', mode === 'dark' ? '#000000' : '#2563eb');
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, newMode);
+        
+        if (newMode === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) {
+          metaTheme.setAttribute('content', newMode === 'dark' ? '#000000' : '#2563eb');
+        }
+      } catch (e) {
+        // localStorage not available
       }
-    }
-  }, [mode, mounted]);
+      
+      return newMode;
+    });
+  }, []);
 
   const muiWrapperUtils = useMemo(() => ({
-    toggleColorMode: () => {
-      setMode(prevMode => (prevMode === "light" ? "dark" : "light"));
-    },
+    toggleColorMode,
     mode,
-  }), [mode]);
+  }), [toggleColorMode, mode]);
 
   const theme = useMemo(() => {
-    return createTheme({
-      palette: {
-        mode,
-        ...(mode === "dark"
-          ? {
-            background: {
-              default: '#000000',
-              paper: '#111827',
-            },
-            divider: '#404040',
-            primary: {
-              light: '#22d3ee',
-              main: '#06b6d4',
-              dark: '#2563eb',
-            },
-            secondary: {
-              main: '#10b981',
-              light: '#34d399',
-              dark: '#059669',
-            },
-            text: {
-              primary: '#e0e0e0',
-              secondary: '#9ca3af',
-            },
-          }
-          : {
-            background: {
-              default: '#ffffff',
-              paper: '#f9fafb',
-            },
-            divider: '#e0e0e0',
-            primary: {
-              main: '#2563eb',
-              light: '#3b82f6',
-              dark: '#1d4ed8',
-            },
-            secondary: {
-              main: '#10b981',
-              light: '#34d399',
-              dark: '#059669',
-            },
-            text: {
-              primary: '#1f2937',
-              secondary: '#6b7280',
-            },
-          }),
-      },
-      typography: {
-        fontFamily: `'Raleway', 'Nunito', sans-serif`,
-        h1: {
-          fontFamily: `'Nunito', sans-serif`,
-          fontWeight: 700,
-        },
-        h2: {
-          fontFamily: `'Nunito', sans-serif`,
-          fontWeight: 700,
-        },
-        h3: {
-          fontFamily: `'Nunito', sans-serif`,
-          fontWeight: 600,
-        },
-        h4: {
-          fontFamily: `'Nunito', sans-serif`,
-          fontWeight: 600,
-        },
-      },
-      components: {
-        MuiCssBaseline: {
-          styleOverrides: {
-            body: {
-              scrollbarWidth: 'thin',
-              scrollbarColor: mode === 'dark' ? '#475569 #1e293b' : '#888 #f1f1f1',
-              '&::-webkit-scrollbar': {
-                width: '8px',
-                height: '8px',
-              },
-              '&::-webkit-scrollbar-track': {
-                background: mode === 'dark' ? '#1e293b' : '#f1f1f1',
-              },
-              '&::-webkit-scrollbar-thumb': {
-                background: mode === 'dark' ? '#475569' : '#888',
-                borderRadius: '4px',
-              },
-              '&::-webkit-scrollbar-thumb:hover': {
-                background: mode === 'dark' ? '#64748b' : '#555',
-              },
-            },
-          },
-        },
-      },
-    })
+    return mode === 'dark' ? darkTheme : lightTheme;
   }, [mode]);
 
-  // Prevent flash of wrong theme
-  if (!mounted) {
-    return null;
-  }
-
+  // Prevent flash of wrong theme during initial load
+  // Use a div wrapper to prevent hydration mismatch with emotion styles
   return (
     <MUIWrapperContext.Provider value={muiWrapperUtils}>
-      <CacheProvider value={cache}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
-      </CacheProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div style={{ display: 'contents' }} suppressHydrationWarning>
+          {mounted ? children : <div style={{ visibility: 'hidden' }}>{children}</div>}
+        </div>
+      </ThemeProvider>
     </MUIWrapperContext.Provider>
   );
 }

@@ -196,12 +196,10 @@ export default function RootLayout({ children }) {
               (function() {
                 try {
                   const mode = localStorage.getItem('mui-theme-mode');
-                  const metaTheme = document.querySelector('meta[name="theme-color"]');
-                  if (metaTheme) {
-                    metaTheme.setAttribute('content', mode === 'dark' ? '#000000' : '#2563eb');
-                  }
                   if (mode === 'dark') {
                     document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
                   }
                 } catch (e) {}
               })();
@@ -209,7 +207,7 @@ export default function RootLayout({ children }) {
 					}}
 				/>
 			</head>
-			<body className={raleway.className}>
+			<body className={raleway.className} suppressHydrationWarning>
 				<MUIWrapper>
 					<Navbar />
 					<main>{children}</main>
