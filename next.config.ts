@@ -2,15 +2,12 @@ const isGithubPages = process.env.GITHUB_PAGES === "true";
 const repoName = isGithubPages ? "/Devansh_Portfolio" : "";
 
 const nextConfig = {
-  unoptimized: true,
   trailingSlash: true,
   reactStrictMode: true,
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
-   experimental: {
-    legacyBrowsers: false, // 🔥 Drop IE11 & legacy polyfills
-  },
   images: {
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "picsum.photos", pathname: "/**" },
       { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
