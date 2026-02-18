@@ -1,20 +1,20 @@
-'use client'
-import React from 'react';
-import { Box, Typography } from '@mui/material';
-import { useTheme } from '@mui/material';
+'use client';
+import React, { useState } from 'react';
+import { Box, Typography, useTheme } from '@mui/material';
 import Link from 'next/link';
 import OrbitalThemeButton from './OrbitalThemeButton';
 
-const Navigation = ({ handleClick, ulClass, liClass }) => {
+const Navigation = ({ handleClick, ulClass, activeSection }) => {
     const theme = useTheme();
+    const [hoveredItem, setHoveredItem] = useState(null);
 
     const navLinks = [
-        { name: 'Home', href: '/#home' },
-        { name: 'About', href: '/#about' },
-        { name: 'Experience', href: '/#experience' },
-        { name: 'Projects', href: '/#projects' },
-        { name: 'Achievements', href: '/achievements' },
-        { name: 'Contact', href: '/#contact' },
+        { name: 'Home', href: '/#Home', id: 'Home' },
+        { name: 'About', href: '/#About', id: 'About' },
+        { name: 'Skills', href: '/#Skills', id: 'Skills' },
+        { name: 'Experience', href: '/#experience', id: 'experience' },
+        { name: 'Projects', href: '/#Projects', id: 'Projects' },
+        { name: 'Contact', href: '/#Contact', id: 'Contact' },
     ];
 
     const isMobileMenu = ulClass?.includes('mobile');
@@ -27,64 +27,120 @@ const Navigation = ({ handleClick, ulClass, liClass }) => {
                 flexDirection: isMobileMenu ? 'column' : 'row',
                 alignItems: 'center',
                 justifyContent: isMobileMenu ? 'center' : 'flex-end',
-                gap: isMobileMenu ? 3 : 4,
+                gap: isMobileMenu ? 2 : 0.5,
                 listStyle: 'none',
                 margin: 0,
                 padding: 0,
-                height: isMobileMenu ? '100%' : 'auto',
             }}
         >
-            {navLinks.map((link) => (
-                <Box
-                    component="li"
-                    key={link.name}
-                    sx={{
-                        margin: 0,
-                        padding: 0,
-                    }}
-                >
-                    <Link
-                        href={link.href}
-                        onClick={handleClick}
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <Typography
-                            sx={{
-                                color: theme.palette.text.primary,
-                                fontSize: isMobileMenu ? '1.25rem' : '1rem',
-                                fontWeight: 500,
-                                cursor: 'pointer',
-                                transition: 'all 0.3s ease',
-                                position: 'relative',
-                                padding: isMobileMenu ? '12px 24px' : '8px 12px',
-                                '&:hover': {
-                                    color: theme.palette.primary.main,
-                                    transform: 'translateY(-2px)',
-                                },
-                                '&::after': {
-                                    content: '""',
-                                    position: 'absolute',
-                                    bottom: 0,
-                                    left: '50%',
-                                    transform: 'translateX(-50%)',
-                                    width: 0,
-                                    height: '2px',
-                                    backgroundColor: theme.palette.primary.main,
-                                    transition: 'width 0.3s ease',
-                                },
-                                '&:hover::after': {
-                                    width: '80%',
-                                },
-                            }}
-                        >
-                            {link.name}
-                        </Typography>
-                    </Link>
-                </Box>
-            ))}
+            {navLinks.map((link, index) => {
+                const isActive = activeSection === link.id;
+                const isHovered = hoveredItem === index;
 
-            {/* Theme Toggle Button */}
-            <Box component="li" sx={{ margin: 0, padding: 0 }}>
+                return (
+                    <Box
+                        component="li"
+                        key={link.name}
+                        sx={{
+                            margin: 0,
+                            padding: 0,
+                            position: 'relative',
+                        }}
+                        onMouseEnter={() => setHoveredItem(index)}
+                        onMouseLeave={() => setHoveredItem(null)}
+                    >
+                        <Link
+                            href={link.href}
+                            onClick={handleClick}
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography
+                                sx={{
+                                    position: 'relative',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    px: isMobileMenu ? 4 : { md: 1.5, lg: 2 },
+                                    py: isMobileMenu ? 2 : 1,
+                                    fontSize: isMobileMenu ? '1.25rem' : { md: '0.875rem', lg: '0.9375rem' },
+                                    fontWeight: isActive ? 600 : 500,
+                                    color: isActive
+                                        ? theme.palette.primary.main
+                                        : theme.palette.text.primary,
+                                    transition: 'all 0.25s ease-out',
+                                    cursor: 'pointer',
+                                    borderRadius: '6px',
+                                    letterSpacing: isActive ? '0.3px' : '0',
+
+                                    // Hover background
+                                    backgroundColor: isActive
+                                        ? theme.palette.mode === 'dark'
+                                            ? 'rgba(6, 182, 212, 0.12)'
+                                            : 'rgba(37, 99, 235, 0.08)'
+                                        : isHovered
+                                            ? theme.palette.mode === 'dark'
+                                                ? 'rgba(255, 255, 255, 0.04)'
+                                                : 'rgba(0, 0, 0, 0.03)'
+                                            : 'transparent',
+
+                                    // Lift effect on hover
+                                    transform: isHovered && !isActive ? 'translateY(-1px)' : 'translateY(0)',
+
+                                    // Active indicator dot
+                                    '&::before': isActive ? {
+                                        content: '""',
+                                        position: 'absolute',
+                                        bottom: '6px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: '4px',
+                                        height: '4px',
+                                        borderRadius: '50%',
+                                        backgroundColor: theme.palette.primary.main,
+                                    } : {},
+
+                                    // Underline on hover (for non-active items)
+                                    '&::after': {
+                                        content: '""',
+                                        position: 'absolute',
+                                        bottom: '6px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: isActive ? '4px' : isHovered ? '20%' : '0%',
+                                        height: '2px',
+                                        borderRadius: '1px',
+                                        backgroundColor: isActive
+                                            ? 'transparent'
+                                            : theme.palette.mode === 'dark'
+                                                ? 'rgba(255, 255, 255, 0.4)'
+                                                : 'rgba(0, 0, 0, 0.3)',
+                                        transition: 'width 0.25s ease-out',
+                                    },
+                                }}
+                            >
+                                {link.name}
+                            </Typography>
+                        </Link>
+                    </Box>
+                );
+            })}
+
+            {/* Divider */}
+            {!isMobileMenu && (
+                <Box
+                    sx={{
+                        width: '1px',
+                        height: '20px',
+                        backgroundColor: theme.palette.mode === 'dark'
+                            ? 'rgba(255, 255, 255, 0.1)'
+                            : 'rgba(0, 0, 0, 0.1)',
+                        mx: 1,
+                    }}
+                />
+            )}
+
+            {/* Theme Toggle */}
+            <Box component="li" sx={{ margin: 0, padding: 0, ml: isMobileMenu ? 0 : 0.5 }}>
                 <OrbitalThemeButton />
             </Box>
         </Box>
