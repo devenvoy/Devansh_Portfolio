@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next'
 
-export default function sitemap(){
+// Add this exact line to force the sitemap to be static during build
+export const dynamic = "force-static"; 
+
+export default function sitemap() {
   const baseUrl = 'https://devansh.amdavadwala.com' 
 
   return [
@@ -15,7 +18,8 @@ export default function sitemap(){
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.6,
-    }, {
+    }, 
+    {
       url: `${baseUrl}/#experience`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
@@ -26,7 +30,8 @@ export default function sitemap(){
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
-    }, {
+    }, 
+    {
       url: `${baseUrl}/achievements`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

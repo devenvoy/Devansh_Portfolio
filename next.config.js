@@ -2,6 +2,7 @@
 const nextConfig = {
     // React configuration
     reactStrictMode: true,
+    output: 'export',
     
     // Build configuration (consider fixing these instead of ignoring)
     typescript: { ignoreBuildErrors: true },
