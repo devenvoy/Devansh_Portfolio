@@ -13,6 +13,7 @@ const nextConfig = {
     
     // Image optimization
     images: {
+      unoptimized: true, // Disable Next.js image optimization
       formats: ['image/avif', 'image/webp'], // Modern image formats
       remotePatterns: [
         { protocol: "https", hostname: "picsum.photos", pathname: "/**" },
