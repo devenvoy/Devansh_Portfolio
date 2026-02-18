@@ -56,6 +56,15 @@ const Navbar = () => {
         return () => observer.disconnect();
     }, []);
 
+    const handleNavClick = (e, href) => {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+            element.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
+        if (handleClick) handleClick();
+    };
+
     return (
         <>
             <Box
@@ -67,11 +76,13 @@ const Navbar = () => {
                     zIndex: 50,
                     top: 0,
                     left: 0,
-                    background: scrolled 
-                        ? theme.palette.mode === 'dark'
-                            ? 'rgba(0, 0, 0, 0.85)'
-                            : 'rgba(255, 255, 255, 0.95)'
-                        : theme.palette.background.default,
+                    background: theme.palette.mode === 'dark'
+                        ? scrolled 
+                            ? 'rgba(10, 10, 10, 0.95)'
+                            : 'transparent'
+                        : scrolled 
+                            ? 'rgba(255, 255, 255, 0.95)'
+                            : 'transparent',
                     backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
                     borderBottom: scrolled 
                         ? `1px solid ${theme.palette.mode === 'dark' 
@@ -107,7 +118,7 @@ const Navbar = () => {
                             fontFamily: 'Nunito, sans-serif',
                             background: theme.palette.mode === 'dark'
                                 ? 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #06b6d4 100%)'
-                                : 'linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #2563eb 100%)',
+                                : 'linear-gradient(135deg, #2563eb 0%, #06b6d6 50%, #2563eb 100%)',
                             backgroundSize: '200% auto',
                             backgroundClip: 'text',
                             WebkitBackgroundClip: 'text',
@@ -121,7 +132,7 @@ const Navbar = () => {
                             },
                         }}
                     >
-                        Portfolio
+                        Devansh
                     </Box>
 
                     {/* Desktop Navigation */}

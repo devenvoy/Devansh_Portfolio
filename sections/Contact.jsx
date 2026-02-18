@@ -1,155 +1,449 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import { Person, GMail, Chat, Submit } from '../components/icons/Icons';
-import { validateForm } from '../utils/formValidation';
-import {
-    Box,
-    Button,
-    TextField,
-    Typography,
-    useTheme,
-    Container,
-    InputAdornment,
-} from '@mui/material';
+'use client';
+import { useRef, useState } from 'react';
+import { Box, Typography, Container, TextField, Button, useTheme } from '@mui/material';
+import { motion, useInView } from 'framer-motion';
+import { 
+    Send, Mail, MapPin, Phone, Github, Linkedin,
+    ArrowRight, Sparkles, CheckCircle
+} from 'lucide-react';
+
+const contactInfo = [
+    { icon: Mail, label: 'Email', value: 'devansh@example.com', href: 'mailto:devansh@example.com' },
+    { icon: MapPin, label: 'Location', value: 'Gujarat, India', href: '#' },
+    { icon: Phone, label: 'Phone', value: '+91 XXXXX XXXXX', href: 'tel:+91XXXXXXXXXX' },
+];
+
+const socialLinks = [
+    { icon: Github, label: 'GitHub', href: 'https://github.com/devenvoy' },
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/devansh-amdavadwala' },
+];
 
 const Contact = () => {
     const theme = useTheme();
-
-    const initialFormData = { name: '', email: '', message: '' };
-    const initialErrData = { nameError: '', emailError: '', messageError: '' };
-
-    const [formData, setFormData] = useState(initialFormData);
-    const [errData, setErrData] = useState(initialErrData);
-
-    useEffect(() => {
-        setFormData(initialFormData);
-        setErrData(initialErrData);
-    }, []);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+    const headerRef = useRef(null);
+    const formRef = useRef(null);
+    const isHeaderInView = useInView(headerRef, { once: true });
+    const isFormInView = useInView(formRef, { once: true });
+    
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await validateForm(formData, setFormData, setErrData, initialFormData, initialErrData);
+        setIsSubmitting(true);
+        // Simulate form submission
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        setTimeout(() => setIsSubmitted(false), 3000);
+        setFormData({ name: '', email: '', message: '' });
     };
-
 
     return (
         <Box
             id="Contact"
             sx={{
-                pt: 10,
-                display: 'flex',
-                alignItems: 'center',
-                background: `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
-                color: theme.palette.text.primary,
+                py: { xs: 8, md: 12 },
+                minHeight: '100vh',
+                width: '100%',
+                background: theme.palette.mode === 'dark'
+                    ? 'linear-gradient(180deg, #0a0a0a 0%, #000000 100%)'
+                    : 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)',
+                position: 'relative',
+                overflow: 'hidden',
             }}
         >
-            <Container maxWidth="md">
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    sx={{
-                        fontWeight: 'bold',
-                        mb: 4,
-                        color: theme.palette.text.primary,
-                    }}
+            {/* Background Decorative Elements */}
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: '10%',
+                    right: '-10%',
+                    width: 500,
+                    height: 500,
+                    borderRadius: '50%',
+                    background: `radial-gradient(circle, ${theme.palette.primary.main}10 0%, transparent 70%)`,
+                    filter: 'blur(60px)',
+                }}
+            />
+            <Box
+                sx={{
+                    position: 'absolute',
+                    bottom: '10%',
+                    left: '-10%',
+                    width: 400,
+                    height: 400,
+                    borderRadius: '50%',
+                    background: `radial-gradient(circle, ${theme.palette.secondary.main}10 0%, transparent 70%)`,
+                    filter: 'blur(60px)',
+                }}
+            />
+
+            <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+                {/* Section Header */}
+                <motion.div
+                    ref={headerRef}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    style={{ textAlign: 'center', marginBottom: '4rem' }}
                 >
-                    Get in touch with me
-                </Typography>
-                <form onSubmit={handleSubmit}>
-                    <Box display="flex" flexDirection="column" gap={3}>
-                        <TextField
-                            fullWidth
-                            name="name"
-                            label="Enter Your Name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            error={Boolean(errData.nameError)}
-                            helperText={errData.nameError}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <Person />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                        <TextField
-                            fullWidth
-                            type="email"
-                            name="email"
-                            label="Enter Your Email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            error={Boolean(errData.emailError)}
-                            helperText={errData.emailError}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <GMail />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                        <TextField
-                            fullWidth
-                            multiline
-                            minRows={6}
-                            name="message"
-                            label="Your Message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            error={Boolean(errData.messageError)}
-                            helperText={errData.messageError}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment
-                                        position="start"
-                                        sx={{ alignSelf: 'start', mt: 1.5 }}
-                                    >
-                                        <Chat />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                        <Button
-                            variant="contained"
-                            type="submit"
+                    <Typography
+                        variant="overline"
+                        sx={{
+                            color: theme.palette.primary.main,
+                            fontWeight: 600,
+                            letterSpacing: '3px',
+                            fontSize: '0.875rem',
+                            mb: 1,
+                            display: 'block',
+                        }}
+                    >
+                        GET IN TOUCH
+                    </Typography>
+                    <Typography
+                        variant="h2"
+                        sx={{
+                            fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+                            fontWeight: 800,
+                            mb: 3,
+                            fontFamily: 'Nunito, sans-serif',
+                        }}
+                    >
+                        Let's Work{' '}
+                        <Box
+                            component="span"
                             sx={{
-                                alignSelf: 'flex-start',
-                                px: 5,
-                                py: 1.5,
-                                fontWeight: 'bold',
-                                background: `linear-gradient(to right, ${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
-                                color: theme.palette.primary.contrastText,
-                                '&:hover': {
-                                    background: `linear-gradient(to right, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
+                                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                            }}
+                        >
+                            Together
+                        </Box>
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        sx={{
+                            color: theme.palette.text.secondary,
+                            maxWidth: 600,
+                            mx: 'auto',
+                            fontSize: '1.125rem',
+                        }}
+                    >
+                        Have a project in mind? Let's create something amazing together. 
+                        I'm always open to discussing new projects and opportunities.
+                    </Typography>
+                </motion.div>
+
+                <motion.div
+                    ref={formRef}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={isFormInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                    {/* Main CTA Card */}
+                    <Box
+                        sx={{
+                            maxWidth: 900,
+                            mx: 'auto',
+                            p: { xs: 3, md: 6 },
+                            borderRadius: '32px',
+                            background: theme.palette.mode === 'dark'
+                                ? 'rgba(255, 255, 255, 0.02)'
+                                : 'rgba(255, 255, 255, 0.9)',
+                            border: `1px solid ${theme.palette.mode === 'dark'
+                                ? 'rgba(255, 255, 255, 0.05)'
+                                : 'rgba(0, 0, 0, 0.05)'}`,
+                            boxShadow: theme.palette.mode === 'dark'
+                                ? '0 40px 80px -20px rgba(0, 0, 0, 0.5)'
+                                : '0 40px 80px -20px rgba(0, 0, 0, 0.1)',
+                            position: 'relative',
+                            overflow: 'hidden',
+                        }}
+                    >
+                        {/* Sparkle Icon */}
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                top: 24,
+                                right: 24,
+                                color: theme.palette.primary.main,
+                                animation: 'sparkle 2s ease-in-out infinite',
+                                '@keyframes sparkle': {
+                                    '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                                    '50%': { opacity: 0.5, transform: 'scale(1.2)' },
                                 },
                             }}
-                            endIcon={
-                                <Box
+                        >
+                            <Sparkles size={32} />
+                        </Box>
+
+                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 6 }}>
+                            {/* Left Side - Info */}
+                            <Box sx={{ flex: 1 }}>
+                                <Typography
+                                    variant="h5"
                                     sx={{
-                                        transition: 'transform 0.3s ease-in-out',
-                                        '&:hover': {
-                                            transform: 'scale(1.1)',
-                                        },
+                                        fontWeight: 700,
+                                        mb: 2,
+                                        fontFamily: 'Nunito, sans-serif',
                                     }}
                                 >
-                                    <Submit />
+                                    Ready to start?
+                                </Typography>
+                                <Typography
+                                    variant="body1"
+                                    sx={{
+                                        color: theme.palette.text.secondary,
+                                        mb: 4,
+                                        lineHeight: 1.7,
+                                    }}
+                                >
+                                    Whether you need a mobile app, web application, or 
+                                    consultation, I'm here to help bring your vision to life.
+                                </Typography>
+
+                                {/* Contact Info */}
+                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 4 }}>
+                                    {contactInfo.map((item) => (
+                                        <motion.a
+                                            key={item.label}
+                                            href={item.href}
+                                            whileHover={{ x: 5 }}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 12,
+                                                color: theme.palette.text.primary,
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            <Box
+                                                sx={{
+                                                    width: 44,
+                                                    height: 44,
+                                                    borderRadius: '12px',
+                                                    background: theme.palette.mode === 'dark'
+                                                        ? 'rgba(6, 182, 212, 0.1)'
+                                                        : 'rgba(37, 99, 235, 0.1)',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <item.icon size={20} color={theme.palette.primary.main} />
+                                            </Box>
+                                            <Box>
+                                                <Typography variant="caption" color="text.secondary">
+                                                    {item.label}
+                                                </Typography>
+                                                <Typography variant="body2" fontWeight={600}>
+                                                    {item.value}
+                                                </Typography>
+                                            </Box>
+                                        </motion.a>
+                                    ))}
                                 </Box>
-                            }
-                        >
-                            Let's Connect
-                        </Button>
-                        <input type="hidden" name="_subject" value="New submission!" />
-                        <input type="hidden" name="_template" value="table" />
-                        <input type="hidden" name="_captcha" value="false" />
+
+                                {/* Social Links */}
+                                <Box sx={{ display: 'flex', gap: 2 }}>
+                                    {socialLinks.map((social) => (
+                                        <motion.a
+                                            key={social.label}
+                                            href={social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{ scale: 1.1, y: -3 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            style={{
+                                                width: 48,
+                                                height: 48,
+                                                borderRadius: '12px',
+                                                background: theme.palette.mode === 'dark'
+                                                    ? 'rgba(255, 255, 255, 0.05)'
+                                                    : 'rgba(0, 0, 0, 0.03)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: theme.palette.text.primary,
+                                                border: `1px solid ${theme.palette.mode === 'dark'
+                                                    ? 'rgba(255, 255, 255, 0.1)'
+                                                    : 'rgba(0, 0, 0, 0.08)'}`,
+                                            }}
+                                        >
+                                            <social.icon size={22} />
+                                        </motion.a>
+                                    ))}
+                                </Box>
+                            </Box>
+
+                            {/* Right Side - Form */}
+                            <Box sx={{ flex: 1 }}>
+                                <form onSubmit={handleSubmit}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                                        <TextField
+                                            fullWidth
+                                            name="name"
+                                            label="Your Name"
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            required
+                                            variant="outlined"
+                                            sx={{
+                                                '& .MuiOutlinedInput-root': {
+                                                    borderRadius: '12px',
+                                                    background: theme.palette.mode === 'dark'
+                                                        ? 'rgba(255, 255, 255, 0.03)'
+                                                        : 'rgba(0, 0, 0, 0.02)',
+                                                },
+                                            }}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            type="email"
+                                            name="email"
+                                            label="Your Email"
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            required
+                                            variant="outlined"
+                                            sx={{
+                                                '& .MuiOutlinedInput-root': {
+                                                    borderRadius: '12px',
+                                                    background: theme.palette.mode === 'dark'
+                                                        ? 'rgba(255, 255, 255, 0.03)'
+                                                        : 'rgba(0, 0, 0, 0.02)',
+                                                },
+                                            }}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            multiline
+                                            rows={4}
+                                            name="message"
+                                            label="Your Message"
+                                            value={formData.message}
+                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                            required
+                                            variant="outlined"
+                                            sx={{
+                                                '& .MuiOutlinedInput-root': {
+                                                    borderRadius: '12px',
+                                                    background: theme.palette.mode === 'dark'
+                                                        ? 'rgba(255, 255, 255, 0.03)'
+                                                        : 'rgba(0, 0, 0, 0.02)',
+                                                },
+                                            }}
+                                        />
+
+                                        <motion.div
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                disabled={isSubmitting || isSubmitted}
+                                                sx={{
+                                                    py: 2,
+                                                    borderRadius: '12px',
+                                                    fontSize: '1rem',
+                                                    fontWeight: 600,
+                                                    textTransform: 'none',
+                                                    background: isSubmitted
+                                                        ? '#10b981'
+                                                        : `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                                                    color: '#fff',
+                                                    boxShadow: `0 10px 30px -10px ${theme.palette.primary.main}50`,
+                                                    transition: 'all 0.3s ease',
+                                                    '&:hover': {
+                                                        boxShadow: `0 20px 40px -15px ${theme.palette.primary.main}60`,
+                                                    },
+                                                }}
+                                                startIcon={isSubmitted ? <CheckCircle /> : isSubmitting ? null : <Send />}
+                                            >
+                                                {isSubmitting ? 'Sending...' : isSubmitted ? 'Message Sent!' : 'Send Message'}
+                                            </Button>
+                                        </motion.div>
+                                    </Box>
+                                </form>
+                            </Box>
+                        </Box>
                     </Box>
-                </form>
+
+                    {/* Quick Action Banner */}
+                    <Box
+                        sx={{
+                            mt: 6,
+                            p: 4,
+                            borderRadius: '24px',
+                            background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                            textAlign: 'center',
+                            color: '#fff',
+                            position: 'relative',
+                            overflow: 'hidden',
+                        }}
+                    >
+                        {/* Animated Background */}
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                inset: 0,
+                                background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+                                opacity: 0.5,
+                            }}
+                        />
+
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                fontWeight: 700,
+                                mb: 2,
+                                fontFamily: 'Nunito, sans-serif',
+                                position: 'relative',
+                                zIndex: 1,
+                            }}
+                        >
+                            Prefer a quick chat?
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                mb: 3,
+                                opacity: 0.9,
+                                position: 'relative',
+                                zIndex: 1,
+                            }}
+                        >
+                            Schedule a free 15-minute consultation to discuss your project
+                        </Typography>
+                        <motion.a
+                            href="https://calendly.com/devansh"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 8,
+                                padding: '12px 32px',
+                                borderRadius: '12px',
+                                background: '#fff',
+                                color: theme.palette.primary.main,
+                                textDecoration: 'none',
+                                fontWeight: 600,
+                                position: 'relative',
+                                zIndex: 1,
+                            }}
+                        >
+                            Schedule a Call
+                            <ArrowRight size={20} />
+                        </motion.a>
+                    </Box>
+                </motion.div>
             </Container>
         </Box>
     );

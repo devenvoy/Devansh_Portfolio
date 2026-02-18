@@ -3,8 +3,8 @@ import MUIWrapper from "@/components/layouts/MUIWrapper";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTopButton from "@/components/BackToTopButton";
+import LoadingScreen from "@/components/LoadingScreen";
 import { ToastContainer } from "react-toastify";
-import "aos/dist/aos.css";
 import "react-toastify/dist/ReactToastify.css";
 
 // Optimize font loading with next/font
@@ -208,13 +208,15 @@ export default function RootLayout({ children }) {
 				/>
 			</head>
 			<body className={raleway.className} suppressHydrationWarning>
-				<MUIWrapper>
-					<Navbar />
-					<main>{children}</main>
-					<Footer />
-					<BackToTopButton />
-					<ToastContainer />
-				</MUIWrapper>
+				<LoadingScreen>
+					<MUIWrapper>
+						<Navbar />
+						<main>{children}</main>
+						<Footer />
+						<BackToTopButton />
+						<ToastContainer />
+					</MUIWrapper>
+				</LoadingScreen>
 			</body>
 		</html>
 	);

@@ -1,471 +1,662 @@
 'use client'
+import { useEffect, useRef, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import { ArrowDown } from '@/components/icons/Icons.jsx';
-import work from '@/data/work.js';
-import contactInfo from '@/data/contactInfo.jsx';
-import {
-    Box,
-    Typography,
-    useTheme,
-} from '@mui/material';
-import AOS from 'aos';
-import { useEffect } from 'react';
+import { Box, Typography, Container, Button, useTheme } from '@mui/material';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
 import Image from 'next/image';
 
+// Particle component for background effect
+const Particle = ({ delay, duration, x, y }) => (
+    <motion.div
+        style={{
+            position: 'absolute',
+            width: 4,
+            height: 4,
+            borderRadius: '50%',
+            background: 'rgba(6, 182, 212, 0.6)',
+            left: x,
+            top: y,
+        }}
+        animate={{
+            y: [0, -30, 0],
+            opacity: [0.2, 1, 0.2],
+            scale: [1, 1.5, 1],
+        }}
+        transition={{
+            duration,
+            delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+        }}
+    />
+);
+
+// Floating shape component
+const FloatingShape = ({ children, delay = 0, x = 0, y = 0 }) => (
+    <motion.div
+        style={{ position: 'absolute', left: x, top: y }}
+        animate={{
+            y: [0, -20, 0],
+            rotate: [0, 5, -5, 0],
+        }}
+        transition={{
+            duration: 6,
+            delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+        }}
+    >
+        {children}
+    </motion.div>
+);
 
 const Home = () => {
     const theme = useTheme();
+    const containerRef = useRef(null);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end start"]
+    });
+    
+    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+    
+    const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+    const mouseX = useSpring(0, springConfig);
+    const mouseY = useSpring(0, springConfig);
 
     useEffect(() => {
-        AOS.init({ duration: 500, once: true });
-    }, []);
+        const handleMouseMove = (e) => {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+            mouseX.set((clientX - innerWidth / 2) / 50);
+            mouseY.set((clientY - innerHeight / 2) / 50);
+            setMousePosition({ x: clientX, y: clientY });
+        };
 
-    useEffect(() => {
-        AOS.refresh();
-    }, [theme]);
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [mouseX, mouseY]);
 
-    const visuallyHiddenStyles = {
-        position: 'absolute',
-        width: 1,
-        height: 1,
-        padding: 0,
-        margin: -1,
-        overflow: 'hidden',
-        clip: 'rect(0 0 0 0)',
-        whiteSpace: 'nowrap',
-        border: 0,
-    };
+    // Generate particles with fixed positions for SSR consistency
+    const particles = [
+        { id: 0, x: '15%', y: '20%', delay: 0, duration: 4 },
+        { id: 1, x: '85%', y: '15%', delay: 0.5, duration: 5 },
+        { id: 2, x: '25%', y: '75%', delay: 1, duration: 4.5 },
+        { id: 3, x: '70%', y: '60%', delay: 1.5, duration: 5.5 },
+        { id: 4, x: '45%', y: '40%', delay: 0.3, duration: 4 },
+        { id: 5, x: '90%', y: '80%', delay: 0.8, duration: 5 },
+        { id: 6, x: '10%', y: '55%', delay: 1.2, duration: 4.5 },
+        { id: 7, x: '60%', y: '25%', delay: 0.2, duration: 5.5 },
+        { id: 8, x: '35%', y: '90%', delay: 0.7, duration: 4 },
+        { id: 9, x: '80%', y: '45%', delay: 1.3, duration: 5 },
+        { id: 10, x: '5%', y: '35%', delay: 0.4, duration: 4.5 },
+        { id: 11, x: '50%', y: '70%', delay: 0.9, duration: 5.5 },
+        { id: 12, x: '95%', y: '30%', delay: 0.1, duration: 4 },
+        { id: 13, x: '20%', y: '50%', delay: 0.6, duration: 5 },
+        { id: 14, x: '75%', y: '85%', delay: 1.1, duration: 4.5 },
+        { id: 15, x: '40%', y: '10%', delay: 0.2, duration: 5.5 },
+        { id: 16, x: '65%', y: '95%', delay: 0.8, duration: 4 },
+        { id: 17, x: '8%', y: '70%', delay: 1.4, duration: 5 },
+        { id: 18, x: '55%', y: '35%', delay: 0.5, duration: 4.5 },
+        { id: 19, x: '30%', y: '65%', delay: 1, duration: 5.5 },
+    ];
+
+    const socialLinks = [
+        { icon: Github, href: 'https://github.com/devenvoy', label: 'GitHub' },
+        { icon: Linkedin, href: 'https://linkedin.com/in/devansh-amdavadwala', label: 'LinkedIn' },
+        { icon: Mail, href: 'mailto:devansh@example.com', label: 'Email' },
+    ];
 
     return (
         <Box
+            ref={containerRef}
             id="Home"
             sx={{
-                minHeight: { xs: '100vh', sm: '100vh', md: '100vh' },
+                minHeight: '100vh',
                 width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                background: `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
+                position: 'relative',
+                overflow: 'hidden',
+                background: theme.palette.mode === 'dark'
+                    ? 'radial-gradient(ellipse at top, #1a1a2e 0%, #000000 50%, #0f0f23 100%)'
+                    : 'radial-gradient(ellipse at top, #f0f9ff 0%, #ffffff 50%, #e0f2fe 100%)',
             }}
         >
-            {/* Container similar to your 'section' class */}
+            {/* Animated Background Grid */}
             <Box
                 sx={{
-                    width: '100%',
-                    maxWidth: 1200,
-                    marginX: 'auto',
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: theme.palette.mode === 'dark'
+                        ? 'linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px)'
+                        : 'linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px)',
+                    backgroundSize: '50px 50px',
+                    opacity: 0.5,
+                }}
+            />
+
+            {/* Floating Particles */}
+            <Box sx={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+                {particles.map((p) => (
+                    <Particle key={p.id} {...p} />
+                ))}
+            </Box>
+
+            {/* Gradient Orbs */}
+            <motion.div
+                style={{
+                    position: 'absolute',
+                    width: 600,
+                    height: 600,
+                    borderRadius: '50%',
+                    background: theme.palette.mode === 'dark'
+                        ? 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)'
+                        : 'radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%)',
+                    filter: 'blur(60px)',
+                    x: mouseX,
+                    y: mouseY,
+                    left: '20%',
+                    top: '20%',
+                }}
+            />
+
+            <motion.div
+                style={{
+                    position: 'absolute',
+                    width: 400,
+                    height: 400,
+                    borderRadius: '50%',
+                    background: theme.palette.mode === 'dark'
+                        ? 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)'
+                        : 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
+                    filter: 'blur(60px)',
+                    x: useTransform(mouseX, v => -v * 1.5),
+                    y: useTransform(mouseY, v => -v * 1.5),
+                    right: '10%',
+                    bottom: '20%',
+                }}
+            />
+
+            <Container
+                maxWidth="xl"
+                sx={{
+                    height: '100vh',
                     display: 'flex',
-                    flexDirection: { xs: 'column', md: 'row-reverse' },
-                    justifyContent: { md: 'space-between' },
                     alignItems: 'center',
-                    gap: { xs: 8, md: 2 },
-                    px: { xs: 2, md: 4 },
+                    justifyContent: 'center',
+                    position: 'relative',
+                    zIndex: 1,
                 }}
             >
-            
-                {/* Avatar container */}
-                <Box
-                    sx={{
-                        flex: { md: '0 0 40%' },
-                        maxWidth: { xs: 320, md: 'auto' },
-                        width: { xs: '100%', md: 'auto' },
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    data-aos="slide-left"
+                <motion.div
+                    style={{ y, opacity, scale, width: '100%' }}
                 >
                     <Box
-                        sx={{
-                            position: 'relative',
-                            width: '100%',
-                            maxWidth: 320,
-                            aspectRatio: '1 / 1', // Adjust based on your actual image ratio
-                        }}
-                    >
-                        <Image
-                            src="https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215454/Avatar_lt6zhz.jpg"
-                            alt="Devansh Amdavadwala - Full Stack Developer"
-                            fill
-                            priority
-                            fetchPriority="high"
-                            sizes="(max-width: 768px) 320px, 320px"
-                            style={{
-                                objectFit: 'cover',
-                                borderRadius: '14px',
-                            }}
-                            quality={90}
-                        />
-                    </Box>
-                </Box>
-
-                {/* Text + animation + socials */}
-                <Box
-                    sx={{
-                        flex: { md: '0 0 55%', xs: '1 1 100%' },
-                        width: '100%',
-                        color: theme.palette.text.primary,
-                        pl: { xs: 0, sm: 4 },
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 1.5,
-                        maxWidth: 420,
-                        justifyContent: 'center',
-                    }}
-                    data-aos="slide-right"
-                >
-                    <Typography
-                        component="h1"
-                        variant="h3"
-                        sx={{
-                            fontWeight: 'bold',
-                            fontFamily: 'Nunito',
-                            fontSize: { xs: '2.8rem', sm: '3.8rem', lg: '4.0rem' },
-                            lineHeight: 1.1,
-                        }}
-                    >
-                        <Box component="span" display="block">
-                            Hi There,
-                        </Box>
-                        <Box component="span" display="block">
-                            I'm{' '}
-                            <Box
-                                component="span"
-                                sx={{
-                                    background: `linear-gradient(to right, ${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                    fontWeight: 'bold',
-                                }}
-                            >
-                                Devansh
-                            </Box>
-                        </Box>
-                    </Typography>
-
-                    <Typography
-                        component="p"
-                        sx={{
-                            color: theme.palette.text.secondary,
-                            fontWeight: 600,
-                            fontFamily: 'Nunito',
-                            fontSize: { xs: '1.2rem', sm: '1.5rem' },
-                            py: 2,
-                            minWidth: { xs: '16rem', sm: '25rem' },
-                            maxWidth: '26rem',
-                        }}
-                    >
-                        <Box component="span" display={{ xs: 'block', sm: 'inline' }}>
-                            I'm an
-                        </Box>
-                        <Box
-                            component="span"
-                            sx={{
-                                color: theme.palette.primary.main,
-                                paddingLeft: { xs: 0, sm: 1 },
-                            }}
-                        >
-                            <TypeAnimation
-                                sequence={work}
-                                speed={1}
-                                wrapper="span"
-                                cursor={true}
-                                repeat={Infinity}
-                            />
-                        </Box>
-                    </Typography>
-
-                    {/* Social icons */}
-                    <Box
-                        component="ul"
                         sx={{
                             display: 'flex',
+                            flexDirection: { xs: 'column', md: 'row' },
                             alignItems: 'center',
-                            gap: { xs: 2, md: 3, lg: 4 },
-                            listStyle: 'none',
-                            p: 0,
-                            m: 0,
-                            zIndex: 40,
-                            justifyContent: 'flex-start',
+                            justifyContent: 'space-between',
+                            gap: { xs: 6, md: 8 },
+                            px: { xs: 2, md: 4 },
                         }}
                     >
-                        {contactInfo.map(({ id, link, name, icon, download }) => {
-                            const Icon = icon;
-                            const isExternal = /^https?:\/\//i.test(link);
-
-                            // If link is missing, render a non-interactive item to avoid a11y issues
-                            if (!link) {
-                                return (
+                        {/* Left Content */}
+                        <Box
+                            sx={{
+                                flex: 1,
+                                maxWidth: { xs: '100%', md: '55%' },
+                                textAlign: { xs: 'center', md: 'left' },
+                            }}
+                        >
+                            {/* Badge */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: 1,
+                                        px: 2,
+                                        py: 0.75,
+                                        borderRadius: '20px',
+                                        background: theme.palette.mode === 'dark'
+                                            ? 'rgba(6, 182, 212, 0.1)'
+                                            : 'rgba(37, 99, 235, 0.1)',
+                                        border: `1px solid ${theme.palette.mode === 'dark'
+                                            ? 'rgba(6, 182, 212, 0.2)'
+                                            : 'rgba(37, 99, 235, 0.2)'}`,
+                                        mb: 3,
+                                    }}
+                                >
                                     <Box
-                                        component="li"
-                                        key={id}
-                                        aria-disabled="true"
                                         sx={{
-                                            position: 'relative',
-                                            width: 32,
-                                            height: 32,
+                                            width: 8,
+                                            height: 8,
                                             borderRadius: '50%',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            p: 0.5,
-                                            filter: 'grayscale(60%)',
-                                            opacity: 0.6,
+                                            background: '#10b981',
+                                            animation: 'pulse 2s infinite',
+                                            '@keyframes pulse': {
+                                                '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                                                '50%': { opacity: 0.5, transform: 'scale(1.2)' },
+                                            },
+                                        }}
+                                    />
+                                    <Typography
+                                        variant="caption"
+                                        sx={{
+                                            color: theme.palette.primary.main,
+                                            fontWeight: 600,
+                                            letterSpacing: '0.5px',
                                         }}
                                     >
-                                        <Icon aria-hidden="true" focusable="false" />
-                                    </Box>
-                                );
-                            }
+                                        Available for hire
+                                    </Typography>
+                                </Box>
+                            </motion.div>
 
-                            return (
-                                <Box
-                                    component="li"
-                                    key={id}
+                            {/* Main Heading */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                            >
+                                <Typography
+                                    variant="h1"
                                     sx={{
-                                        position: 'relative',
-                                        width: 32,
-                                        height: 32,
-                                        borderRadius: '50%',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        p: 0.5,
-                                        filter: 'grayscale(100%)',
-                                        cursor: 'pointer',
-                                        transition: 'filter 0.45s ease, transform 0.3s ease, box-shadow 0.2s ease',
-                                        '&:hover, &:focus-within, &:active': {
-                                            filter: 'grayscale(0%)',
-                                            transform: 'scale(1.1)',
-                                        },
-                                        // keyboard focus ring when the link inside is focused
-                                        '&:focus-within': {
-                                            boxShadow: `0 0 0 3px ${theme.palette.action.focus}`,
-                                            borderRadius: '50%',
+                                        fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem', lg: '4.5rem' },
+                                        fontWeight: 800,
+                                        lineHeight: 1.1,
+                                        mb: 2,
+                                        fontFamily: 'Nunito, sans-serif',
+                                    }}
+                                >
+                                    <Box component="span" sx={{ color: theme.palette.text.primary }}>
+                                        Hi, I'm{' '}
+                                    </Box>
+                                    <Box
+                                        component="span"
+                                        sx={{
+                                            background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                                            WebkitBackgroundClip: 'text',
+                                            WebkitTextFillColor: 'transparent',
+                                            position: 'relative',
+                                        }}
+                                    >
+                                        Devansh
+                                        <motion.span
+                                            style={{
+                                                position: 'absolute',
+                                                bottom: -5,
+                                                left: 0,
+                                                right: 0,
+                                                height: 8,
+                                                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                                                borderRadius: 4,
+                                                opacity: 0.3,
+                                            }}
+                                            initial={{ scaleX: 0 }}
+                                            animate={{ scaleX: 1 }}
+                                            transition={{ duration: 0.8, delay: 1 }}
+                                        />
+                                    </Box>
+                                </Typography>
+                            </motion.div>
+
+                            {/* Type Animation */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.6 }}
+                            >
+                                <Typography
+                                    variant="h2"
+                                    sx={{
+                                        fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                                        fontWeight: 600,
+                                        color: theme.palette.text.secondary,
+                                        mb: 3,
+                                        minHeight: { xs: '2.5rem', md: '3rem' },
+                                    }}
+                                >
+                                    I'm a{' '}
+                                    <Box
+                                        component="span"
+                                        sx={{ color: theme.palette.primary.main }}
+                                    >
+                                        <TypeAnimation
+                                            sequence={[
+                                                'Full Stack Developer',
+                                                2000,
+                                                'Mobile App Developer',
+                                                2000,
+                                                'UI/UX Enthusiast',
+                                                2000,
+                                                'Problem Solver',
+                                                2000,
+                                            ]}
+                                            speed={50}
+                                            repeat={Infinity}
+                                        />
+                                    </Box>
+                                </Typography>
+                            </motion.div>
+
+                            {/* Description */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.8 }}
+                            >
+                                <Typography
+                                    variant="body1"
+                                    sx={{
+                                        fontSize: { xs: '1rem', md: '1.125rem' },
+                                        color: theme.palette.text.secondary,
+                                        maxWidth: '500px',
+                                        mb: 4,
+                                        lineHeight: 1.7,
+                                    }}
+                                >
+                                    I craft exceptional digital experiences with modern technologies. 
+                                    Specializing in React, Flutter, and cloud-native solutions that 
+                                    drive business growth and user engagement.
+                                </Typography>
+                            </motion.div>
+
+                            {/* CTA Buttons */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 1 }}
+                                style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    size="large"
+                                    href="#Contact"
+                                    sx={{
+                                        px: 4,
+                                        py: 1.5,
+                                        borderRadius: '12px',
+                                        fontSize: '1rem',
+                                        fontWeight: 600,
+                                        textTransform: 'none',
+                                        background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                                        boxShadow: `0 10px 30px -10px ${theme.palette.primary.main}50`,
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            transform: 'translateY(-3px)',
+                                            boxShadow: `0 20px 40px -15px ${theme.palette.primary.main}60`,
                                         },
                                     }}
                                 >
-                                    <a
-                                        href={link}
-                                        download={download}
-                                        target={isExternal ? '_blank' : undefined}
-                                        rel={isExternal ? 'noopener noreferrer' : undefined}
-                                        aria-label={name}                           // ✅ discernible name
-                                        style={{
-                                            color: 'inherit',
-                                            display: 'flex',
-                                            width: 28,
-                                            height: 28,
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            outline: 'none',
-                                        }}
-                                    >
-                                        {/* Decorative icon shouldn't be read by SR */}
-                                        <Icon 
-                                        color={theme.palette.text.primary}aria-hidden="true" focusable="false" />
-                                        {/* Redundant hidden text, helpful for some AT and for robustness */}
-                                        <span style={visuallyHiddenStyles}>{name}</span>
-                                    </a>
+                                    Let's Talk
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    size="large"
+                                    startIcon={<Download size={20} />}
+                                    sx={{
+                                        px: 4,
+                                        py: 1.5,
+                                        borderRadius: '12px',
+                                        fontSize: '1rem',
+                                        fontWeight: 600,
+                                        textTransform: 'none',
+                                        borderWidth: 2,
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            transform: 'translateY(-3px)',
+                                            borderWidth: 2,
+                                        },
+                                    }}
+                                >
+                                    Download CV
+                                </Button>
+                            </motion.div>
 
-                                    {/* Tooltip that appears on hover AND when the link is focused */}
+                            {/* Social Links */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 1.2 }}
+                                style={{ marginTop: '2rem' }}
+                            >
+                                <Box sx={{ display: 'flex', gap: 2, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                                    {socialLinks.map((social, index) => (
+                                        <motion.a
+                                            key={social.label}
+                                            href={social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{ scale: 1.1, y: -5 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            style={{
+                                                width: 44,
+                                                height: 44,
+                                                borderRadius: '12px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                background: theme.palette.mode === 'dark'
+                                                    ? 'rgba(255, 255, 255, 0.05)'
+                                                    : 'rgba(0, 0, 0, 0.03)',
+                                                border: `1px solid ${theme.palette.mode === 'dark'
+                                                    ? 'rgba(255, 255, 255, 0.1)'
+                                                    : 'rgba(0, 0, 0, 0.08)'}`,
+                                                color: theme.palette.text.primary,
+                                                transition: 'all 0.3s ease',
+                                            }}
+                                        >
+                                            <social.icon size={20} />
+                                        </motion.a>
+                                    ))}
+                                </Box>
+                            </motion.div>
+                        </Box>
+
+                        {/* Right Content - Profile Image */}
+                        <Box
+                            sx={{
+                                flex: { xs: 'none', md: 1 },
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                position: 'relative',
+                            }}
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                                transition={{ duration: 1, delay: 0.5, type: 'spring' }}
+                                style={{ position: 'relative' }}
+                            >
+                                {/* Decorative Rings */}
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                                    style={{
+                                        position: 'absolute',
+                                        inset: -20,
+                                        border: `2px dashed ${theme.palette.mode === 'dark'
+                                            ? 'rgba(6, 182, 212, 0.2)'
+                                            : 'rgba(37, 99, 235, 0.2)'}`,
+                                        borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                                    }}
+                                />
+                                <motion.div
+                                    animate={{ rotate: -360 }}
+                                    transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                                    style={{
+                                        position: 'absolute',
+                                        inset: -40,
+                                        border: `2px dashed ${theme.palette.mode === 'dark'
+                                            ? 'rgba(139, 92, 246, 0.15)'
+                                            : 'rgba(59, 130, 246, 0.15)'}`,
+                                        borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%',
+                                    }}
+                                />
+
+                                {/* Main Image Container */}
+                                <Box
+                                    sx={{
+                                        position: 'relative',
+                                        width: { xs: 280, sm: 320, md: 380 },
+                                        height: { xs: 280, sm: 320, md: 380 },
+                                        borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                                        overflow: 'hidden',
+                                        boxShadow: theme.palette.mode === 'dark'
+                                            ? '0 25px 50px -12px rgba(6, 182, 212, 0.25)'
+                                            : '0 25px 50px -12px rgba(37, 99, 235, 0.25)',
+                                    }}
+                                >
+                                    <Image
+                                        src="https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759215454/Avatar_lt6zhz.jpg"
+                                        alt="Devansh Amdavadwala"
+                                        fill
+                                        priority
+                                        style={{
+                                            objectFit: 'cover',
+                                        }}
+                                    />
+                                    
+                                    {/* Overlay gradient */}
                                     <Box
                                         sx={{
                                             position: 'absolute',
-                                            bottom: -32,
-                                            left: '50%',
-                                            transform: 'translateX(-50%) scale(0)',
-                                            backgroundColor: theme.palette.background.paper,
-                                            color: theme.palette.text.secondary,
+                                            inset: 0,
+                                            background: `linear-gradient(180deg, transparent 60%, ${theme.palette.mode === 'dark'
+                                                ? 'rgba(0,0,0,0.4)'
+                                                : 'rgba(255,255,255,0.2)'} 100%)`,
+                                        }}
+                                    />
+                                </Box>
+
+                                {/* Floating Tech Stack Badges */}
+                                <FloatingShape x="-60px" y="20%" delay={0}>
+                                    <Box
+                                        sx={{
+                                            px: 2,
+                                            py: 0.75,
+                                            borderRadius: '8px',
+                                            background: theme.palette.mode === 'dark'
+                                                ? 'rgba(97, 218, 251, 0.9)'
+                                                : 'rgba(97, 218, 251, 0.95)',
+                                            color: '#000',
+                                            fontWeight: 600,
                                             fontSize: '0.75rem',
-                                            px: 1,
-                                            py: 0.5,
-                                            borderRadius: 1,
-                                            fontFamily: 'Nunito',
-                                            whiteSpace: 'nowrap',
-                                            transition: 'transform 0.2s ease',
-                                            pointerEvents: 'none',
-                                            zIndex: 50,
-                                            // show on hover or keyboard focus
-                                            '.MuiBox-root:hover > &': {
-                                                transform: 'translateX(-50%) scale(1)',
-                                            },
-                                            '.MuiBox-root:focus-within > &': {
-                                                transform: 'translateX(-50%) scale(1)',
-                                            },
+                                            boxShadow: '0 4px 15px rgba(97, 218, 251, 0.4)',
                                         }}
                                     >
-                                        {name}
+                                        React
                                     </Box>
-                                </Box>
-                            );
-                        })}
-                    </Box>
+                                </FloatingShape>
 
-                    {/* About Me Button */}
-                    <AboutButton />
-                </Box>
-            </Box>
+                                <FloatingShape x="calc(100% + 20px)" y="40%" delay={1}>
+                                    <Box
+                                        sx={{
+                                            px: 2,
+                                            py: 0.75,
+                                            borderRadius: '8px',
+                                            background: theme.palette.mode === 'dark'
+                                                ? 'rgba(2, 119, 189, 0.9)'
+                                                : 'rgba(2, 119, 189, 0.95)',
+                                            color: '#fff',
+                                            fontWeight: 600,
+                                            fontSize: '0.75rem',
+                                            boxShadow: '0 4px 15px rgba(2, 119, 189, 0.4)',
+                                        }}
+                                    >
+                                        Flutter
+                                    </Box>
+                                </FloatingShape>
+
+                                <FloatingShape x="-40px" y="70%" delay={2}>
+                                    <Box
+                                        sx={{
+                                            px: 2,
+                                            py: 0.75,
+                                            borderRadius: '8px',
+                                            background: theme.palette.mode === 'dark'
+                                                ? 'rgba(104, 159, 56, 0.9)'
+                                                : 'rgba(104, 159, 56, 0.95)',
+                                            color: '#fff',
+                                            fontWeight: 600,
+                                            fontSize: '0.75rem',
+                                            boxShadow: '0 4px 15px rgba(104, 159, 56, 0.4)',
+                                        }}
+                                    >
+                                        Node.js
+                                    </Box>
+                                </FloatingShape>
+                            </motion.div>
+                        </Box>
+                    </Box>
+                </motion.div>
+
+                {/* Scroll Indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2 }}
+                    style={{
+                        position: 'absolute',
+                        bottom: 40,
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                    }}
+                >
+                    <motion.a
+                        href="#About"
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '8px',
+                            color: theme.palette.text.secondary,
+                            textDecoration: 'none',
+                        }}
+                    >
+                        <Typography variant="caption" sx={{ fontSize: '0.75rem', letterSpacing: '2px' }}>
+                            SCROLL
+                        </Typography>
+                        <Box
+                            sx={{
+                                width: 24,
+                                height: 40,
+                                border: `2px solid ${theme.palette.text.secondary}`,
+                                borderRadius: '12px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                pt: 1,
+                            }}
+                        >
+                            <motion.div
+                                animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                style={{
+                                    width: 4,
+                                    height: 8,
+                                    borderRadius: 2,
+                                    background: theme.palette.primary.main,
+                                }}
+                            />
+                        </Box>
+                    </motion.a>
+                </motion.div>
+            </Container>
         </Box>
     );
 };
 
 export default Home;
-
-
-// const AboutButton = () => {
-//     return (
-//         <a to="#About" smooth="true" duration={500} style={{ textDecoration: 'none' }}>
-//             <Box    
-//                 className="group"
-//                 aria-label="Scroll to About section"
-//                 sx={{
-//                     position: 'relative',
-//                     zIndex: 30,
-//                     display: 'flex',
-//                     alignItems: 'center',
-//                     justifyContent: 'center',
-//                     gap: 1,
-//                     px: 3,
-//                     py: 1,
-//                     my: 3,
-//                     borderRadius: 2,
-//                     cursor: 'pointer',
-//                     width: '10rem',
-//                     background: 'linear-gradient(to bottom right, #22d3ee, #2563eb)',
-//                     transition: 'all 0.3s linear 75ms',
-//                     overflow: 'hidden',
-//                     '&:hover .label': {
-//                         transform: 'translateX(-1.25rem)',
-//                         transition: 'transform 0.4s ease-out 0.4s',
-//                     },
-//                     '&:hover .arrow': {
-//                         transform: 'translateY(0)',
-//                         opacity: 1,
-//                         transition: 'transform 0.3s ease-in 0.2s, opacity 0.3s ease-in 0.2s',
-//                     },
-//                 }}
-//             >
-//                 <Typography
-//                     variant="button"
-//                     className="label"
-//                     sx={{
-//                         pr: { xs: 3, sm: 0 },
-//                         color: 'white',
-//                         fontWeight: 500,
-//                         fontFamily: 'Nunito',
-//                         transition: 'transform 0.3s ease',
-//                     }}
-//                 >
-//                     About Me
-//                 </Typography>
-
-//                 <Box
-//                     className="arrow"
-//                     sx={{
-//                         position: 'absolute',
-//                         right: 20,
-//                         top: '50%',
-//                         transform: 'translateY(-50%)',
-//                         opacity: 0,
-//                         animation: 'arrowPulse 2s infinite',
-//                         color: 'white',
-//                         display: 'flex',
-//                         alignItems: 'center',
-//                         justifyContent: 'center',
-//                         pointerEvents: 'none',
-//                     }}
-//                 >
-//                     <ArrowDown />
-//                 </Box>
-
-//                 {/* CSS keyframes injected into the DOM once */}
-//                 <style>
-//                     {`
-//                     @keyframes arrowPulse {
-//                         0%, 100% {
-//                             transform: translateY(-50%) scale(1);
-//                         }
-//                         50% {
-//                             transform: translateY(-50%) scale(1.15);
-//                         }
-//                     }
-//                 `}
-//                 </style>
-//             </Box>
-//         </a>
-//     );
-// };
-
-const AboutButton = () => (
-    <Box
-        component="a"                 // renders a real <a>
-        href="/#about"                // <-- crawlable!
-        aria-label="Scroll to About section"
-        sx={{
-            position: 'relative',
-            zIndex: 30,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 1,
-            px: 3,
-            py: 1,
-            my: 3,
-            borderRadius: 2,
-            cursor: 'pointer',
-            width: '10rem',
-            background: 'linear-gradient(to bottom right, #22d3ee, #2563eb)',
-            transition: 'all 0.3s linear 75ms',
-            overflow: 'hidden',
-            textDecoration: 'none',
-            '&:hover .label': {
-                transform: 'translateX(-1.25rem)',
-                transition: 'transform 0.4s ease-out 0.4s',
-            },
-            '&:hover .arrow': {
-                transform: 'translateY(0)',
-                opacity: 1,
-                transition: 'transform 0.3s ease-in 0.2s, opacity 0.3s ease-in 0.2s',
-            },
-        }}
-    >
-        <Typography
-            variant="button"
-            className="label"
-            sx={{
-                pr: { xs: 3, sm: 0 },
-                color: 'white',
-                fontWeight: 500,
-                fontFamily: 'Nunito',
-                transition: 'transform 0.3s ease',
-            }}
-        >
-            About Me
-        </Typography>
-
-        <Box
-            className="arrow"
-            sx={{
-                position: 'absolute',
-                right: 20,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                opacity: 0,
-                animation: 'arrowPulse 2s infinite',
-                color: 'white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                pointerEvents: 'none',
-            }}
-        >
-            <ArrowDown />
-        </Box>
-
-        <style>{`
-        @keyframes arrowPulse {
-          0%, 100% { transform: translateY(-50%) scale(1); }
-          50% { transform: translateY(-50%) scale(1.15); }
-        }
-      `}</style>
-    </Box>
-);
