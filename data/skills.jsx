@@ -45,7 +45,7 @@ import ReactJs, {
 
 const skills = [
 	{
-		id: 3,
+		id: 1,
 		icon: <Kotlin />,
 		name: "Kotlin",
 		style: {
@@ -53,7 +53,7 @@ const skills = [
 		},
 	},
 	{
-		id: 4,
+		id: 2,
 		icon: <Java />,
 		name: "Java",
 		style: {
@@ -61,7 +61,7 @@ const skills = [
 		},
 	},
 	{
-		id: 5,
+		id: 3,
 		icon: <AndroidStudio />,
 		name: "Android Studio",
 		style: {
@@ -69,7 +69,7 @@ const skills = [
 		},
 	},
 	{
-		id: 6,
+		id: 4,
 		icon: <Compose />,
 		name: "Jetpack Compose",
 		style: {
@@ -77,7 +77,15 @@ const skills = [
 		},
 	},
 	{
-		id: 7,
+		id: 5,
+		icon: <ComposeMultiplatform />,
+		name: "Compose Multiplatform",
+		style: {
+			shadowColor: "#38BF6E",
+		},
+	},
+	{
+		id: 6,
 		icon: <Flutter />,
 		name: "Flutter",
 		style: {
@@ -85,23 +93,47 @@ const skills = [
 		},
 	},
 	{
-		id: 8,
-		icon: <MaterialUI />,
-		name: "MaterialUI",
+		id: 7,
+		icon: <ReactJs />,
+		name: "React.js",
 		style: {
-			shadowColor: "#1266A9",
+			shadowColor: "#61DAFB",
+		},
+	},
+	{
+		id: 8,
+		icon: <NextJs />,
+		name: "Next.js",
+		style: {
+			shadowColor: "#646464",
 		},
 	},
 	{
 		id: 9,
+		icon: <TS />,
+		name: "TypeScript",
+		style: {
+			shadowColor: "#3178C6",
+		},
+	},
+	{
+		id: 10,
+		icon: <JS />,
+		name: "JavaScript",
+		style: {
+			shadowColor: "#F7DF1E",
+		},
+	},
+	{
+		id: 11,
 		icon: <SQLite />,
-		name: "SQLite",
+		name: "SQLite / Room",
 		style: {
 			shadowColor: "#76BEE8",
 		},
 	},
 	{
-		id: 10,
+		id: 12,
 		icon: <FireBase />,
 		name: "Firebase",
 		style: {
@@ -109,7 +141,7 @@ const skills = [
 		},
 	},
 	{
-		id: 11,
+		id: 13,
 		icon: <MongoDB />,
 		name: "MongoDB",
 		style: {
@@ -117,168 +149,7 @@ const skills = [
 		},
 	},
 	{
-		id: 12,
-		icon: <PostMan />,
-		name: "PostMan",
-		style: {
-			shadowColor: "#FF6C37",
-		},
-	},
-	{
-		id: 13,
-		icon: <Git />,
-		name: "Git",
-		style: {
-			shadowColor: "#F34F29",
-		},
-	},
-	{
 		id: 14,
-		icon: <GitHub />,
-		name: "GitHub",
-		style: {
-			shadowColor: "#5c5a5a",
-		},
-	},
-	{
-		id: 15,
-		icon: <PHP />,
-		name: "PHP",
-		style: {
-			shadowColor: "#9597c8",
-		},
-	},
-	{
-		id: 16,
-		icon: <Python />,
-		name: "Python",
-		style: {
-			shadowColor: "#ddbe4e",
-		},
-	},
-	{
-		id: 17,
-		icon: <C />,
-		name: "C",
-		style: {
-			shadowColor: "#3949AB",
-		},
-	},
-	{
-		id: 18,
-		icon: <CPlusPlus />,
-		name: "C++",
-		style: {
-			shadowColor: "#004482",
-		},
-	},
-	{
-		id: 19,
-		icon: <CSharp />,
-		name: "C#",
-		style: {
-			shadowColor: "#A179DC",
-		},
-	},
-	{
-		id: 30,
-		icon: <Rust />,
-		name: "Rust",
-		style: {
-			shadowColor: "#CE412B",
-		},
-	},
-	{
-		id: 20,
-		icon: <MySQL />,
-		name: "MySQL",
-		style: {
-			shadowColor: "#F29111",
-		},
-	},
-	{
-		id: 21,
-		icon: <PostGreSql />,
-		name: "PostgreSql",
-		style: {
-			shadowColor: "#336791",
-		},
-	},
-	{
-		id: 22,
-		icon: <VSCode />,
-		name: "VS Code",
-		style: {
-			shadowColor: "#1D95E5",
-		},
-	},
-	{
-		id: 23,
-		icon: <Bash />,
-		name: "Bash",
-		style: {
-			shadowColor: "#4dbc85",
-		},
-	},
-	/*
-	{
-		id: 24,
-		icon: <ReactJs />,
-		name: "React",
-		style: {
-			shadowColor: "#61DAFB",
-		},
-	},
-	{
-		id: 25,
-		icon: <NodeJS />,
-		name: "Node Js",
-		style: {
-			shadowColor: "#83CD27",
-		},
-	},
-	{
-		id: 26,
-		icon: <NextJs />,
-		name: "NextJs",
-		style: {
-			shadowColor: "#646464",
-		},
-	},
-	{
-		id: 27,
-		icon: <ExpressJS />,
-		name: "Express Js",
-		style: {
-			shadowColor: "#444444",
-		},
-	},
-	{
-		id: 28,
-		icon: <Redux />,
-		name: "Redux",
-		style: {
-			shadowColor: "#764ABC",
-		},
-	},
-	{
-		id: 29,
-		icon: <TailwindCSS />,
-		name: "Tailwind",
-		style: {
-			shadowColor: "#3D8FC6",
-		},
-	},
-	{
-		id: 31,
-		icon: <Bootstrap />,
-		name: "Bootstrap",
-		style: {
-			shadowColor: "#6610F2",
-		},
-	},
-	{
-		id: 32,
 		icon: <GraphQL />,
 		name: "GraphQL",
 		style: {
@@ -286,47 +157,39 @@ const skills = [
 		},
 	},
 	{
-		id: 33,
-		icon: <SASS />,
-		name: "SASS",
+		id: 15,
+		icon: <PostMan />,
+		name: "Postman",
 		style: {
-			shadowColor: "#CC6699",
+			shadowColor: "#FF6C37",
 		},
 	},
 	{
-		id: 34,
-		icon: <Redis />,
-		name: "Redis",
+		id: 16,
+		icon: <Git />,
+		name: "Git",
 		style: {
-			shadowColor: "#C6302B",
+			shadowColor: "#F34F29",
 		},
 	},
 	{
-		id: 35,
-		icon: <JQuery />,
-		name: "JQuery",
+		id: 17,
+		icon: <GitHub />,
+		name: "GitHub",
 		style: {
-			shadowColor: "#1266A9",
+			shadowColor: "#5c5a5a",
 		},
 	},
 	{
-		id: 36,
+		id: 18,
 		icon: <Doker />,
-		name: "Doker",
+		name: "Docker",
 		style: {
 			shadowColor: "#0091E2",
 		},
 	},
 	{
-		id: 37,
-		icon: <Kubernets />,
-		name: "Kubernets",
-		style: {
-			shadowColor: "#326DE6",
-		},
-	},
-	{
-		id: 38,
+		id: 19,
 		icon: <Heroku />,
 		name: "Heroku",
 		style: {
@@ -334,15 +197,21 @@ const skills = [
 		},
 	},
 	{
-		id: 39,
-		icon: <DotNet />,
-		name: "DotNet Core",
+		id: 20,
+		icon: <VSCode />,
+		name: "VS Code",
 		style: {
-			shadowColor: "#430098",
+			shadowColor: "#1D95E5",
 		},
-	}
-		*/
+	},
+	{
+		id: 21,
+		icon: <Ktor />,
+		name: "Ktor",
+		style: {
+			shadowColor: "#087CFA",
+		},
+	},
 ];
-
 
 export default skills;

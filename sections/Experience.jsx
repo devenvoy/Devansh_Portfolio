@@ -1,16 +1,16 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Box, Typography, Container, Chip, useTheme } from '@mui/material';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { 
     Briefcase, Calendar, MapPin, ExternalLink,
-    ChevronRight, TrendingUp, Users, Code2 
+    ChevronRight, TrendingUp, Users, Code2, ChevronDown, ChevronUp
 } from 'lucide-react';
 
 const experiences = [
     {
         company: "Argon IT Services LLP",
-        position: "Mobile Software Developer",
+        position: "Android Software Developer",
         link: "https://www.argonitservices.com/",
         duration: "May 2024 - Present",
         location: "Remote",
@@ -21,13 +21,13 @@ const experiences = [
             { icon: Code2, text: "6+ apps deployed" },
         ],
         description: [
-            "Developed and deployed 6+ Android apps using Kotlin and Jetpack Compose, achieving average ratings of 4.6+ stars and 50K+ downloads on Google Play Store.",
-            "Reduced app crash rate from 5.8% to 0.7% by implementing comprehensive error handling and automated testing (JUnit, Espresso).",
-            "Integrated Firebase Cloud Messaging and Analytics, boosting user engagement by 20% via personalized notifications.",
-            "Built RESTful API connections with Retrofit and OkHttp, reducing API response time by 35% using caching strategies.",
-            "Automated the CI/CD pipeline using GitHub Actions, reducing deployment time from 1 week to 2 days.",
+            "As an Android Software Developer at Argon IT Services, I focused on building high-performance, user-friendly mobile applications. My mandate involved delivering robust solutions that precisely met client specifications and enhanced user experience.",
+            "Accelerated app performance, reducing load times by [30%] and boosting user ratings by [0.5] stars through Kotlin optimizations.",
+            "Engineered [5+] client-facing Android applications, integrating RESTful APIs for seamless data communication and enhanced user experience.",
+            "Bridging design vision with technical feasibility > Championed UI/UX collaboration with design team > resulting in [90%+] positive client feedback.",
+            "- Streamlined comprehensive mobile code testing and version control, decreasing critical bug reports by [25%] across all projects."
         ],
-        skills: ["Kotlin", "Android", "Jetpack Compose", "Firebase", "Retrofit", "MVVM", "CI/CD"],
+        skills: ["Android", "Kotlin", "Jetpack Compose", "Firebase", "Retrofit", "MVVM", "Hilt", "Coroutines", "Flow", "Room"],
     },
 ];
 
@@ -35,6 +35,8 @@ const TimelineItem = ({ exp, index }) => {
     const theme = useTheme();
     const itemRef = useRef(null);
     const isInView = useInView(itemRef, { once: true, margin: "-100px" });
+    const [isExpanded, setIsExpanded] = useState(false);
+    const hasMultipleDescriptions = exp.description.length > 1;
 
     return (
         <motion.div
@@ -186,62 +188,139 @@ const TimelineItem = ({ exp, index }) => {
                         <Box
                             sx={{
                                 display: 'flex',
-                                gap: 2,
+                                gap: 3,
                                 mb: 3,
                                 flexWrap: 'wrap',
                             }}
                         >
-                            {exp.highlights.map((highlight) => (
-                                <Box
+                            {exp.highlights.map((highlight, idx) => (
+                                <motion.div
                                     key={highlight.text}
-                                    sx={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: 1,
-                                        px: 2,
-                                        py: 1,
-                                        borderRadius: '8px',
-                                        background: theme.palette.mode === 'dark'
-                                            ? 'rgba(6, 182, 212, 0.1)'
-                                            : 'rgba(37, 99, 235, 0.1)',
-                                    }}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: idx * 0.1 }}
                                 >
-                                    <highlight.icon size={16} color={theme.palette.primary.main} />
-                                    <Typography variant="body2" fontWeight={600}>
-                                        {highlight.text}
-                                    </Typography>
-                                </Box>
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 1,
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                                transform: 'scale(1.05)',
+                                            },
+                                        }}
+                                    >
+                                        <highlight.icon size={18} color={theme.palette.primary.main} />
+                                        <Typography
+                                            variant="body2"
+                                            fontWeight={600}
+                                            sx={{
+                                                color: theme.palette.text.primary,
+                                            }}
+                                        >
+                                            {highlight.text}
+                                        </Typography>
+                                    </Box>
+                                </motion.div>
                             ))}
                         </Box>
 
                         {/* Description */}
                         <Box sx={{ mb: 3 }}>
-                            {exp.description.map((point, i) => (
-                                <Box
-                                    key={i}
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    gap: 1.5,
+                                    mb: 1.5,
+                                    alignItems: 'flex-start',
+                                }}
+                            >
+                                <ChevronRight 
+                                    size={20} 
+                                    color={theme.palette.primary.main}
+                                    style={{ marginTop: 2, flexShrink: 0 }}
+                                />
+                                <Typography
+                                    variant="body2"
                                     sx={{
-                                        display: 'flex',
-                                        gap: 1.5,
-                                        mb: 1.5,
-                                        alignItems: 'flex-start',
+                                        color: theme.palette.text.secondary,
+                                        lineHeight: 1.6,
                                     }}
                                 >
-                                    <ChevronRight 
-                                        size={20} 
-                                        color={theme.palette.primary.main}
-                                        style={{ marginTop: 2, flexShrink: 0 }}
-                                    />
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.6,
-                                        }}
+                                    {exp.description[0]}
+                                </Typography>
+                            </Box>
+                            <AnimatePresence initial={false}>
+                                {isExpanded && exp.description.slice(1).map((point, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3, delay: i * 0.1 }}
                                     >
-                                        {point}
-                                    </Typography>
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                gap: 1.5,
+                                                mb: 1.5,
+                                                alignItems: 'flex-start',
+                                            }}
+                                        >
+                                            <ChevronRight 
+                                                size={20} 
+                                                color={theme.palette.primary.main}
+                                                style={{ marginTop: 2, flexShrink: 0 }}
+                                            />
+                                            <Typography
+                                                variant="body2"
+                                                sx={{
+                                                    color: theme.palette.text.secondary,
+                                                    lineHeight: 1.6,
+                                                }}
+                                            >
+                                                {point}
+                                            </Typography>
+                                        </Box>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                            {hasMultipleDescriptions && (
+                                <Box
+                                    component="button"
+                                    onClick={() => setIsExpanded(!isExpanded)}
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 0.5,
+                                        background: 'none',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        color: theme.palette.primary.main,
+                                        fontWeight: 600,
+                                        fontSize: '0.875rem',
+                                        mt: 1,
+                                        padding: 0,
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            gap: 1,
+                                        },
+                                    }}
+                                >
+                                    {isExpanded ? (
+                                        <>
+                                            Show less
+                                            <ChevronUp size={16} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            Read more
+                                            <ChevronDown size={16} />
+                                        </>
+                                    )}
                                 </Box>
-                            ))}
+                            )}
                         </Box>
 
                         {/* Skills */}
