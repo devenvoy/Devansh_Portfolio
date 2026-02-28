@@ -206,100 +206,119 @@ const GridLightEffect = ({
         }
         ctx.restore();
 
-        // ── Draw the Blackhole (top-down view) ──────────
+        // ── Draw the Blackhole (top-down, matching reference) ──
         if (pull > 0.01) {
-            const bhSize = pull * 60; // max event horizon radius ~60px
-            const diskSize = pull * 120; // accretion disk radius
+            const bhSize = pull * 35;    // event horizon radius
+            const diskOuter = bhSize + pull * 15; // tight band ~15px around event horizon
             const rot = bh.rotation;
 
             ctx.save();
             ctx.translate(mx, my);
 
-            // ── Outer glow / gravitational lensing ──
-            const outerGlow = ctx.createRadialGradient(0, 0, bhSize * 0.5, 0, 0, diskSize * 1.5);
-            outerGlow.addColorStop(0, `rgba(139, 92, 246, ${0.3 * pull})`);
-            outerGlow.addColorStop(0.5, `rgba(6, 182, 212, ${0.15 * pull})`);
-            outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            ctx.fillStyle = outerGlow;
+            // ── Outer soft glow (gravitational lensing haze) ──
+            const lensGlow = ctx.createRadialGradient(0, 0, diskOuter * 0.4, 0, 0, diskOuter * 1.6);
+            lensGlow.addColorStop(0, `rgba(180, 190, 220, ${0.12 * pull})`);
+            lensGlow.addColorStop(0.5, `rgba(100, 110, 140, ${0.06 * pull})`);
+            lensGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = lensGlow;
             ctx.beginPath();
-            ctx.arc(0, 0, diskSize * 1.5, 0, Math.PI * 2);
+            ctx.arc(0, 0, diskOuter * 1.6, 0, Math.PI * 2);
             ctx.fill();
 
-            // ── Accretion disk (rotating elliptical rings) ──
-            for (let ring = 3; ring >= 0; ring--) {
-                const ringRadius = bhSize + (diskSize - bhSize) * (ring / 3);
-                const ringWidth = 2 + ring * 1.5;
-                const ringAlpha = (0.6 - ring * 0.12) * pull;
+            // ── Congested Saturn-Ring Lines (rotating accretion disk) ──
+            // Densely packed thin concentric arc strokes with random dust coloring
+            const ringCount = 120;
+            for (let i = 0; i < ringCount; i++) {
+                // Seeded pseudo-random for each ring line
+                const s1 = Math.sin(i * 127.1 + 42) * 43758.5453;
+                const r1 = s1 - Math.floor(s1);
+                const s2 = Math.sin(i * 269.5 + 84) * 43758.5453;
+                const r2 = s2 - Math.floor(s2);
+                const s3 = Math.sin(i * 419.2 + 126) * 43758.5453;
+                const r3 = s3 - Math.floor(s3);
+
+                // Radius: distribute densely between photon ring and outer disk
+                const t = i / ringCount; // 0→1 inner to outer
+                const radius = bhSize * 1.2 + (diskOuter - bhSize * 1.2) * t;
+
+                // Rotation: all rings rotate fast, slight per-ring offset
+                const ringAngle = rot * (2.5 + r1 * 0.5) + r2 * Math.PI * 2;
+
+                // Arc length: varies per ring (partial arcs for that striated look)
+                const arcLen = Math.PI * (0.4 + r3 * 1.2);
+
+                // Brightness: bright near event horizon, fades outward
+                const brightness = Math.max(0, 1 - t * 0.9);
+                const baseAlpha = brightness * 0.4 * pull;
+                if (baseAlpha < 0.01) continue;
+
+                // Line width: thinner overall (1-2px), thicker near center
+                const lw = (0.5 + (1 - t) * 1.5) * pull;
+
+                // Color: mostly white/light-gray, ~15% are orange or yellow dust
+                let cr, cg, cb;
+                if (r1 < 0.08) {
+                    // Orange dust
+                    cr = 255; cg = 160 + Math.round(r2 * 40); cb = 60 + Math.round(r3 * 40);
+                } else if (r1 < 0.15) {
+                    // Yellow dust
+                    cr = 255; cg = 220 + Math.round(r2 * 30); cb = 100 + Math.round(r3 * 60);
+                } else {
+                    // White / light lavender-gray
+                    const shade = 200 + Math.round(brightness * 55);
+                    cr = shade; cg = shade - 2; cb = shade + 5;
+                }
 
                 ctx.save();
-                ctx.rotate(rot + ring * 0.4);
-                ctx.scale(1, 0.35); // flatten to ellipse (top-down perspective)
+                ctx.rotate(ringAngle);
 
                 ctx.beginPath();
-                ctx.arc(0, 0, ringRadius, 0, Math.PI * 2);
-                ctx.lineWidth = ringWidth;
-
-                // Gradient along the ring — brighter on one side (doppler effect)
-                const ringGrad = ctx.createLinearGradient(-ringRadius, 0, ringRadius, 0);
-                ringGrad.addColorStop(0, `rgba(6, 182, 212, ${ringAlpha})`);
-                ringGrad.addColorStop(0.3, `rgba(236, 72, 153, ${ringAlpha * 0.8})`);
-                ringGrad.addColorStop(0.5, `rgba(255, 200, 50, ${ringAlpha * 1.2})`);
-                ringGrad.addColorStop(0.7, `rgba(236, 72, 153, ${ringAlpha * 0.8})`);
-                ringGrad.addColorStop(1, `rgba(139, 92, 246, ${ringAlpha})`);
-                ctx.strokeStyle = ringGrad;
+                ctx.arc(0, 0, radius, -arcLen / 2, arcLen / 2);
+                ctx.strokeStyle = `rgba(${cr}, ${cg}, ${cb}, ${baseAlpha})`;
+                ctx.lineWidth = lw;
+                ctx.lineCap = 'round';
                 ctx.stroke();
 
                 ctx.restore();
             }
 
-            // ── Spinning light streaks in the disk ──
-            for (let i = 0; i < 6; i++) {
-                const angle = rot * 1.5 + (i / 6) * Math.PI * 2;
-                const streakR = bhSize + (diskSize - bhSize) * 0.5;
-                const sx = Math.cos(angle) * streakR;
-                const sy = Math.sin(angle) * streakR * 0.35; // flattened
+            // ── Bright photon ring (intense glow at event horizon edge) ──
+            // Multiple layered rings for thick, bright glow
+            for (let layer = 0; layer < 4; layer++) {
+                const rOff = layer * 2;
+                const ringR = bhSize * 1.15 + rOff;
+                const ringAlpha = (0.5 - layer * 0.1) * pull;
+                const ringW = (5 - layer * 0.8) * pull;
 
-                const streakGrad = ctx.createRadialGradient(sx, sy, 0, sx, sy, 15 * pull);
-                streakGrad.addColorStop(0, `rgba(255, 255, 255, ${0.5 * pull})`);
-                streakGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                ctx.fillStyle = streakGrad;
                 ctx.beginPath();
-                ctx.arc(sx, sy, 15 * pull, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.arc(0, 0, ringR, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(240, 235, 255, ${ringAlpha})`;
+                ctx.lineWidth = ringW;
+                ctx.shadowColor = `rgba(220, 215, 255, ${0.4 * pull})`;
+                ctx.shadowBlur = 12 * pull;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
             }
 
-            // ── Photon ring (bright thin ring at event horizon edge) ──
-            ctx.save();
-            ctx.rotate(rot * 0.5);
-            ctx.scale(1, 0.35);
+            // ── Inner bright halo (the white-hot ring in the reference) ──
+            const haloGrad = ctx.createRadialGradient(0, 0, bhSize * 0.8, 0, 0, bhSize * 1.8);
+            haloGrad.addColorStop(0, `rgba(255, 250, 255, ${0.7 * pull})`);
+            haloGrad.addColorStop(0.4, `rgba(220, 215, 240, ${0.4 * pull})`);
+            haloGrad.addColorStop(1, 'rgba(180, 180, 210, 0)');
+            ctx.fillStyle = haloGrad;
             ctx.beginPath();
-            ctx.arc(0, 0, bhSize * 1.15, 0, Math.PI * 2);
-            ctx.lineWidth = 2 * pull;
-            ctx.strokeStyle = `rgba(255, 200, 100, ${0.8 * pull})`;
-            ctx.shadowColor = 'rgba(255, 200, 100, 0.5)';
-            ctx.shadowBlur = 10 * pull;
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-            ctx.restore();
-
-            // ── Event Horizon (dark center) ──
-            const eventHorizonGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, bhSize);
-            eventHorizonGrad.addColorStop(0, `rgba(0, 0, 0, ${0.95 * pull})`);
-            eventHorizonGrad.addColorStop(0.7, `rgba(0, 0, 0, ${0.9 * pull})`);
-            eventHorizonGrad.addColorStop(0.85, `rgba(20, 10, 40, ${0.7 * pull})`);
-            eventHorizonGrad.addColorStop(1, `rgba(50, 20, 80, ${0.3 * pull})`);
-            ctx.fillStyle = eventHorizonGrad;
-            ctx.beginPath();
-            ctx.arc(0, 0, bhSize, 0, Math.PI * 2);
+            ctx.arc(0, 0, bhSize * 1.8, 0, Math.PI * 2);
             ctx.fill();
 
-            // ── Inner singularity glow ──
-            const coreGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, bhSize * 0.4);
-            coreGlow.addColorStop(0, `rgba(139, 92, 246, ${0.3 * pull})`);
-            coreGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            ctx.fillStyle = coreGlow;
+            // ── Event Horizon (deep black center) ──
+            const ehGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, bhSize);
+            ehGrad.addColorStop(0, `rgba(0, 0, 0, ${0.98 * pull})`);
+            ehGrad.addColorStop(0.75, `rgba(0, 0, 0, ${0.95 * pull})`);
+            ehGrad.addColorStop(0.9, `rgba(10, 5, 20, ${0.8 * pull})`);
+            ehGrad.addColorStop(1, `rgba(30, 20, 50, ${0.4 * pull})`);
+            ctx.fillStyle = ehGrad;
             ctx.beginPath();
-            ctx.arc(0, 0, bhSize * 0.4, 0, Math.PI * 2);
+            ctx.arc(0, 0, bhSize, 0, Math.PI * 2);
             ctx.fill();
 
             ctx.restore();
