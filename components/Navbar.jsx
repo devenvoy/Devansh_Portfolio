@@ -28,8 +28,10 @@ const Navbar = () => {
 
     // Track active section
     useEffect(() => {
-        const sections = ['Home', 'About', 'Skills', 'experience', 'Projects', 'blogs', 'Contact'];
-        
+        // Home is position:fixed, so we can't observe it with IntersectionObserver.
+        // Instead, detect Home by scroll position and observe the rest normally.
+        const sections = ['About', 'Skills', 'experience', 'Projects', 'blogs', 'Contact'];
+
         const observerOptions = {
             root: null,
             rootMargin: '-20% 0px -60% 0px',
@@ -53,7 +55,19 @@ const Navbar = () => {
             }
         });
 
-        return () => observer.disconnect();
+        // Detect "Home" when scrolled near the top
+        const handleScroll = () => {
+            if (window.scrollY < window.innerHeight * 0.5) {
+                setActiveSection('Home');
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // set initial state
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     const handleNavClick = (e, href) => {
@@ -77,19 +91,19 @@ const Navbar = () => {
                     top: 0,
                     left: 0,
                     background: theme.palette.mode === 'dark'
-                        ? scrolled 
+                        ? scrolled
                             ? 'rgba(10, 10, 10, 0.95)'
                             : 'transparent'
-                        : scrolled 
+                        : scrolled
                             ? 'rgba(255, 255, 255, 0.95)'
                             : 'transparent',
                     backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-                    borderBottom: scrolled 
-                        ? `1px solid ${theme.palette.mode === 'dark' 
-                            ? 'rgba(255, 255, 255, 0.08)' 
+                    borderBottom: scrolled
+                        ? `1px solid ${theme.palette.mode === 'dark'
+                            ? 'rgba(255, 255, 255, 0.08)'
                             : 'rgba(0, 0, 0, 0.06)'}`
                         : 'none',
-                    boxShadow: scrolled 
+                    boxShadow: scrolled
                         ? theme.palette.mode === 'dark'
                             ? '0 4px 30px rgba(0, 0, 0, 0.4)'
                             : '0 4px 30px rgba(0, 0, 0, 0.08)'
@@ -125,7 +139,7 @@ const Navbar = () => {
                             WebkitTextFillColor: 'transparent',
                             textDecoration: 'none',
                             transition: 'all 0.3s ease',
-                            
+
                             '&:hover': {
                                 transform: 'scale(1.03)',
                                 backgroundPosition: 'right center',
@@ -137,9 +151,9 @@ const Navbar = () => {
 
                     {/* Desktop Navigation */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <Navigation 
-                            ulClass="" 
-                            liClass="" 
+                        <Navigation
+                            ulClass=""
+                            liClass=""
                             activeSection={activeSection}
                         />
                     </Box>

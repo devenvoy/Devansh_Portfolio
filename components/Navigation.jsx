@@ -18,9 +18,15 @@ const Navigation = ({ handleClick, ulClass, activeSection }) => {
 
     const handleNavClick = (e, href) => {
         e.preventDefault();
-        const element = document.querySelector(href);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // The Home section is position:fixed, so scrollIntoView won't work.
+        // Instead, scroll to the very top of the page.
+        if (href === '#Home' || href === '#home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            const element = document.querySelector(href);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
         if (handleClick) handleClick();
     };

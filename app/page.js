@@ -16,12 +16,14 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
-      <section id="home"><Home /></section>
-      <section id="about"><About /></section>
-      <section id="skills"><Skills /></section>
-      <section id="experience"><ExperienceSection /></section>
-      <section id="projects"><Projects /></section>
-      <section id="contact"><Contact /></section>
+      <section id="home" style={{ position: 'relative', zIndex: 0 }}><Home /></section>
+      <div style={{ position: 'relative', zIndex: 10, background: 'var(--background)', marginTop: '100vh' }}>
+        <section id="about"><About /></section>
+        <section id="skills"><Skills /></section>
+        <section id="experience"><ExperienceSection /></section>
+        <section id="projects"><Projects /></section>
+        <section id="contact"><Contact /></section>
+      </div>
     </>
   );
 }
