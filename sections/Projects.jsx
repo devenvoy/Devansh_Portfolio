@@ -4,6 +4,7 @@ import { Box, Typography, Container, Chip, useTheme } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
 import { ExternalLink, Github, Star, Eye, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
+import { trackProjectClick, trackSocialClick } from '../lib/analytics';
 
 const projects = [
     {
@@ -89,7 +90,7 @@ const ProjectCard = ({ project, index }) => {
                             }}
                             className="project-image"
                         />
-                        
+
                         {/* Overlay on Hover */}
                         <Box
                             sx={{
@@ -118,6 +119,7 @@ const ProjectCard = ({ project, index }) => {
                                 href={project.demo}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() => trackProjectClick(project.name)}
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
                                 style={{
@@ -262,6 +264,7 @@ const ProjectCard = ({ project, index }) => {
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => trackProjectClick(project.name)}
                             whileHover={{ x: 5 }}
                             style={{
                                 display: 'inline-flex',
@@ -352,7 +355,7 @@ const Projects = () => {
                             fontSize: '1.125rem',
                         }}
                     >
-                        A showcase of my best work, featuring mobile applications 
+                        A showcase of my best work, featuring mobile applications
                         and web solutions built with modern technologies.
                     </Typography>
                 </motion.div>
@@ -373,6 +376,7 @@ const Projects = () => {
                         href="https://github.com/devenvoy"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackSocialClick('GitHub_ViewAll')}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         style={{

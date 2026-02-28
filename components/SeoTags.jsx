@@ -55,7 +55,7 @@ export default function SeoTags({
 
                 {/* LinkedIn */}
                 <meta property="og:site_name" content="Devansh Amdavadwala Portfolio" />
-                <meta property="og:see_also" content="https://www.linkedin.com/in/devansh-amdavadwala" />
+                <meta property="og:see_also" content="https://www.linkedin.com/in/devansh-a-bb104524a" />
 
                 {/* Pinterest */}
                 <meta name="pinterest-rich-pin" content="true" />
@@ -73,7 +73,7 @@ export default function SeoTags({
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
                 <meta name="apple-mobile-web-app-title" content="Devansh Portfolio" />
-                
+
                 {/* Microsoft Tags */}
                 <meta name="msapplication-TileColor" content="#2563eb" />
                 <meta name="msapplication-TileImage" content={`${basePath}/mstile-150x150.png`} />
@@ -90,7 +90,7 @@ export default function SeoTags({
                             "url": url,
                             "image": image,
                             "sameAs": [
-                                "https://www.linkedin.com/in/devansh-amdavadwala",
+                                "https://www.linkedin.com/in/devansh-a-bb104524a",
                                 "https://github.com/devenvoy",
                                 `https://twitter.com/${twitterHandle.replace('@', '')}`
                             ],
@@ -133,12 +133,12 @@ export default function SeoTags({
 
                 {/* Canonical URL */}
                 <link rel="canonical" href={url} />
-                
+
                 {/* Alternate Languages */}
                 <link rel="alternate" hrefLang="en" href={url} />
                 <link rel="alternate" hrefLang="x-default" href={url} />
             </Head>
-            
+
             <NextSeo
                 title={title}
                 description={description}

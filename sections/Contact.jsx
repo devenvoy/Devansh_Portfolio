@@ -1,23 +1,24 @@
 'use client';
-import { useRef, useCallback } from 'react';
-import { Box, Typography, Container, TextField, Button, useTheme } from '@mui/material';
+import { useRef, useCallback, useState } from 'react';
+import { Box, Typography, Container, TextField, Button, useTheme, IconButton } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
 import {
     Send, Mail, MapPin, Phone, Github, Linkedin,
-    ArrowRight, Sparkles, CheckCircle
+    ArrowRight, Sparkles, CheckCircle, Eye, EyeOff
 } from 'lucide-react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import useContactForm, { MESSAGE_MAX_LENGTH } from '../hooks/useContactForm';
+import { trackContactReveal, trackSocialClick, trackFormSubmit, trackSectionView } from '../lib/analytics';
 
 const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'devanshamdavadwala@gmail.com', href: 'mailto:devanshamdavadwala@gmail.com' },
-    { icon: MapPin, label: 'Location', value: 'Gujarat, India', href: '#' },
-    { icon: Phone, label: 'Phone', value: '+91 XXXXX XXXXX', href: 'tel:+91XXXXXXXXXX' },
+    { icon: Mail, label: 'Email', value: 'devanshamdavadwala@gmail.com', masked: 'dev•••@gmail.com', href: 'mailto:devanshamdavadwala@gmail.com' },
+    { icon: MapPin, label: 'Location', value: 'Gujarat, India', masked: '••••, India', href: '#' },
+    { icon: Phone, label: 'Phone', value: '+91 94295 09806', masked: '+91 •••••  •••••', href: 'tel:+919429509806' },
 ];
 
 const socialLinks = [
     { icon: Github, label: 'GitHub', href: 'https://github.com/devenvoy' },
-    { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/devansh-amdavadwala' },
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/devansh-a-bb104524a' },
 ];
 
 const Contact = () => {
@@ -29,12 +30,22 @@ const Contact = () => {
 
     const { formData, isSubmitting, isSubmitted, isError, updateField, handleSubmit } = useContactForm();
     const { executeRecaptcha } = useGoogleReCaptcha();
+    const [showDetails, setShowDetails] = useState(false);
+
+    const toggleDetails = useCallback(() => {
+        const newState = !showDetails;
+        setShowDetails(newState);
+        if (newState) {
+            trackContactReveal('all');
+        }
+    }, [showDetails]);
 
     const onSubmit = useCallback(async (e) => {
         e.preventDefault();
         if (!executeRecaptcha) return;
         const token = await executeRecaptcha('contact_form');
         handleSubmit(e, token);
+        trackFormSubmit(true);
     }, [executeRecaptcha, handleSubmit]);
 
     return (
@@ -207,7 +218,8 @@ const Contact = () => {
                                     {contactInfo.map((item) => (
                                         <motion.a
                                             key={item.label}
-                                            href={item.href}
+                                            href={showDetails ? item.href : undefined}
+                                            onClick={!showDetails ? (e) => { e.preventDefault(); toggleDetails(); } : undefined}
                                             whileHover={{ x: 5 }}
                                             style={{
                                                 display: 'flex',
@@ -215,6 +227,7 @@ const Contact = () => {
                                                 gap: 12,
                                                 color: theme.palette.text.primary,
                                                 textDecoration: 'none',
+                                                cursor: showDetails ? 'pointer' : 'pointer',
                                             }}
                                         >
                                             <Box
@@ -236,8 +249,12 @@ const Contact = () => {
                                                 <Typography variant="caption" color="text.secondary">
                                                     {item.label}
                                                 </Typography>
-                                                <Typography variant="body2" fontWeight={600}>
-                                                    {item.value}
+                                                <Typography variant="body2" fontWeight={600} sx={{
+                                                    filter: showDetails ? 'none' : 'blur(4px)',
+                                                    transition: 'filter 0.3s ease',
+                                                    userSelect: showDetails ? 'auto' : 'none',
+                                                }}>
+                                                    {showDetails ? item.value : item.masked}
                                                 </Typography>
                                             </Box>
                                         </motion.a>
@@ -245,7 +262,7 @@ const Contact = () => {
                                 </Box>
 
                                 {/* Social Links */}
-                                <Box sx={{ display: 'flex', gap: 2 }}>
+                                <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                                     {socialLinks.map((social) => (
                                         <motion.a
                                             key={social.label}
@@ -273,6 +290,24 @@ const Contact = () => {
                                             <social.icon size={22} />
                                         </motion.a>
                                     ))}
+                                    <Box sx={{ flex: 1 }} />
+                                    <IconButton
+                                        onClick={toggleDetails}
+                                        size="small"
+                                        sx={{
+                                            color: theme.palette.primary.main,
+                                            background: theme.palette.mode === 'dark'
+                                                ? 'rgba(6, 182, 212, 0.1)'
+                                                : 'rgba(37, 99, 235, 0.1)',
+                                            '&:hover': {
+                                                background: theme.palette.mode === 'dark'
+                                                    ? 'rgba(6, 182, 212, 0.2)'
+                                                    : 'rgba(37, 99, 235, 0.2)',
+                                            },
+                                        }}
+                                    >
+                                        {showDetails ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </IconButton>
                                 </Box>
                             </Box>
 

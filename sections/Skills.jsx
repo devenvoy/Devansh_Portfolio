@@ -2,9 +2,8 @@
 import { useRef, useState } from 'react';
 import { Box, Typography, Container, useTheme, Tooltip, Fade } from '@mui/material';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { 
-    Smartphone, Code2, Database, Cloud, Layers,
-    Palette, GitBranch, Terminal
+import {
+    Smartphone, Code2, Database, Cloud, Layers
 } from 'lucide-react';
 
 const skillCategories = [
@@ -148,7 +147,7 @@ const Skills = () => {
     const skillsRef = useRef(null);
     const isHeaderInView = useInView(headerRef, { once: true });
     const isSkillsInView = useInView(skillsRef, { once: true, margin: "-100px" });
-    
+
     const [selectedTab, setSelectedTab] = useState('mobile');
     const [hoveredTab, setHoveredTab] = useState(null);
 
@@ -220,7 +219,7 @@ const Skills = () => {
                             fontSize: '1.125rem',
                         }}
                     >
-                        Specialized in Android development with expertise in Kotlin, Jetpack Compose, 
+                        Specialized in Android development with expertise in Kotlin, Jetpack Compose,
                         and cross-platform solutions including web technologies.
                     </Typography>
                 </motion.div>
@@ -288,8 +287,8 @@ const Skills = () => {
                                                 background: `linear-gradient(135deg, ${category.color}30, ${category.color}10)`,
                                             }}
                                         >
-                                            <category.icon 
-                                                size={20} 
+                                            <category.icon
+                                                size={20}
                                                 color={selectedTab === category.id ? category.color : theme.palette.text.secondary}
                                             />
                                         </Box>
@@ -297,8 +296,8 @@ const Skills = () => {
                                             variant="subtitle1"
                                             sx={{
                                                 fontWeight: 600,
-                                                color: selectedTab === category.id 
-                                                    ? category.color 
+                                                color: selectedTab === category.id
+                                                    ? category.color
                                                     : theme.palette.text.primary,
                                                 display: { xs: 'none', sm: 'block' },
                                                 whiteSpace: 'nowrap',
@@ -402,70 +401,6 @@ const Skills = () => {
                     </AnimatePresence>
                 </Box>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.6 }}
-                    style={{ marginTop: '3rem', textAlign: 'center' }}
-                >
-                    <Box
-                        sx={{
-                            display: 'inline-flex',
-                            gap: { xs: 2, md: 4 },
-                            flexWrap: 'wrap',
-                            justifyContent: 'center',
-                            p: { xs: 2, md: 3 },
-                            borderRadius: '16px',
-                            background: theme.palette.mode === 'dark'
-                                ? 'rgba(255, 255, 255, 0.02)'
-                                : 'rgba(255, 255, 255, 0.8)',
-                            border: `1px solid ${theme.palette.mode === 'dark'
-                                ? 'rgba(255, 255, 255, 0.05)'
-                                : 'rgba(0, 0, 0, 0.05)'}`,
-                        }}
-                    >
-                        {[
-                            { icon: GitBranch, label: 'Version Control', desc: 'Git & GitHub' },
-                            { icon: Terminal, label: 'Unit Testing', desc: 'JUnit, Mockito' },
-                            { icon: Palette, label: 'UI/UX Design', desc: 'Figma, Adobe XD' },
-                            { icon: Layers, label: 'Architecture', desc: 'MVVM, Clean Code' },
-                        ].map((item) => (
-                            <Box
-                                key={item.label}
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 2,
-                                    px: 1,
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        width: 40,
-                                        height: 40,
-                                        borderRadius: '10px',
-                                        background: theme.palette.mode === 'dark'
-                                            ? 'rgba(6, 182, 212, 0.1)'
-                                            : 'rgba(37, 99, 235, 0.1)',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    <item.icon size={20} color={theme.palette.primary.main} />
-                                </Box>
-                                <Box sx={{ textAlign: 'left', display: { xs: 'none', sm: 'block' } }}>
-                                    <Typography variant="body2" fontWeight={600}>
-                                        {item.label}
-                                    </Typography>
-                                    <Typography variant="caption" color="text.secondary">
-                                        {item.desc}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        ))}
-                    </Box>
-                </motion.div>
             </Container>
         </Box>
     );

@@ -5,6 +5,7 @@ import { Box, Typography, Container, Button, useTheme } from '@mui/material';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
 import Image from 'next/image';
+import { trackCTAClick, trackSocialClick, trackResumeDownload } from '../lib/analytics';
 
 // Particle component for background effect
 const Particle = ({ delay, duration, x, y }) => (
@@ -108,7 +109,7 @@ const Home = () => {
 
     const socialLinks = [
         { icon: Github, href: 'https://github.com/devenvoy', label: 'GitHub' },
-        { icon: Linkedin, href: 'https://linkedin.com/in/devansh-amdavadwala', label: 'LinkedIn' },
+        { icon: Linkedin, href: 'https://linkedin.com/in/devansh-a-bb104524a', label: 'LinkedIn' },
         { icon: Mail, href: 'mailto:devanshamdavadwala@gmail.com', label: 'Email' },
     ];
 
@@ -333,13 +334,13 @@ const Home = () => {
                                     >
                                         <TypeAnimation
                                             sequence={[
-                                                'Full Stack Developer',
+                                                'Android Developer',
+                                                2000,
+                                                'Kotlin Enthusiast',
                                                 2000,
                                                 'Mobile App Developer',
                                                 2000,
-                                                'UI/UX Enthusiast',
-                                                2000,
-                                                'Problem Solver',
+                                                'Software Developer',
                                                 2000,
                                             ]}
                                             speed={50}
@@ -365,9 +366,9 @@ const Home = () => {
                                         lineHeight: 1.7,
                                     }}
                                 >
-                                    I craft exceptional digital experiences with modern technologies.
-                                    Specializing in React, Flutter, and cloud-native solutions that
-                                    drive business growth and user engagement.
+                                    I build polished, high-performance mobile apps with a focus on
+                                    Android and Kotlin. Specialized in Jetpack Compose, Compose Multiplatform,
+                                    and Flutter — with hands-on experience in backend and frontend web development.
                                 </Typography>
                             </motion.div>
 
@@ -382,6 +383,7 @@ const Home = () => {
                                     variant="contained"
                                     size="large"
                                     href="#Contact"
+                                    onClick={() => trackCTAClick('lets_talk')}
                                     sx={{
                                         px: 4,
                                         py: 1.5,
@@ -404,6 +406,7 @@ const Home = () => {
                                     variant="outlined"
                                     size="large"
                                     startIcon={<Download size={20} />}
+                                    onClick={() => trackResumeDownload()}
                                     sx={{
                                         px: 4,
                                         py: 1.5,
@@ -437,6 +440,7 @@ const Home = () => {
                                             href={social.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            onClick={() => trackSocialClick(social.label)}
                                             whileHover={{ scale: 1.1, y: -5 }}
                                             whileTap={{ scale: 0.95 }}
                                             style={{
@@ -548,15 +552,15 @@ const Home = () => {
                                             py: 0.75,
                                             borderRadius: '8px',
                                             background: theme.palette.mode === 'dark'
-                                                ? 'rgba(97, 218, 251, 0.9)'
-                                                : 'rgba(97, 218, 251, 0.95)',
-                                            color: '#000',
+                                                ? 'rgba(127, 82, 255, 0.9)'
+                                                : 'rgba(127, 82, 255, 0.95)',
+                                            color: '#fff',
                                             fontWeight: 600,
                                             fontSize: '0.75rem',
-                                            boxShadow: '0 4px 15px rgba(97, 218, 251, 0.4)',
+                                            boxShadow: '0 4px 15px rgba(127, 82, 255, 0.4)',
                                         }}
                                     >
-                                        React
+                                        Kotlin
                                     </Box>
                                 </FloatingShape>
 
@@ -586,15 +590,15 @@ const Home = () => {
                                             py: 0.75,
                                             borderRadius: '8px',
                                             background: theme.palette.mode === 'dark'
-                                                ? 'rgba(104, 159, 56, 0.9)'
-                                                : 'rgba(104, 159, 56, 0.95)',
+                                                ? 'rgba(76, 175, 80, 0.9)'
+                                                : 'rgba(76, 175, 80, 0.95)',
                                             color: '#fff',
                                             fontWeight: 600,
                                             fontSize: '0.75rem',
-                                            boxShadow: '0 4px 15px rgba(104, 159, 56, 0.4)',
+                                            boxShadow: '0 4px 15px rgba(76, 175, 80, 0.4)',
                                         }}
                                     >
-                                        Node.js
+                                        Compose
                                     </Box>
                                 </FloatingShape>
                             </motion.div>

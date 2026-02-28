@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { Box, Typography, Container, Grid, Chip, useTheme } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
 import { Download, MapPin, Calendar, Coffee, Code2, Sparkles } from 'lucide-react';
+import { trackResumeDownload } from '../lib/analytics';
 
 const stats = [
     { number: '3+', label: 'Years Experience', icon: Calendar },
@@ -12,9 +13,9 @@ const stats = [
 ];
 
 const skills = [
-    'Android Development', 'Flutter', 'React Native', 'Kotlin',
-    'Java', 'Dart', 'Jetpack Compose', 'Firebase',
-    'REST APIs', 'Git', 'CI/CD', 'UI/UX Design'
+    'Android Development', 'Kotlin', 'Jetpack Compose', 'Compose Multiplatform',
+    'Flutter', 'Dart', 'Kotlin Multiplatform', 'Firebase',
+    'Java', 'REST APIs', 'Git', 'CI/CD', 'UI/UX Design'
 ];
 
 const About = () => {
@@ -140,7 +141,7 @@ const About = () => {
                                     >
                                         Devansh Amdavadwala
                                     </Box>
-                                    , a passionate Mobile & Full Stack Developer
+                                    , an Android & Mobile App Developer
                                 </Typography>
 
                                 <Typography
@@ -152,10 +153,10 @@ const About = () => {
                                         mb: 3,
                                     }}
                                 >
-                                    With over 3 years of experience, I specialize in crafting exceptional 
-                                    mobile applications and web solutions. My expertise spans across Android 
-                                    development with Kotlin and Java, cross-platform development with Flutter, 
-                                    and modern web technologies.
+                                    With over 3 years of experience, I specialize in building native Android
+                                    applications using Kotlin and Jetpack Compose. I also work with Compose
+                                    Multiplatform and Flutter for cross-platform development, and have
+                                    hands-on experience with backend and frontend web technologies.
                                 </Typography>
 
                                 <Typography
@@ -167,9 +168,9 @@ const About = () => {
                                         mb: 4,
                                     }}
                                 >
-                                    I believe in writing clean, maintainable code and creating intuitive user 
-                                    experiences. When I'm not coding, you'll find me exploring new technologies, 
-                                    contributing to open-source projects, or enjoying a good cup of coffee.
+                                    I'm passionate about clean architecture, modern UI patterns, and delivering
+                                    smooth user experiences. When I'm not building apps, you'll find me exploring
+                                    new Kotlin features, contributing to open-source, or enjoying a good cup of coffee.
                                 </Typography>
 
                                 {/* Location & Quick Info */}
@@ -230,6 +231,7 @@ const About = () => {
                                         component="a"
                                         href="/devansh_amdavadwala_resume.pdf"
                                         download
+                                        onClick={() => trackResumeDownload()}
                                         sx={{
                                             display: 'inline-flex',
                                             alignItems: 'center',

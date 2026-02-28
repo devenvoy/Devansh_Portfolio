@@ -1,11 +1,12 @@
 'use client';
 import { Box, Typography, Container, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
-import { 
+import {
     Mail, MapPin, Heart, Github, Linkedin, Twitter,
     ArrowUpRight, Code2
 } from 'lucide-react';
 import Link from 'next/link';
+import { trackSocialClick } from '../lib/analytics';
 
 const navLinks = [
     { name: 'Home', href: '#Home' },
@@ -18,7 +19,7 @@ const navLinks = [
 
 const socialLinks = [
     { name: 'GitHub', icon: Github, href: 'https://github.com/devenvoy' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/devansh-amdavadwala' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/devansh-a-bb104524a' },
     { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/devansh_dev' },
 ];
 
@@ -73,7 +74,7 @@ const Footer = () => {
                                 lineHeight: 1.7,
                             }}
                         >
-                            A passionate developer crafting exceptional digital experiences. 
+                            A passionate developer crafting exceptional digital experiences.
                             Let's build something amazing together.
                         </Typography>
 
@@ -170,6 +171,7 @@ const Footer = () => {
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={() => trackSocialClick(`Footer_${social.name}`)}
                                         whileHover={{ x: 5 }}
                                         style={{
                                             color: theme.palette.text.secondary,
@@ -232,6 +234,7 @@ const Footer = () => {
                                 href={social.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() => trackSocialClick(`Footer_${social.name}`)}
                                 whileHover={{ scale: 1.1, y: -3 }}
                                 whileTap={{ scale: 0.95 }}
                                 style={{
