@@ -40,3 +40,8 @@ body {
 .font-nunito {
   font-family: var(--font-nunito);
 }
+
+/* Hide reCAPTCHA v3 badge — attribution text is shown in the contact form */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}

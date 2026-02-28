@@ -1,7 +1,10 @@
 'use client';
 import { useState } from 'react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/devanshamdavadwala@gmail.com';
+export const MESSAGE_MAX_LENGTH = 1000;
 
 const useContactForm = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -10,11 +13,20 @@ const useContactForm = () => {
     const [isError, setIsError] = useState(false);
 
     const updateField = (field, value) => {
+        // Enforce message character limit
+        if (field === 'message' && value.length > MESSAGE_MAX_LENGTH) return;
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, recaptchaToken) => {
         e.preventDefault();
+
+        if (!recaptchaToken) {
+            setIsError(true);
+            setTimeout(() => setIsError(false), 4000);
+            return;
+        }
+
         setIsSubmitting(true);
         setIsError(false);
 
@@ -36,6 +48,19 @@ const useContactForm = () => {
             });
 
             if (response.ok) {
+                // Save to Firestore
+                try {
+                    await addDoc(collection(db, 'contact_messages'), {
+                        name: formData.name,
+                        email: formData.email,
+                        message: formData.message,
+                        createdAt: serverTimestamp(),
+                    });
+                } catch (firestoreError) {
+                    // Don't fail the whole submission if Firestore write fails
+                    console.error('Firestore write failed:', firestoreError);
+                }
+
                 setIsSubmitted(true);
                 setFormData({ name: '', email: '', message: '' });
                 setTimeout(() => setIsSubmitted(false), 4000);

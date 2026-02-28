@@ -1,12 +1,13 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import { Box, Typography, Container, TextField, Button, useTheme } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
 import {
     Send, Mail, MapPin, Phone, Github, Linkedin,
     ArrowRight, Sparkles, CheckCircle
 } from 'lucide-react';
-import useContactForm from '../hooks/useContactForm';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import useContactForm, { MESSAGE_MAX_LENGTH } from '../hooks/useContactForm';
 
 const contactInfo = [
     { icon: Mail, label: 'Email', value: 'devanshamdavadwala@gmail.com', href: 'mailto:devanshamdavadwala@gmail.com' },
@@ -27,6 +28,14 @@ const Contact = () => {
     const isFormInView = useInView(formRef, { once: true });
 
     const { formData, isSubmitting, isSubmitted, isError, updateField, handleSubmit } = useContactForm();
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
+    const onSubmit = useCallback(async (e) => {
+        e.preventDefault();
+        if (!executeRecaptcha) return;
+        const token = await executeRecaptcha('contact_form');
+        handleSubmit(e, token);
+    }, [executeRecaptcha, handleSubmit]);
 
     return (
         <Box
@@ -269,7 +278,7 @@ const Contact = () => {
 
                             {/* Right Side - Form */}
                             <Box sx={{ flex: 1 }}>
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={onSubmit}>
                                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                                         <TextField
                                             fullWidth
@@ -306,25 +315,41 @@ const Contact = () => {
                                                 },
                                             }}
                                         />
-                                        <TextField
-                                            fullWidth
-                                            multiline
-                                            rows={4}
-                                            name="message"
-                                            label="Your Message"
-                                            value={formData.message}
-                                            onChange={(e) => updateField('message', e.target.value)}
-                                            required
-                                            variant="outlined"
-                                            sx={{
-                                                '& .MuiOutlinedInput-root': {
-                                                    borderRadius: '12px',
-                                                    background: theme.palette.mode === 'dark'
-                                                        ? 'rgba(255, 255, 255, 0.03)'
-                                                        : 'rgba(0, 0, 0, 0.02)',
-                                                },
-                                            }}
-                                        />
+                                        <Box>
+                                            <TextField
+                                                fullWidth
+                                                multiline
+                                                rows={4}
+                                                name="message"
+                                                label="Your Message"
+                                                value={formData.message}
+                                                onChange={(e) => updateField('message', e.target.value)}
+                                                required
+                                                variant="outlined"
+                                                inputProps={{ maxLength: MESSAGE_MAX_LENGTH }}
+                                                sx={{
+                                                    '& .MuiOutlinedInput-root': {
+                                                        borderRadius: '12px',
+                                                        background: theme.palette.mode === 'dark'
+                                                            ? 'rgba(255, 255, 255, 0.03)'
+                                                            : 'rgba(0, 0, 0, 0.02)',
+                                                    },
+                                                }}
+                                            />
+                                            <Typography
+                                                variant="caption"
+                                                sx={{
+                                                    display: 'block',
+                                                    textAlign: 'right',
+                                                    mt: 0.5,
+                                                    color: formData.message.length >= MESSAGE_MAX_LENGTH
+                                                        ? '#ef4444'
+                                                        : theme.palette.text.secondary,
+                                                }}
+                                            >
+                                                {formData.message.length} / {MESSAGE_MAX_LENGTH}
+                                            </Typography>
+                                        </Box>
 
                                         <motion.div
                                             whileHover={{ scale: 1.02 }}
@@ -357,6 +382,22 @@ const Contact = () => {
                                                 {isSubmitting ? 'Sending...' : isSubmitted ? 'Message Sent!' : isError ? 'Failed to send. Try again.' : 'Send Message'}
                                             </Button>
                                         </motion.div>
+                                        <Typography
+                                            variant="caption"
+                                            sx={{
+                                                display: 'block',
+                                                textAlign: 'center',
+                                                mt: 1.5,
+                                                color: theme.palette.text.secondary,
+                                                opacity: 0.6,
+                                                fontSize: '0.7rem',
+                                            }}
+                                        >
+                                            Protected by reCAPTCHA.{' '}
+                                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>Privacy</a>
+                                            {' · '}
+                                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>Terms</a>
+                                        </Typography>
                                     </Box>
                                 </form>
                             </Box>

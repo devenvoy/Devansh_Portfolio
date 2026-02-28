@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTopButton from "@/components/BackToTopButton";
 import LoadingScreen from "@/components/LoadingScreen";
+import ReCaptchaWrapper from "@/components/ReCaptchaWrapper";
+import AnalyticsProvider from "@/components/AnalyticsProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -37,87 +39,87 @@ const nunito = Nunito({
 });
 
 export const metadata = {
-  title: 'Devansh Amdavadwala - Portfolio',
-  description:
-    'Mobile Android Software developer crafting beautiful, dynamic mobile experiences with modern technologies. View my projects and achievements.',
-  authors: [{ name: 'Devansh Amdavadwala' }],
-  icons: {
-    icon: "/favicon.ico",
-  },
-  keywords: [
-    'developer',
-    'portfolio',
-    'react',
-    'typescript',
-    'web development',
-    'full-stack',
-    'devenvoy',
-    'devansh',
-    'devansh amdavadwala',
-    'android',
-    'developer',
-    'android developement',
-    'flutter development',
-    'flutter',
-    'dart',
-    'compose',
-    'jetpack compose',
-    'kotlin multiplatform',
-    'compose multiplatform',
-    'dynamic',
-    'UI/UX',
-    'ui/ux',
-    'mobile app',
-    'mobile development',
-    'mobile developer',
-    'android app',
-    'android development',
-    'android developer',
-    'kotlin developer',
-    'MVVM',
-    'Clean Architecture',
-    'RESTful APIs',
-    'Firebase',
-    'Git',
-    'Agile',
-    'Scrum',
-    'Material Design',
-    'Google Play Store',
-    'app publishing',
-    'debugging',
-    'performance optimization',
-  ],
-  openGraph: {
-    title: 'Devansh Amdavadwala - Portfolio',
-    description:
-      'Mobile Android Software developer crafting beautiful, dynamic mobile experiences with modern technologies. View my projects and achievements.',
-    type: 'website',
-    images: [
-      {
-        url: 'https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759226789/Devansh_dnvavj.png',
-        width: 1200,
-        height: 630,
-        alt: 'Devansh Amdavadwala Portfolio',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Devansh Amdavadwala - Android Developer',
-    site: 'https://devansh.amdavadwala.com',
-    images: [
-      'https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759226789/Devansh_dnvavj.png',
-    ],
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: '/apple-touch-icon.png',
-  },
-  metadataBase: new URL('https://devansh.amdavadwala.com'),
+	title: 'Devansh Amdavadwala - Portfolio',
+	description:
+		'Mobile Android Software developer crafting beautiful, dynamic mobile experiences with modern technologies. View my projects and achievements.',
+	authors: [{ name: 'Devansh Amdavadwala' }],
+	icons: {
+		icon: "/favicon.ico",
+	},
+	keywords: [
+		'developer',
+		'portfolio',
+		'react',
+		'typescript',
+		'web development',
+		'full-stack',
+		'devenvoy',
+		'devansh',
+		'devansh amdavadwala',
+		'android',
+		'developer',
+		'android developement',
+		'flutter development',
+		'flutter',
+		'dart',
+		'compose',
+		'jetpack compose',
+		'kotlin multiplatform',
+		'compose multiplatform',
+		'dynamic',
+		'UI/UX',
+		'ui/ux',
+		'mobile app',
+		'mobile development',
+		'mobile developer',
+		'android app',
+		'android development',
+		'android developer',
+		'kotlin developer',
+		'MVVM',
+		'Clean Architecture',
+		'RESTful APIs',
+		'Firebase',
+		'Git',
+		'Agile',
+		'Scrum',
+		'Material Design',
+		'Google Play Store',
+		'app publishing',
+		'debugging',
+		'performance optimization',
+	],
+	openGraph: {
+		title: 'Devansh Amdavadwala - Portfolio',
+		description:
+			'Mobile Android Software developer crafting beautiful, dynamic mobile experiences with modern technologies. View my projects and achievements.',
+		type: 'website',
+		images: [
+			{
+				url: 'https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759226789/Devansh_dnvavj.png',
+				width: 1200,
+				height: 630,
+				alt: 'Devansh Amdavadwala Portfolio',
+			},
+		],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Devansh Amdavadwala - Android Developer',
+		site: 'https://devansh.amdavadwala.com',
+		images: [
+			'https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759226789/Devansh_dnvavj.png',
+		],
+	},
+	icons: {
+		icon: [
+			{ url: '/favicon.ico', sizes: 'any' },
+			{ url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+			{ url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+		],
+		apple: '/apple-touch-icon.png',
+	},
+	metadataBase: new URL('https://devansh.amdavadwala.com'),
 };
 
 export const viewport = {
@@ -209,13 +211,16 @@ export default function RootLayout({ children }) {
 			</head>
 			<body className={raleway.className} suppressHydrationWarning>
 				<LoadingScreen>
-					<MUIWrapper>
-						<Navbar />
-						<main>{children}</main>
-						<Footer />
-						<BackToTopButton />
-						<ToastContainer />
-					</MUIWrapper>
+					<ReCaptchaWrapper>
+						<MUIWrapper>
+							<AnalyticsProvider />
+							<Navbar />
+							<main>{children}</main>
+							<Footer />
+							<BackToTopButton />
+							<ToastContainer />
+						</MUIWrapper>
+					</ReCaptchaWrapper>
 				</LoadingScreen>
 			</body>
 		</html>
