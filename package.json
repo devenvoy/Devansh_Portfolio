@@ -16,6 +16,8 @@
     "@gsap/react": "^2.1.2",
     "@mui/icons-material": "^7.3.8",
     "@mui/material": "^7.3.8",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "aos": "^2.3.4",
     "axios": "^1.13.5",
     "clsx": "^2.1.1",
@@ -30,7 +32,8 @@
     "react-google-recaptcha-v3": "^1.11.0",
     "react-toastify": "^11.0.5",
     "react-type-animation": "^3.2.0",
-    "tailwind-merge": "^3.3.0"
+    "tailwind-merge": "^3.3.0",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "baseline-browser-mapping": "^2.9.19",

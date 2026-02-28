@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
 import Image from 'next/image';
 import { trackCTAClick, trackSocialClick, trackResumeDownload } from '../lib/analytics';
+import GridLightEffect from '../components/HeroScene';
 
 // Particle component for background effect
 const Particle = ({ delay, duration, x, y }) => (
@@ -127,18 +128,8 @@ const Home = () => {
                     : 'radial-gradient(ellipse at top, #f0f9ff 0%, #ffffff 50%, #e0f2fe 100%)',
             }}
         >
-            {/* Animated Background Grid */}
-            <Box
-                sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: theme.palette.mode === 'dark'
-                        ? 'linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px)'
-                        : 'linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px)',
-                    backgroundSize: '50px 50px',
-                    opacity: 0.5,
-                }}
-            />
+            {/* Grid Light Effect — gradient flashlight visible only through grid lines */}
+            <GridLightEffect darkMode={theme.palette.mode === 'dark'} />
 
             {/* Floating Particles */}
             <Box sx={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
