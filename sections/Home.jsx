@@ -8,31 +8,6 @@ import Image from 'next/image';
 import { trackCTAClick, trackSocialClick, trackResumeDownload } from '../lib/analytics';
 import GridLightEffect from '../components/HeroScene';
 
-// Particle component for background effect
-const Particle = ({ delay, duration, x, y }) => (
-    <motion.div
-        style={{
-            position: 'absolute',
-            width: 4,
-            height: 4,
-            borderRadius: '50%',
-            background: 'rgba(6, 182, 212, 0.6)',
-            left: x,
-            top: y,
-        }}
-        animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 1, 0.2],
-            scale: [1, 1.5, 1],
-        }}
-        transition={{
-            duration,
-            delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-        }}
-    />
-);
 
 // Floating shape component
 const FloatingShape = ({ children, delay = 0, x = 0, y = 0 }) => (
@@ -84,29 +59,6 @@ const Home = () => {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, [mouseX, mouseY]);
 
-    // Generate particles with fixed positions for SSR consistency
-    const particles = [
-        { id: 0, x: '15%', y: '20%', delay: 0, duration: 4 },
-        { id: 1, x: '85%', y: '15%', delay: 0.5, duration: 5 },
-        { id: 2, x: '25%', y: '75%', delay: 1, duration: 4.5 },
-        { id: 3, x: '70%', y: '60%', delay: 1.5, duration: 5.5 },
-        { id: 4, x: '45%', y: '40%', delay: 0.3, duration: 4 },
-        { id: 5, x: '90%', y: '80%', delay: 0.8, duration: 5 },
-        { id: 6, x: '10%', y: '55%', delay: 1.2, duration: 4.5 },
-        { id: 7, x: '60%', y: '25%', delay: 0.2, duration: 5.5 },
-        { id: 8, x: '35%', y: '90%', delay: 0.7, duration: 4 },
-        { id: 9, x: '80%', y: '45%', delay: 1.3, duration: 5 },
-        { id: 10, x: '5%', y: '35%', delay: 0.4, duration: 4.5 },
-        { id: 11, x: '50%', y: '70%', delay: 0.9, duration: 5.5 },
-        { id: 12, x: '95%', y: '30%', delay: 0.1, duration: 4 },
-        { id: 13, x: '20%', y: '50%', delay: 0.6, duration: 5 },
-        { id: 14, x: '75%', y: '85%', delay: 1.1, duration: 4.5 },
-        { id: 15, x: '40%', y: '10%', delay: 0.2, duration: 5.5 },
-        { id: 16, x: '65%', y: '95%', delay: 0.8, duration: 4 },
-        { id: 17, x: '8%', y: '70%', delay: 1.4, duration: 5 },
-        { id: 18, x: '55%', y: '35%', delay: 0.5, duration: 4.5 },
-        { id: 19, x: '30%', y: '65%', delay: 1, duration: 5.5 },
-    ];
 
     const socialLinks = [
         { icon: Github, href: 'https://github.com/devenvoy', label: 'GitHub' },
@@ -131,47 +83,7 @@ const Home = () => {
             {/* Grid Light Effect — gradient flashlight visible only through grid lines */}
             <GridLightEffect darkMode={theme.palette.mode === 'dark'} />
 
-            {/* Floating Particles */}
-            <Box sx={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-                {particles.map((p) => (
-                    <Particle key={p.id} {...p} />
-                ))}
-            </Box>
 
-            {/* Gradient Orbs */}
-            <motion.div
-                style={{
-                    position: 'absolute',
-                    width: 600,
-                    height: 600,
-                    borderRadius: '50%',
-                    background: theme.palette.mode === 'dark'
-                        ? 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)'
-                        : 'radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%)',
-                    filter: 'blur(60px)',
-                    x: mouseX,
-                    y: mouseY,
-                    left: '20%',
-                    top: '20%',
-                }}
-            />
-
-            <motion.div
-                style={{
-                    position: 'absolute',
-                    width: 400,
-                    height: 400,
-                    borderRadius: '50%',
-                    background: theme.palette.mode === 'dark'
-                        ? 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)'
-                        : 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
-                    filter: 'blur(60px)',
-                    x: useTransform(mouseX, v => -v * 1.5),
-                    y: useTransform(mouseY, v => -v * 1.5),
-                    right: '10%',
-                    bottom: '20%',
-                }}
-            />
 
             <Container
                 maxWidth="xl"
