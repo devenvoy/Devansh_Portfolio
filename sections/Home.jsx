@@ -55,16 +55,16 @@ const Home = () => {
     const theme = useTheme();
     const containerRef = useRef(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    
+
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end start"]
     });
-    
+
     const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-    
+
     const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
     const mouseX = useSpring(0, springConfig);
     const mouseY = useSpring(0, springConfig);
@@ -109,7 +109,7 @@ const Home = () => {
     const socialLinks = [
         { icon: Github, href: 'https://github.com/devenvoy', label: 'GitHub' },
         { icon: Linkedin, href: 'https://linkedin.com/in/devansh-amdavadwala', label: 'LinkedIn' },
-        { icon: Mail, href: 'mailto:devansh@example.com', label: 'Email' },
+        { icon: Mail, href: 'mailto:devanshamdavadwala@gmail.com', label: 'Email' },
     ];
 
     return (
@@ -365,8 +365,8 @@ const Home = () => {
                                         lineHeight: 1.7,
                                     }}
                                 >
-                                    I craft exceptional digital experiences with modern technologies. 
-                                    Specializing in React, Flutter, and cloud-native solutions that 
+                                    I craft exceptional digital experiences with modern technologies.
+                                    Specializing in React, Flutter, and cloud-native solutions that
                                     drive business growth and user engagement.
                                 </Typography>
                             </motion.div>
@@ -527,7 +527,7 @@ const Home = () => {
                                             objectFit: 'cover',
                                         }}
                                     />
-                                    
+
                                     {/* Overlay gradient */}
                                     <Box
                                         sx={{

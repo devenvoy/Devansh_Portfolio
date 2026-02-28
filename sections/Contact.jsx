@@ -1,14 +1,15 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Box, Typography, Container, TextField, Button, useTheme } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
-import { 
+import {
     Send, Mail, MapPin, Phone, Github, Linkedin,
     ArrowRight, Sparkles, CheckCircle
 } from 'lucide-react';
+import useContactForm from '../hooks/useContactForm';
 
 const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'devansh@example.com', href: 'mailto:devansh@example.com' },
+    { icon: Mail, label: 'Email', value: 'devanshamdavadwala@gmail.com', href: 'mailto:devanshamdavadwala@gmail.com' },
     { icon: MapPin, label: 'Location', value: 'Gujarat, India', href: '#' },
     { icon: Phone, label: 'Phone', value: '+91 XXXXX XXXXX', href: 'tel:+91XXXXXXXXXX' },
 ];
@@ -24,21 +25,8 @@ const Contact = () => {
     const formRef = useRef(null);
     const isHeaderInView = useInView(headerRef, { once: true });
     const isFormInView = useInView(formRef, { once: true });
-    
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        // Simulate form submission
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setTimeout(() => setIsSubmitted(false), 3000);
-        setFormData({ name: '', email: '', message: '' });
-    };
+    const { formData, isSubmitting, isSubmitted, isError, updateField, handleSubmit } = useContactForm();
 
     return (
         <Box
@@ -132,7 +120,7 @@ const Contact = () => {
                             fontSize: '1.125rem',
                         }}
                     >
-                        Have a project in mind? Let's create something amazing together. 
+                        Have a project in mind? Let's create something amazing together.
                         I'm always open to discussing new projects and opportunities.
                     </Typography>
                 </motion.div>
@@ -201,7 +189,7 @@ const Contact = () => {
                                         lineHeight: 1.7,
                                     }}
                                 >
-                                    Whether you need a mobile app, web application, or 
+                                    Whether you need a mobile app, web application, or
                                     consultation, I'm here to help bring your vision to life.
                                 </Typography>
 
@@ -288,7 +276,7 @@ const Contact = () => {
                                             name="name"
                                             label="Your Name"
                                             value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            onChange={(e) => updateField('name', e.target.value)}
                                             required
                                             variant="outlined"
                                             sx={{
@@ -306,7 +294,7 @@ const Contact = () => {
                                             name="email"
                                             label="Your Email"
                                             value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            onChange={(e) => updateField('email', e.target.value)}
                                             required
                                             variant="outlined"
                                             sx={{
@@ -325,7 +313,7 @@ const Contact = () => {
                                             name="message"
                                             label="Your Message"
                                             value={formData.message}
-                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                            onChange={(e) => updateField('message', e.target.value)}
                                             required
                                             variant="outlined"
                                             sx={{
@@ -354,7 +342,9 @@ const Contact = () => {
                                                     textTransform: 'none',
                                                     background: isSubmitted
                                                         ? '#10b981'
-                                                        : `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                                                        : isError
+                                                            ? '#ef4444'
+                                                            : `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                                                     color: '#fff',
                                                     boxShadow: `0 10px 30px -10px ${theme.palette.primary.main}50`,
                                                     transition: 'all 0.3s ease',
@@ -364,7 +354,7 @@ const Contact = () => {
                                                 }}
                                                 startIcon={isSubmitted ? <CheckCircle /> : isSubmitting ? null : <Send />}
                                             >
-                                                {isSubmitting ? 'Sending...' : isSubmitted ? 'Message Sent!' : 'Send Message'}
+                                                {isSubmitting ? 'Sending...' : isSubmitted ? 'Message Sent!' : isError ? 'Failed to send. Try again.' : 'Send Message'}
                                             </Button>
                                         </motion.div>
                                     </Box>
