@@ -1,11 +1,9 @@
 import { Raleway, Great_Vibes, Nunito } from "next/font/google";
 import MUIWrapper from "@/components/layouts/MUIWrapper";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import BackToTopButton from "@/components/BackToTopButton";
 import LoadingScreen from "@/components/LoadingScreen";
 import ReCaptchaWrapper from "@/components/ReCaptchaWrapper";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
+import LayoutContent from "@/components/LayoutContent";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -214,10 +212,7 @@ export default function RootLayout({ children }) {
 					<ReCaptchaWrapper>
 						<MUIWrapper>
 							<AnalyticsProvider />
-							<Navbar />
-							<main>{children}</main>
-							<Footer />
-							<BackToTopButton />
+							<LayoutContent>{children}</LayoutContent>
 							<ToastContainer />
 						</MUIWrapper>
 					</ReCaptchaWrapper>

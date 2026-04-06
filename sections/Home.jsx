@@ -294,8 +294,12 @@ const Home = () => {
                                     <Button
                                         variant="contained"
                                         size="large"
-                                        href="#Contact"
-                                        onClick={() => trackCTAClick('lets_talk')}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            trackCTAClick('lets_talk');
+                                            const el = document.getElementById('Contact');
+                                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }}
                                         sx={{
                                             px: { xs: 3, md: 4 },
                                             py: { xs: 1.2, md: 1.5 },
@@ -317,6 +321,9 @@ const Home = () => {
                                     <Button
                                         variant="outlined"
                                         size="large"
+                                        component="a"
+                                        href="/devansh_amdavadwala_resume.pdf"
+                                        download="Devansh_Amdavadwala_Resume.pdf"
                                         startIcon={<Download size={20} />}
                                         onClick={() => trackResumeDownload()}
                                         sx={{
