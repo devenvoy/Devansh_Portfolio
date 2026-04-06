@@ -377,7 +377,7 @@ const Experience = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    style={{ textAlign: 'center', marginBottom: '4rem' }}
+                    style={{ textAlign: 'center', marginBottom: '2.5rem' }}
                 >
                     <Typography
                         variant="overline"
@@ -395,7 +395,7 @@ const Experience = () => {
                     <Typography
                         variant="h2"
                         sx={{
-                            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                            fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
                             fontWeight: 800,
                             mb: 2,
                             fontFamily: 'Nunito, sans-serif',
@@ -419,7 +419,7 @@ const Experience = () => {
                             color: theme.palette.text.secondary,
                             maxWidth: 600,
                             mx: 'auto',
-                            fontSize: '1.125rem',
+                            fontSize: { xs: '0.95rem', md: '1.125rem' },
                         }}
                     >
                         My professional journey and the impactful projects 

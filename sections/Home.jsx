@@ -111,8 +111,8 @@ const Home = () => {
                             flexDirection: { xs: 'column', md: 'row' },
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            gap: { xs: 6, md: 8 },
-                            px: { xs: 2, md: 4 },
+                            gap: { xs: 3, sm: 4, md: 8 },
+                            px: { xs: 1, sm: 2, md: 4 },
                         }}
                     >
                         {/* Left Content */}
@@ -146,7 +146,7 @@ const Home = () => {
                                             border: `1px solid ${theme.palette.mode === 'dark'
                                                 ? 'rgba(6, 182, 212, 0.2)'
                                                 : 'rgba(37, 99, 235, 0.2)'}`,
-                                            mb: 3,
+                                            mb: { xs: 2, md: 3 },
                                         }}
                                     >
                                         <Box
@@ -184,7 +184,7 @@ const Home = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
-                                            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem', lg: '4.5rem' },
+                                            fontSize: { xs: '2rem', sm: '3rem', md: '4rem', lg: '4.5rem' },
                                             fontWeight: 800,
                                             lineHeight: 1.1,
                                             mb: 2,
@@ -232,10 +232,10 @@ const Home = () => {
                                     <Typography
                                         variant="h2"
                                         sx={{
-                                            fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                                            fontSize: { xs: '1.1rem', sm: '1.5rem', md: '2.5rem' },
                                             fontWeight: 600,
                                             color: theme.palette.text.secondary,
-                                            mb: 3,
+                                            mb: { xs: 2, md: 3 },
                                             minHeight: { xs: '2.5rem', md: '3rem' },
                                         }}
                                     >
@@ -271,10 +271,10 @@ const Home = () => {
                                     <Typography
                                         variant="body1"
                                         sx={{
-                                            fontSize: { xs: '1rem', md: '1.125rem' },
+                                            fontSize: { xs: '0.875rem', md: '1.125rem' },
                                             color: theme.palette.text.secondary,
                                             maxWidth: '500px',
-                                            mb: 4,
+                                            mb: { xs: 3, md: 4 },
                                             lineHeight: 1.7,
                                         }}
                                     >
@@ -289,7 +289,7 @@ const Home = () => {
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 1 }}
-                                    style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}
+                                    style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}
                                 >
                                     <Button
                                         variant="contained"
@@ -297,10 +297,10 @@ const Home = () => {
                                         href="#Contact"
                                         onClick={() => trackCTAClick('lets_talk')}
                                         sx={{
-                                            px: 4,
-                                            py: 1.5,
+                                            px: { xs: 3, md: 4 },
+                                            py: { xs: 1.2, md: 1.5 },
                                             borderRadius: '12px',
-                                            fontSize: '1rem',
+                                            fontSize: { xs: '0.875rem', md: '1rem' },
                                             fontWeight: 600,
                                             textTransform: 'none',
                                             background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
@@ -320,10 +320,10 @@ const Home = () => {
                                         startIcon={<Download size={20} />}
                                         onClick={() => trackResumeDownload()}
                                         sx={{
-                                            px: 4,
-                                            py: 1.5,
+                                            px: { xs: 3, md: 4 },
+                                            py: { xs: 1.2, md: 1.5 },
                                             borderRadius: '12px',
-                                            fontSize: '1rem',
+                                            fontSize: { xs: '0.875rem', md: '1rem' },
                                             fontWeight: 600,
                                             textTransform: 'none',
                                             borderWidth: 2,
@@ -395,7 +395,8 @@ const Home = () => {
                                     transition={{ duration: 1, delay: 0.5, type: 'spring' }}
                                     style={{ position: 'relative' }}
                                 >
-                                    {/* Decorative Rings */}
+                                    {/* Decorative Rings — hidden on mobile */}
+                                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                     <motion.div
                                         animate={{ rotate: 360 }}
                                         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
@@ -420,13 +421,14 @@ const Home = () => {
                                             borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%',
                                         }}
                                     />
+                                    </Box>
 
                                     {/* Main Image Container */}
                                     <Box
                                         sx={{
                                             position: 'relative',
-                                            width: { xs: 280, sm: 320, md: 380 },
-                                            height: { xs: 280, sm: 320, md: 380 },
+                                            width: { xs: 200, sm: 260, md: 380 },
+                                            height: { xs: 200, sm: 260, md: 380 },
                                             borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
                                             overflow: 'hidden',
                                             boxShadow: theme.palette.mode === 'dark'
@@ -456,7 +458,8 @@ const Home = () => {
                                         />
                                     </Box>
 
-                                    {/* Floating Tech Stack Badges */}
+                                    {/* Floating Tech Stack Badges — hidden on mobile */}
+                                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                                     <FloatingShape x="-60px" y="20%" delay={0}>
                                         <Box
                                             sx={{
@@ -475,7 +478,9 @@ const Home = () => {
                                             Kotlin
                                         </Box>
                                     </FloatingShape>
+                                    </Box>
 
+                                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                                     <FloatingShape x="calc(100% + 20px)" y="40%" delay={1}>
                                         <Box
                                             sx={{
@@ -513,6 +518,7 @@ const Home = () => {
                                             Compose
                                         </Box>
                                     </FloatingShape>
+                                    </Box>
                                 </motion.div>
                             </Box>
                         </motion.div>
@@ -526,7 +532,7 @@ const Home = () => {
                     transition={{ delay: 2 }}
                     style={{
                         position: 'absolute',
-                        bottom: 40,
+                        bottom: 20,
                         left: '50%',
                         transform: 'translateX(-50%)',
                     }}

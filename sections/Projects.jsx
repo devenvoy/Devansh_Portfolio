@@ -214,9 +214,9 @@ const ProjectCard = ({ project, index }) => {
                         variant="body1"
                         sx={{
                             color: theme.palette.text.secondary,
-                            fontSize: '1.125rem',
+                            fontSize: { xs: '0.95rem', md: '1.125rem' },
                             lineHeight: 1.7,
-                            mb: 3,
+                            mb: { xs: 2, md: 3 },
                         }}
                     >
                         {project.description}
@@ -310,7 +310,7 @@ const Projects = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    style={{ textAlign: 'center', marginBottom: '4rem' }}
+                    style={{ textAlign: 'center', marginBottom: '2.5rem' }}
                 >
                     <Typography
                         variant="overline"
@@ -328,7 +328,7 @@ const Projects = () => {
                     <Typography
                         variant="h2"
                         sx={{
-                            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                            fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
                             fontWeight: 800,
                             mb: 2,
                             fontFamily: 'Nunito, sans-serif',
@@ -352,7 +352,7 @@ const Projects = () => {
                             color: theme.palette.text.secondary,
                             maxWidth: 600,
                             mx: 'auto',
-                            fontSize: '1.125rem',
+                            fontSize: { xs: '0.95rem', md: '1.125rem' },
                         }}
                     >
                         A showcase of my best work, featuring mobile applications

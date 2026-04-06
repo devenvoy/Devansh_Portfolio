@@ -86,7 +86,7 @@ const SkillProgressBar = ({ skill, index, color, isInView }) => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.4, delay: index * 0.08 }}
         >
-            <Box sx={{ mb: 2.5 }}>
+            <Box sx={{ mb: { xs: 1.5, md: 2.5 } }}>
                 <Box
                     sx={{
                         display: 'flex',
@@ -174,7 +174,7 @@ const Skills = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    style={{ textAlign: 'center', marginBottom: '3rem' }}
+                    style={{ textAlign: 'center', marginBottom: '2rem' }}
                 >
                     <Typography
                         variant="overline"
@@ -192,7 +192,7 @@ const Skills = () => {
                     <Typography
                         variant="h2"
                         sx={{
-                            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                            fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
                             fontWeight: 800,
                             mb: 2,
                             fontFamily: 'Nunito, sans-serif',
@@ -216,7 +216,7 @@ const Skills = () => {
                             color: theme.palette.text.secondary,
                             maxWidth: 600,
                             mx: 'auto',
-                            fontSize: '1.125rem',
+                            fontSize: { xs: '0.95rem', md: '1.125rem' },
                         }}
                     >
                         Specialized in Android development with expertise in Kotlin, Jetpack Compose,

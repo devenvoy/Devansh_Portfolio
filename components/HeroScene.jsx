@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { drawBlackhole } from './Blackhole';
 
 /**
@@ -27,6 +27,16 @@ const GridLightEffect = ({
     blackholeSize = 25,
     darkMode = false,
 }) => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 768px)');
+        setIsMobile(mq.matches);
+        const handler = (e) => setIsMobile(e.matches);
+        mq.addEventListener('change', handler);
+        return () => mq.removeEventListener('change', handler);
+    }, []);
+
     const canvasRef = useRef(null);
     const mouseRef = useRef({ x: -1000, y: -1000 });
     const pressedRef = useRef(false);
@@ -259,6 +269,9 @@ const GridLightEffect = ({
             if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
         };
     }, [draw]);
+
+    // Disable grid + blackhole on mobile screens
+    if (isMobile) return null;
 
     return (
         <canvas

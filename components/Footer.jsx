@@ -31,7 +31,9 @@ const Footer = () => {
         <Box
             component="footer"
             sx={{
-                py: { xs: 6, md: 8 },
+                py: { xs: 4, md: 8 },
+                position: 'relative',
+                zIndex: 10,
                 background: theme.palette.mode === 'dark'
                     ? '#000000'
                     : '#ffffff',
@@ -47,14 +49,14 @@ const Footer = () => {
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
                         justifyContent: 'space-between',
-                        gap: 6,
-                        mb: 6,
+                        gap: { xs: 4, md: 6 },
+                        mb: { xs: 4, md: 6 },
                     }}
                 >
                     {/* Brand Section */}
                     <Box sx={{ flex: 1, maxWidth: 400 }}>
                         <Typography
-                            variant="h4"
+                            variant="h5"
                             sx={{
                                 fontWeight: 800,
                                 mb: 2,

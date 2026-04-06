@@ -73,6 +73,7 @@ const Contact = () => {
                     borderRadius: '50%',
                     background: `radial-gradient(circle, ${theme.palette.primary.main}10 0%, transparent 70%)`,
                     filter: 'blur(60px)',
+                    display: { xs: 'none', md: 'block' },
                 }}
             />
             <Box
@@ -85,6 +86,7 @@ const Contact = () => {
                     borderRadius: '50%',
                     background: `radial-gradient(circle, ${theme.palette.secondary.main}10 0%, transparent 70%)`,
                     filter: 'blur(60px)',
+                    display: { xs: 'none', md: 'block' },
                 }}
             />
 
@@ -95,7 +97,7 @@ const Contact = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    style={{ textAlign: 'center', marginBottom: '4rem' }}
+                    style={{ textAlign: 'center', marginBottom: '2.5rem' }}
                 >
                     <Typography
                         variant="overline"
@@ -113,7 +115,7 @@ const Contact = () => {
                     <Typography
                         variant="h2"
                         sx={{
-                            fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+                            fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3.5rem' },
                             fontWeight: 800,
                             mb: 3,
                             fontFamily: 'Nunito, sans-serif',
@@ -137,7 +139,7 @@ const Contact = () => {
                             color: theme.palette.text.secondary,
                             maxWidth: 600,
                             mx: 'auto',
-                            fontSize: '1.125rem',
+                            fontSize: { xs: '0.95rem', md: '1.125rem' },
                         }}
                     >
                         Have a project in mind? Let's create something amazing together.
@@ -443,7 +445,7 @@ const Contact = () => {
                     <Box
                         sx={{
                             mt: 6,
-                            p: 4,
+                            p: { xs: 3, md: 4 },
                             borderRadius: '24px',
                             background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                             textAlign: 'center',

@@ -6,7 +6,7 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as random from "maath/random";
-import { useState, useRef, Suspense } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 
 export const StarBackground = (props) => {
   const ref = useRef(null);
@@ -42,15 +42,39 @@ export const StarBackground = (props) => {
   );
 };
 
-export const StarsCanvas = () => (
-  <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, zIndex: 0 }}>
-    <Canvas camera={{ position: [0, 0, 1] }}>
-      <Suspense fallback={null}>
-        <StarBackground />
-      </Suspense>
-    </Canvas>
-  </div>
-);
+export const StarsCanvas = () => {
+  const [show, setShow] = useState(true); // default: always show
+
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (!isMobile) {
+      // Desktop — always show, no need to consult Remote Config
+      setShow(true);
+      return;
+    }
+
+    // Mobile — read Firebase Remote Config (default true)
+    let cancelled = false;
+    (async () => {
+      const { getRemoteConfigBoolean } = await import('../lib/firebase');
+      const enabled = await getRemoteConfigBoolean('show_stars_mobile', true);
+      if (!cancelled) setShow(enabled);
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  if (!show) return null;
+
+  return (
+    <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, zIndex: 0 }}>
+      <Canvas camera={{ position: [0, 0, 1] }}>
+        <Suspense fallback={null}>
+          <StarBackground />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+};
 
 // ── Light mode: soft bokeh-style floating particles ──
 

@@ -75,7 +75,7 @@ const About = () => {
                     animate={isInView ? "visible" : "hidden"}
                 >
                     {/* Section Header */}
-                    <motion.div variants={itemVariants} style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                    <motion.div variants={itemVariants} style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
                         <Typography
                             variant="overline"
                             sx={{
@@ -92,7 +92,7 @@ const About = () => {
                         <Typography
                             variant="h2"
                             sx={{
-                                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                                fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
                                 fontWeight: 800,
                                 mb: 2,
                                 fontFamily: 'Nunito, sans-serif',
@@ -128,7 +128,7 @@ const About = () => {
                                 <Typography
                                     variant="h4"
                                     sx={{
-                                        fontSize: { xs: '1.5rem', md: '2rem' },
+                                        fontSize: { xs: '1.25rem', md: '2rem' },
                                         fontWeight: 700,
                                         mb: 3,
                                         fontFamily: 'Nunito, sans-serif',
@@ -148,9 +148,9 @@ const About = () => {
                                     variant="body1"
                                     sx={{
                                         color: theme.palette.text.secondary,
-                                        fontSize: '1.125rem',
+                                        fontSize: { xs: '0.95rem', md: '1.125rem' },
                                         lineHeight: 1.8,
-                                        mb: 3,
+                                        mb: { xs: 2, md: 3 },
                                     }}
                                 >
                                     With over 3 years of experience, I specialize in building native Android
@@ -163,9 +163,9 @@ const About = () => {
                                     variant="body1"
                                     sx={{
                                         color: theme.palette.text.secondary,
-                                        fontSize: '1.125rem',
+                                        fontSize: { xs: '0.95rem', md: '1.125rem' },
                                         lineHeight: 1.8,
-                                        mb: 4,
+                                        mb: { xs: 3, md: 4 },
                                     }}
                                 >
                                     I'm passionate about clean architecture, modern UI patterns, and delivering
@@ -190,7 +190,7 @@ const About = () => {
                                 </Box>
 
                                 {/* Skills Tags */}
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mb: 4 }}>
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 1, md: 1.5 }, mb: { xs: 3, md: 4 } }}>
                                     {skills.map((skill, index) => (
                                         <motion.div
                                             key={skill}
@@ -271,7 +271,7 @@ const About = () => {
                                         >
                                             <Box
                                                 sx={{
-                                                    p: 3,
+                                                    p: { xs: 2.5, md: 3 },
                                                     borderRadius: '20px',
                                                     background: theme.palette.mode === 'dark'
                                                         ? 'rgba(255, 255, 255, 0.03)'
@@ -290,9 +290,9 @@ const About = () => {
                                             >
                                                 <Box
                                                     sx={{
-                                                        width: 50,
-                                                        height: 50,
-                                                        borderRadius: '14px',
+                                                        width: { xs: 40, md: 50 },
+                                                        height: { xs: 40, md: 50 },
+                                                        borderRadius: { xs: '10px', md: '14px' },
                                                         background: `linear-gradient(135deg, ${theme.palette.primary.main}20, ${theme.palette.secondary.main}20)`,
                                                         display: 'flex',
                                                         alignItems: 'center',
@@ -306,7 +306,7 @@ const About = () => {
                                                 <Typography
                                                     variant="h3"
                                                     sx={{
-                                                        fontSize: { xs: '2rem', md: '2.5rem' },
+                                                        fontSize: { xs: '1.5rem', md: '2.5rem' },
                                                         fontWeight: 800,
                                                         color: theme.palette.text.primary,
                                                         mb: 0.5,
