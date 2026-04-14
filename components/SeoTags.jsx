@@ -5,7 +5,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export default function SeoTags({
     title = 'Devansh Developer - Portfolio',
-    description = 'Android developer crafting beautiful, functional mobile experiences with modern technologies.',
+    description = 'Mobile Android & KMP developer specializing in building scalable, performance-oriented applications with Jetpack Compose and Kotlin Multiplatform.',
     image = 'https://res.cloudinary.com/dzbtr3w2l/image/upload/v1759226789/Devansh_1_v41itb.png',
     url = `https://devenvoy.github.io${basePath}`,
     type = 'website',

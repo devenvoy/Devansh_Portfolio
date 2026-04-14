@@ -1,13 +1,13 @@
 const work = [
-  " Software Developer",
+  "Software Developer",
   2000,
-  "Android Developer",
+  "Android & KMP Developer",
   2000,
-  "KMP Developer",
+  "Mobile App Specialist",
   2000,
-  "TECH Enthusiast",
+  "Kotlin Expert",
   2000,
-  "OPEN Source Contributor",
+  "Open Source Contributor",
   2000,
 ];
 
