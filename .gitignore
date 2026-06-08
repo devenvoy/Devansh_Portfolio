@@ -40,3 +40,11 @@ envData.txt
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.claude
+.cursorrules
+.mcp.json
+.opencode.json 
+CLAUDE.md
+GEMINI.md
+AGENTS.md
+.code-review-graph
